@@ -43,6 +43,7 @@ export interface Showtime {
 }
 
 export interface Seat {
+  status: 0 | 1 | 2;
   type: string;
   code: string;
   price: number;
@@ -52,4 +53,22 @@ export interface Seat {
 export interface Room {
   name: string;
   _id: number;
+}
+
+export interface Food {
+  id: number;
+  image: string;
+  title: string;
+  contents: string[];
+  price: number;
+  quantity: number;
+}
+
+export interface Ticket {
+  _id: number;
+  foods: Food[];
+  foodPrice: number;
+  seats: Seat[];
+  seatPrice: number;
+  totalPrice: number;
 }

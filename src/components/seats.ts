@@ -8,6 +8,7 @@ const insideRows: Seat[][] = [];
 const lastRow: Seat[] = [];
 for (let i = 1; i < 17; i++) {
   const seat: Seat = {
+    status: 0,
     type: "Single",
     code: "A" + i,
     price: 50000,
@@ -21,6 +22,7 @@ rows.forEach((row) => {
   let insideRow: Seat[] = [];
   for (let i = 1; i < 19; i++) {
     const seat: Seat = {
+      status: 0,
       type: "Single",
       code: row + i,
       price: 80000,
@@ -34,6 +36,7 @@ rows.forEach((row) => {
 });
 for (let i = 1; i < 9; i++) {
   const seat: Seat = {
+    status: 0,
     type: "Couple",
     code: "S" + i,
     price: 150000,

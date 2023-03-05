@@ -38,7 +38,6 @@ export const Cinemas = () => {
   }, []);
 
   React.useEffect(() => {
-    console.log(showtimesResult);
     let listShowtimes: Showtime[] = [];
     showtimesResult?.map((showtime: Showtime) => {
       if (showtime.showtimes.length > 0) {
@@ -130,7 +129,9 @@ export const Cinemas = () => {
                       (showtimeDetails: ShowtimeDetails) => (
                         <div
                           className="p-2 border-sky-700 border-2 cursor-pointer hover:bg-sky-500"
-                          onClick={() => navigate(`/booking/${showtimeDetails._id}`)}
+                          onClick={() =>
+                            navigate(`/booking/${showtimeDetails._id}`)
+                          }
                         >
                           {showtimeDetails.time}
                         </div>

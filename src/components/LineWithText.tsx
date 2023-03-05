@@ -13,13 +13,13 @@ export const LineWithText = (props: {
 }) => {
   return (
     <div className="flex justify-center items-center h-16">
-      <div className="w-1/5 sm:w-1/4 lg:w-1/3 h-1 bg-gray-600"></div>
-      <div className="text-center px-5">
+      <div className="w-1/5 sm:w-1/4 lg:w-1/2 h-1 bg-gray-600"></div>
+      <div className="text-center px-5 w-1/3">
         <span className="font-bold text-xl sm:text-2xl lg:text-3xl text-blue-900">
           {props.children}
         </span>
       </div>
-      <div className="w-1/5 sm:w-1/4 lg:w-1/3 h-1 bg-gray-600"></div>
+      <div className="w-1/5 sm:w-1/4 lg:w-1/2 h-1 bg-gray-600"></div>
     </div>
   );
 };
