@@ -2,13 +2,35 @@ import React, { useEffect, useState } from "react";
 import { LineWithText } from "../../components/LineWithText";
 import { TagsOutlined } from "@ant-design/icons";
 import { Food } from "../../interface/Interface";
+import { RadioGroup } from "@headlessui/react";
+import {
+  faCcMastercard,
+  faCcVisa,
+  faCcPaypal,
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const payments = [
+  {
+    name: "Thẻ Mastercard",
+    icon: faCcMastercard,
+  },
+  {
+    name: "Thẻ Visa",
+    icon: faCcVisa,
+  },
+  {
+    name: "Thẻ Paypal",
+    icon: faCcPaypal,
+  },
+];
 
 export const Payment: React.FC<{
   seatPrice: number;
-  foodPrice: number;
   listFoods: Food[];
   totalPrice: number;
-}> = ({ seatPrice, foodPrice, listFoods, totalPrice }) => {
+  setSelectedPayment: React.Dispatch<React.SetStateAction<string | undefined>>;
+}> = ({ seatPrice, listFoods, totalPrice, setSelectedPayment }) => {
   const [typeVoucher, setTypeVoucher] = React.useState<0 | 1 | 2>(0);
 
   const [timeLeft, setTimeLeft] = useState(5 * 60);
@@ -31,9 +53,9 @@ export const Payment: React.FC<{
   return (
     <div>
       <LineWithText>THANH TOÁN</LineWithText>
-      <div className="grid grid-cols-2 mx-20 space-x-10">
+      <div className="grid sm:grid-cols-2 mx-20 space-x-10 ">
         <div className="space-y-4">
-          <div className="border border-sky-300 rounded h-auto p-4 space-y-3">
+          <div className="border border-sky-300 rounded h-auto py-4 px-7 space-y-3">
             <TagsOutlined className="text-[24px]" />
             <span className="font-bold text-[16px] mx-2">GIẢM GIÁ</span>
             <button
@@ -96,39 +118,59 @@ export const Payment: React.FC<{
             <div className="inline-flex font-bold text-[16px] mx-2">
               PHƯƠNG THỨC THANH TOÁN
             </div>
-            <div className="flex flex-col space-y-4">
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  name="radioGroup"
-                  value="option1"
-                  className="w-4 h-4 text-gray-600 border-gray-300 rounded-sm focus:ring-0"
-                />
-                <i className="mx-3 fa-brands fa-cc-visa text-[30px]"></i>
-                <span className="text-[16px]">Thẻ Visa</span>
-              </label>
 
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  name="radioGroup"
-                  value="option2"
-                  className="w-4 h-4 text-gray-600 border-gray-300 rounded-sm focus:ring-0"
-                />
-                <i className="mx-3 fa-brands fa-cc-mastercard text-[30px]"></i>
-                <span className="text-[16px]">Thẻ MasterCard</span>
-              </label>
-
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  name="radioGroup"
-                  value="option3"
-                  className="w-4 h-4 text-gray-600 border-gray-300 rounded-sm focus:ring-0"
-                />
-                <i className="mx-3 fa-brands fa-cc-paypal text-[30px]"></i>
-                <span className="text-[16px]">PayPal</span>
-              </label>
+            <div className="w-full px-2 py-2">
+              <div className="mx-auto w-full max-w-md">
+                <RadioGroup onChange={setSelectedPayment}>
+                  <div className="space-y-3">
+                    {payments.map((payment) => (
+                      <RadioGroup.Option
+                        key={payment.name}
+                        value={payment}
+                        className={({ active, checked }) =>
+                          `${
+                            active
+                              ? "ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300"
+                              : ""
+                          }
+                  ${
+                    checked ? "bg-sky-700 bg-opacity-75 text-white" : "bg-white"
+                  }
+                    relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
+                        }
+                      >
+                        {({ active, checked }) => (
+                          <>
+                            <div className="flex w-full items-center justify-between">
+                              <div className="flex items-center">
+                                <div className="text-sm">
+                                  <RadioGroup.Label
+                                    as="p"
+                                    className={`font-medium flex items-center justify-between ${
+                                      checked ? "text-white" : "text-gray-900"
+                                    }`}
+                                  >
+                                    <FontAwesomeIcon
+                                      icon={payment.icon}
+                                      className="mr-3 text-[24px]"
+                                    />
+                                    {payment.name}
+                                  </RadioGroup.Label>
+                                </div>
+                              </div>
+                              {checked && (
+                                <div className="shrink-0 text-white">
+                                  <CheckIcon className="h-6 w-6" />
+                                </div>
+                              )}
+                            </div>
+                          </>
+                        )}
+                      </RadioGroup.Option>
+                    ))}
+                  </div>
+                </RadioGroup>
+              </div>
             </div>
           </div>
         </div>
@@ -212,3 +254,18 @@ export const Payment: React.FC<{
     </div>
   );
 };
+
+function CheckIcon(props: any) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <circle cx={12} cy={12} r={12} fill="#fff" opacity="0.2" />
+      <path
+        d="M7 13l3 3 7-7"
+        stroke="#fff"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

@@ -1,23 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { SelectSeats } from "./SelectSeats";
 import { Layout } from "../../components/Layout";
 import { LineWithText } from "../../components/LineWithText";
 import { useGet } from "../../api/get";
 import { Food, Seat, Showtime, Ticket } from "../../interface/Interface";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BuyFood } from "./BuyFood";
 import { Payment } from "./Payment";
 import { openNotification } from "../../components/Notifications";
+import { usePost } from "../../api/post";
+import { Modal } from "../../components/Modal/Modal";
 
 export const Booking = () => {
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user") ?? "null");
   const { fetchGet: fetchShowtime, result: showtimeResult } =
     useGet<Showtime>();
-  const [type, setType] = React.useState<number>(1);
-  const [listSelectedSeats, setListSelectedSeats] = React.useState<Seat[]>([]);
-  const [listFoods, setListFoods] = React.useState<Food[]>([]);
-  const [foodPrice, setFoodPrice] = React.useState<number>(0);
-  const [seatPrice, setSeatPrice] = React.useState<number>(0);
-  const [totalPrice, setTotalPrice] = React.useState<number>(0);
+  const {
+    fetchPost: fetchBooking,
+    result: bookingResult,
+    isError,
+  } = usePost<any>();
+  const [type, setType] = useState<number>(1);
+  const [listSelectedSeats, setListSelectedSeats] = useState<Seat[]>([]);
+  const [listFoods, setListFoods] = useState<Food[]>([]);
+  const [foodPrice, setFoodPrice] = useState<number>(0);
+  const [seatPrice, setSeatPrice] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+
+  const [paymentMethod, setPaymentMethod] = useState<any>();
+
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const param = useParams();
   const id = param.id;
@@ -39,15 +52,16 @@ export const Booking = () => {
   const handleNextClick = (type: number) => {
     if (type === 1) {
       if (seatPrice === 0) {
-        openNotification("Thông báo!", "Vui lòng chọn ghế để tiếp tục");
+        openNotification("info", "Vui lòng chọn ghế để tiếp tục");
         return;
       } else {
-        window.scroll({
-          top: 0,
-          left: 0,
-          behavior: "smooth",
-        });
-        setType(type + 1);
+        setOpenModal(true);
+        // window.scroll({
+        //   top: 0,
+        //   left: 0,
+        //   behavior: "smooth",
+        // });
+        // setType(type + 1);
       }
     } else {
       if (type < 3) {
@@ -57,9 +71,32 @@ export const Booking = () => {
           behavior: "smooth",
         });
         setType(type + 1);
+      } else if (type === 3) {
+        if (paymentMethod) {
+          bookTicket();
+        } else {
+          openNotification("info", "Vui lòng chọn phương thức thanh toán");
+        }
       }
     }
   };
+
+  React.useEffect(() => {
+    if (bookingResult) {
+      if (!isError) {
+        if (bookingResult?.ticket?.Showtime) {
+          openNotification("success", "Thanh toán thành công");
+          navigate("/ticket/" + bookingResult?.ticket?._id);
+        }
+      } else {
+        console.log("bookingResult", bookingResult);
+        openNotification(
+          "error",
+          "Vé bạn chọn đã có người đặt, vui lòng đặt lại"
+        );
+      }
+    }
+  }, [bookingResult]);
 
   React.useEffect(() => {
     let price = 0;
@@ -83,8 +120,41 @@ export const Booking = () => {
     setTotalPrice(foodPrice + seatPrice);
   }, [foodPrice, seatPrice]);
 
+  React.useEffect(() => {}, [foodPrice, seatPrice]);
+
+  const bookTicket = () => {
+    let code: number[] = [];
+    listSelectedSeats?.map((seat: Seat) => {
+      code.push(seat.id);
+    });
+
+    let listFood: Food[] = [];
+
+    listFoods.map((food: Food) => {
+      if (food.quantity > 0) {
+        listFood.push(food);
+      }
+    });
+
+    fetchBooking(
+      {
+        showtime: id,
+        user: user._id,
+        seat: code,
+        foods: listFood,
+        paymentMethod: paymentMethod.name,
+      },
+      "ticket"
+    );
+  };
+
   return (
     <Layout>
+      <Modal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        setType={setType}
+      ></Modal>
       {type != 3 && (
         <div>
           <LineWithText>BOOKING ONLINE</LineWithText>
@@ -103,7 +173,10 @@ export const Booking = () => {
       )}
 
       {type === 1 && (
-        <SelectSeats setListSelectedSeats={setListSelectedSeats}></SelectSeats>
+        <SelectSeats
+          soldSeats={showtimeResult?.showtime.seats}
+          setListSelectedSeats={setListSelectedSeats}
+        ></SelectSeats>
       )}
 
       {type === 2 && <BuyFood setListFoods={setListFoods}></BuyFood>}
@@ -111,9 +184,9 @@ export const Booking = () => {
       {type === 3 && (
         <Payment
           seatPrice={seatPrice}
-          foodPrice={foodPrice}
           listFoods={listFoods}
           totalPrice={totalPrice}
+          setSelectedPayment={setPaymentMethod}
         ></Payment>
       )}
 
@@ -149,7 +222,7 @@ export const Booking = () => {
             <div>Ghế:</div>
             <div className="font-bold">
               {listSelectedSeats?.map((seat: Seat) => (
-                <span>{seat.code}, </span>
+                <span key={seat.code}>{seat.code}, </span>
               ))}
             </div>
           </div>

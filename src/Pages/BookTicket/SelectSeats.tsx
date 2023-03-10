@@ -3,28 +3,26 @@ import { Space } from "antd";
 import { seatMap, seats } from "../../components/seats";
 import { Seat } from "../../components/Seat";
 import { LineWithText } from "../../components/LineWithText";
-import { Food, Seat as SeatInterface } from "../../interface/Interface";
+import { Seat as SeatInterface } from "../../interface/Interface";
 export const SelectSeats: React.FC<{
+  soldSeats: number[] | undefined;
   setListSelectedSeats: React.Dispatch<React.SetStateAction<SeatInterface[]>>;
-}> = ({ setListSelectedSeats }) => {
+}> = ({ soldSeats, setListSelectedSeats }) => {
   const [selectedSeats, setSelectedSeats] = React.useState<SeatInterface[]>([]);
 
   const status = (seat: SeatInterface) => {
-    if (selectedSeats.includes(seat)) return 1;
-    return 0;
+    if (soldSeats?.includes(seat.id)) return 2;
+    else if (selectedSeats.includes(seat)) return 1;
+    else return 0;
   };
 
   React.useEffect(() => {
     setListSelectedSeats(selectedSeats);
   }, [selectedSeats]);
 
-  // const pickSeat = (seatId: number) => {
-  //   if (selectedSeats.includes(seatId)) {
-  //     setSelectedSeats(selectedSeats.filter((seat) => seat !== Number(seatId)));
-  //   } else setSelectedSeats([...selectedSeats, seatId]);
-  // };
-
   const pickSeat = (seat: SeatInterface) => {
+    if (soldSeats?.includes(seat.id)) return;
+    console.log(seat);
     const index = selectedSeats.indexOf(seat);
     if (index === -1) {
       setSelectedSeats([...selectedSeats, seat]);

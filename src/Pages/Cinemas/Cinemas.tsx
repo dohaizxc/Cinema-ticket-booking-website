@@ -8,18 +8,14 @@ import {
   Province,
   Cinema,
   Showtime,
-  Movie,
   ShowtimeDetails,
 } from "../../interface/Interface";
+import dayjs from "dayjs";
 
 import { useNavigate } from "react-router-dom";
 
 export const Cinemas = () => {
-  // const [provinceId, setProvinceId] = React.useState(
-  //   "638f61dceae6921efd78e7b4"
-  // );
   const navigate = useNavigate();
-
   const { fetchGet: fetchProvinces, result: provincesResult } =
     useGet<Province[]>();
   const { fetchGet: fetchCinemas, result: cinemasResult } = useGet<Cinema[]>();
@@ -27,11 +23,29 @@ export const Cinemas = () => {
     useGet<Showtime[]>();
   const [hidden, setHidden] = useState<boolean>(true);
   const [showtimes, setShowtimes] = useState<Showtime[]>();
-  const [selectedProvince, setSelectedProvince] = useState<Province | null>(
-    null
+  const [selectedProvince, setSelectedProvince] = useState<
+    Province | undefined
+  >(undefined);
+
+  const [selectedCinema, setSelectedCinema] = useState<Cinema | undefined>(
+    undefined
   );
 
-  const [selectedCinema, setSelectedCinema] = useState<Cinema | null>(null);
+  const [selectedDate, setSelectedDate] = React.useState<dayjs.Dayjs>(
+    dayjs("2022-12-10")
+  );
+
+  React.useEffect(() => {
+    console.log(selectedDate?.format("YYYY-MM-DD"));
+    if (selectedCinema) {
+      fetchShowtimes(
+        "showtime/cinema/" +
+          selectedCinema._id +
+          "/" +
+          selectedDate?.format("YYYY-MM-DD")
+      );
+    }
+  }, [selectedDate, selectedCinema]);
 
   React.useEffect(() => {
     fetchProvinces("province");
@@ -54,14 +68,13 @@ export const Cinemas = () => {
       setHidden(true);
     }
     setSelectedProvince(province);
+    setSelectedCinema(undefined);
     fetchCinemas("province/" + province._id);
   };
 
   const handleCinemaClick = (cinema: Cinema) => {
     setSelectedCinema(cinema);
     setHidden(false);
-    if (selectedCinema?._id)
-      fetchShowtimes("showtime/cinema/" + selectedCinema?._id + "/2022-12-11");
   };
 
   const handleLocationClick = (linkUrl: URL) => {
@@ -111,43 +124,49 @@ export const Cinemas = () => {
       {!hidden && (
         <>
           <LineWithText>LỊCH CHIẾU PHIM</LineWithText>
-          <ListDays></ListDays>
-          {showtimes?.map((showtime: Showtime) => (
-            <div className="grid grid-cols-7 px-32">
-              <img
-                src={showtime.movie.image}
-                alt={showtime.movie.name}
-                className="py-5 h-[300px] w-[200px]"
-              ></img>
-              <div className="col-span-6 py-5 px-10">
-                <div className="font-bold text-[24px] pb-2">
-                  {showtime.movie.name}
-                </div>
-                <div className="font-medium text-[20px]">
-                  <div className="flex flex-wrap gap-x-6 gap-y-4">
-                    {showtime.showtimes?.map(
-                      (showtimeDetails: ShowtimeDetails) => (
-                        <div
-                          className="p-2 border-sky-700 border-2 cursor-pointer hover:bg-sky-500"
-                          onClick={() =>
-                            navigate(`/booking/${showtimeDetails._id}`)
-                          }
-                        >
-                          {showtimeDetails.time}
-                        </div>
-                      )
-                    )}
+          <ListDays selectDay={setSelectedDate}></ListDays>
+          {showtimes && showtimes.length > 0 ? (
+            <div>
+              {showtimes?.map((showtime: Showtime) => (
+                <div className="grid grid-cols-7 px-32">
+                  <img
+                    src={showtime.movie.image}
+                    alt={showtime.movie.name}
+                    className="py-5 h-[300px] w-[200px]"
+                  ></img>
+                  <div className="col-span-6 py-5 px-10">
+                    <div className="font-bold text-[24px] pb-2">
+                      {showtime.movie.name}
+                    </div>
+                    <div className="font-medium text-[20px]">
+                      <div className="flex flex-wrap gap-x-6 gap-y-4">
+                        {showtime.showtimes?.map(
+                          (showtimeDetails: ShowtimeDetails) => (
+                            <div
+                              className="p-2 border-sky-700 border-2 cursor-pointer hover:bg-sky-500"
+                              onClick={() =>
+                                navigate(`/booking/${showtimeDetails._id}`)
+                              }
+                            >
+                              {showtimeDetails.time}
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
+          ) : (
+            <div className="font-bold text-center text-[24px] mt-5">
+              KHÔNG CÓ SUẤT CHIẾU PHÙ HỢP
+            </div>
+          )}
         </>
       )}
 
-      {/* <div>
-        {selectedCinema && <pre>{JSON.stringify(selectedCinema, null, 2)}</pre>}
-      </div> */}
+      {/* <div>{showtimes && <pre>{JSON.stringify(showtimes, null, 2)}</pre>}</div> */}
     </Layout>
   );
 };

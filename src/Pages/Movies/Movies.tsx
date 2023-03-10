@@ -5,23 +5,20 @@ import { useNavigate } from "react-router-dom";
 import { Movie } from "../../interface/Interface";
 
 export const Movies = () => {
+  const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState<boolean | undefined>(true);
-
-  const handleTypeClick = (type: boolean) => {
-    setSelectedType(type);
-  };
-
   const { fetchGet: fetchMovies, result: movieResults } = useGet<Movie[]>();
 
   React.useEffect(() => {
     fetchMovies("movie");
   }, []);
 
-  const navigate = useNavigate();
+  const handleTypeClick = (type: boolean) => {
+    setSelectedType(type);
+  };
 
   return (
     <Layout>
-      Movie
       <div className="flex justify-center gap-x-10 text-[20px] font-bold">
         <div
           className={`border-sky-700 border-[2px] px-10 py-2 rounded-3xl hover:bg-sky-500

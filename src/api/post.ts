@@ -1,17 +1,18 @@
 import React from "react";
 
-export const useGet = <T extends any>() => {
+export const usePost = <T extends any>() => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
   const [result, setResult] = React.useState<T | undefined>(undefined);
   const token = localStorage.getItem("token");
 
-  const fetchGet = async (path: any) => {
+  const fetchPost = async (object: any, path: string) => {
     setIsLoading(true);
     setIsError(false);
-    console.log(token);
+    console.log(object);
     const response = await fetch("http://localhost:3500/" + path, {
-      method: "GET",
+      method: "POST",
+      body: JSON.stringify(object),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -20,8 +21,10 @@ export const useGet = <T extends any>() => {
       .then((res) => {
         setIsLoading(false);
         if (!res.ok) setIsError(true);
+        console.log("isok", res.ok);
         return res.json();
       })
+
       .catch((err) => {
         setIsError(true);
         setIsLoading(false);
@@ -29,6 +32,5 @@ export const useGet = <T extends any>() => {
     setResult(response);
     return response;
   };
-
-  return { isLoading, isError, fetchGet, result };
+  return { isLoading, isError, fetchPost, result };
 };

@@ -28,7 +28,7 @@ export const Seat: React.FC<{
       ${seat.type === "Couple" ? "w-[92px]" : "w-[37px]"}
       ${
         status === 2
-          ? "bg-[#B8C4BF]"
+          ? "bg-[#B8C4BF] cursor-not-allowed"
           : status === 1
           ? "bg-[#fc6060]"
           : seat.type === "Couple"
