@@ -10,6 +10,7 @@ import {
   Showtime,
   ShowtimeDetails,
 } from "../../interface/Interface";
+import { Spin } from "antd";
 import dayjs from "dayjs";
 
 import { useNavigate } from "react-router-dom";
@@ -19,8 +20,11 @@ export const Cinemas = () => {
   const { fetchGet: fetchProvinces, result: provincesResult } =
     useGet<Province[]>();
   const { fetchGet: fetchCinemas, result: cinemasResult } = useGet<Cinema[]>();
-  const { fetchGet: fetchShowtimes, result: showtimesResult } =
-    useGet<Showtime[]>();
+  const {
+    fetchGet: fetchShowtimes,
+    result: showtimesResult,
+    isLoading,
+  } = useGet<Showtime[]>();
   const [hidden, setHidden] = useState<boolean>(true);
   const [showtimes, setShowtimes] = useState<Showtime[]>();
   const [selectedProvince, setSelectedProvince] = useState<
@@ -90,7 +94,7 @@ export const Cinemas = () => {
           <div
             key={province._id}
             onClick={() => handleProvinceClick(province)}
-            className={`text-[16px] lg:text-[20px]  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500
+            className={`text-[16px] lg:text-[20px]  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
             ${selectedProvince?._id === province._id ? "bg-sky-500" : ""}`}
           >
             <div className="font-bold">{province.name}</div>
@@ -103,7 +107,7 @@ export const Cinemas = () => {
           <div key={cinema._id}>
             <div
               onClick={() => handleCinemaClick(cinema)}
-              className={`font-bold text-[10px] lg:text-[16px] px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500
+              className={`font-bold text-[10px] lg:text-[16px] px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded-t 
           ${selectedCinema?._id === cinema._id ? "bg-sky-500" : ""}`}
             >
               {cinema.name}
@@ -112,7 +116,7 @@ export const Cinemas = () => {
               {cinema.address}
             </div>
             <p
-              className=" border-sky-700 border-[2px] p-2  cursor-pointer hover:bg-sky-500"
+              className=" border-sky-700 border-[2px] p-2  cursor-pointer hover:bg-sky-500 rounded-b "
               onClick={() => handleLocationClick(cinema.address_url)}
             >
               <i className="fa-solid fa-location-dot"></i>
@@ -125,43 +129,52 @@ export const Cinemas = () => {
         <>
           <LineWithText>LỊCH CHIẾU PHIM</LineWithText>
           <ListDays selectDay={setSelectedDate}></ListDays>
-          {showtimes && showtimes.length > 0 ? (
-            <div>
-              {showtimes?.map((showtime: Showtime) => (
-                <div className="grid grid-cols-7 px-32">
-                  <img
-                    src={showtime.movie.image}
-                    alt={showtime.movie.name}
-                    className="py-5 h-[300px] w-[200px]"
-                  ></img>
-                  <div className="col-span-6 py-5 px-10">
-                    <div className="font-bold text-[24px] pb-2">
-                      {showtime.movie.name}
-                    </div>
-                    <div className="font-medium text-[20px]">
-                      <div className="flex flex-wrap gap-x-6 gap-y-4">
-                        {showtime.showtimes?.map(
-                          (showtimeDetails: ShowtimeDetails) => (
-                            <div
-                              className="p-2 border-sky-700 border-2 cursor-pointer hover:bg-sky-500"
-                              onClick={() =>
-                                navigate(`/booking/${showtimeDetails._id}`)
-                              }
-                            >
-                              {showtimeDetails.time}
-                            </div>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+
+          {isLoading ? (
+            <div className="flex justify-center items-center">
+              <Spin size="large" tip="Loading..." />
             </div>
           ) : (
-            <div className="font-bold text-center text-[24px] mt-5">
-              KHÔNG CÓ SUẤT CHIẾU PHÙ HỢP
-            </div>
+            <>
+              {showtimes && showtimes.length > 0 ? (
+                <div>
+                  {showtimes?.map((showtime: Showtime) => (
+                    <div className="grid grid-cols-7 px-32">
+                      <img
+                        src={showtime.movie.image}
+                        alt={showtime.movie.name}
+                        className="py-5 h-[300px] w-[200px]"
+                      ></img>
+                      <div className="col-span-6 py-5 px-10">
+                        <div className="font-bold text-[24px] pb-2">
+                          {showtime.movie.name}
+                        </div>
+                        <div className="font-medium text-[20px]">
+                          <div className="flex flex-wrap gap-x-6 gap-y-4">
+                            {showtime.showtimes?.map(
+                              (showtimeDetails: ShowtimeDetails) => (
+                                <div
+                                  className="p-2 border-sky-700 border-2 cursor-pointer hover:bg-sky-500 rounded"
+                                  onClick={() =>
+                                    navigate(`/booking/${showtimeDetails._id}`)
+                                  }
+                                >
+                                  {showtimeDetails.time}
+                                </div>
+                              )
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="font-bold text-center text-[24px] mt-5">
+                  KHÔNG CÓ SUẤT CHIẾU PHÙ HỢP
+                </div>
+              )}
+            </>
           )}
         </>
       )}

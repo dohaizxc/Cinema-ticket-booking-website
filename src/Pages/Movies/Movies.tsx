@@ -3,36 +3,59 @@ import { Layout } from "../../components/Layout";
 import { useGet } from "../../api/get";
 import { useNavigate } from "react-router-dom";
 import { Movie } from "../../interface/Interface";
+import { Tab } from "@headlessui/react";
+
+function classNames(...classes: any) {
+  return classes.filter(Boolean).join(" ");
+}
+
+const type = [
+  {
+    id: 1,
+    title: "PHIM ĐANG CHIẾU",
+    value: true,
+  },
+  {
+    id: 2,
+    title: "PHIM SẮP CHIẾU",
+    value: false,
+  },
+];
 
 export const Movies = () => {
   const navigate = useNavigate();
-  const [selectedType, setSelectedType] = useState<boolean | undefined>(true);
+  const [selectedType, setSelectedType] = useState<boolean>(true);
   const { fetchGet: fetchMovies, result: movieResults } = useGet<Movie[]>();
 
   React.useEffect(() => {
     fetchMovies("movie");
   }, []);
 
-  const handleTypeClick = (type: boolean) => {
-    setSelectedType(type);
-  };
-
   return (
     <Layout>
-      <div className="flex justify-center gap-x-10 text-[20px] font-bold">
-        <div
-          className={`border-sky-700 border-[2px] px-10 py-2 rounded-3xl hover:bg-sky-500
-        ${selectedType === true ? "bg-sky-500" : ""}`}
-          onClick={() => handleTypeClick(true)}
-        >
-          PHIM ĐANG CHIẾU
-        </div>
-        <div
-          className={`border-sky-700 border-[2px] px-10 py-2 rounded-3xl hover:bg-sky-500
-        ${selectedType === false ? "bg-sky-500" : ""}`}
-          onClick={() => handleTypeClick(false)}
-        >
-          PHIM SẮP CHIẾU
+      <div className="flex items-center justify-center">
+        <div className="my-10 sm:w-1/2 w-3/5">
+          <Tab.Group>
+            <Tab.List className="flex space-x-1 rounded-full bg-sky-900/20 p-1">
+              {type.map((type) => (
+                <Tab
+                  key={type.id}
+                  onClick={() => setSelectedType(type.value)}
+                  className={({ selected }) =>
+                    classNames(
+                      "w-full rounded-full py-2.5 sm:text-base text-sm font-semibold leading-5 ",
+                      "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+                      selected
+                        ? "bg-white shadow text-sky-700"
+                        : "text-gray-100 hover:bg-white/[0.12] hover:text-white"
+                    )
+                  }
+                >
+                  {type.title}
+                </Tab>
+              ))}
+            </Tab.List>
+          </Tab.Group>
         </div>
       </div>
       <div className="flex flex-wrap gap-x-5 gap-y-10 py-10 px-[50px]">

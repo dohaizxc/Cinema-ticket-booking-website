@@ -23,8 +23,8 @@ export const Profile = () => {
 
   return (
     <Layout>
-      <div className="flex space-x-10 px-20">
-        <div className="w-1/3 bg-white rounded">
+      <div className="flex sm:flex-row flex-col sm:space-x-10 space-x-0 px-20">
+        <div className="sm:w-1/3 w-full bg-white rounded">
           <div className="rounded bg-gradient-to-r from-sky-300 to-indigo-300 pb-4">
             <div className="bg-[url('https://order.thecoffeehouse.com/_nuxt/img/Leaves.5c9ad83.svg')] bg-cover bg-no-repeat">
               <div className="flex justify-between mx-4">
@@ -115,7 +115,7 @@ export const Profile = () => {
             </button>
           </div>
         </div>
-        <div className="w-2/3 border border-sky-300">
+        <div className="sm:w-2/3 w-full border border-sky-300">
           {type === 1 && user && (
             <UserInfo fetchGet={fetchUser} user={user}></UserInfo>
           )}

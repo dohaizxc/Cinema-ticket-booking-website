@@ -11,6 +11,7 @@ import {
   ShowtimeDetails,
 } from "../../interface/Interface";
 import { ListDays } from "../../components/ListDays";
+import { Spin } from "antd";
 import dayjs from "dayjs";
 
 export const MovieDetails = () => {
@@ -19,8 +20,11 @@ export const MovieDetails = () => {
   const { fetchGet: fetchProvinces, result: provincesResult } =
     useGet<Province[]>();
   const { fetchGet: fetchCinemas, result: cinemasResult } = useGet<Cinema[]>();
-  const { fetchGet: fetchShowtimes, result: showtimesResult } =
-    useGet<Showtime[]>();
+  const {
+    fetchGet: fetchShowtimes,
+    result: showtimesResult,
+    isLoading,
+  } = useGet<Showtime[]>();
   const [selectedDate, setSelectedDate] = React.useState<dayjs.Dayjs>(
     dayjs("2022-12-10")
   );
@@ -86,7 +90,7 @@ export const MovieDetails = () => {
     <Layout>
       <LineWithText>THÔNG TIN PHIM</LineWithText>
       <div className="grid grid-cols-3 px-24">
-        <img className="p-2" src={movie?.image}></img>
+        <img className="m-2 rounded" src={movie?.image}></img>
         <div className="col-span-2 px-10">
           <div className="font-bold text-[32px] pb-5">{movie?.name}</div>
           <div className="pb-5">{movie?.description}</div>
@@ -149,7 +153,7 @@ export const MovieDetails = () => {
           <div
             key={province._id}
             onClick={() => handleProvinceClick(province)}
-            className={`text-[16px] lg:text-[20px]  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500
+            className={`text-[16px] lg:text-[20px]  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
             ${selectedProvince?._id === province._id ? "bg-sky-500" : ""}`}
           >
             <div className="font-bold">{province.name}</div>
@@ -161,35 +165,43 @@ export const MovieDetails = () => {
 
       <LineWithText>LỊCH CHIẾU PHIM</LineWithText>
 
-      {showtimes && showtimes.length > 0 ? (
-        <div>
-          {showtimes?.map((showtime: Showtime) => (
-            <div className=" py-5 px-10">
-              <div className="font-bold text-[24px] pb-2">
-                {showtime.cinema.name}
-              </div>
-              <div className="font-medium text-[20px]">
-                <div className="flex flex-wrap gap-x-6 gap-y-4">
-                  {showtime.showtimes?.map(
-                    (showtimeDetails: ShowtimeDetails) => (
-                      <div
-                        className="p-2 border-sky-700 border-2 cursor-pointer hover:bg-sky-500"
-                        onClick={() =>
-                          navigate(`/booking/${showtimeDetails._id}`)
-                        }
-                      >
-                        {showtimeDetails.time}
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
+      {isLoading ? (
+        <div className="flex justify-center items-center">
+          <Spin size="large" tip="Loading..." />
         </div>
       ) : (
-        <div className="font-bold text-center text-[24px] mt-5">
-          KHÔNG CÓ SUẤT CHIẾU PHÙ HỢP
+        <div>
+          {showtimes && showtimes.length > 0 ? (
+            <div>
+              {showtimes?.map((showtime: Showtime) => (
+                <div className=" py-5 px-10">
+                  <div className="font-bold text-[24px] pb-2">
+                    {showtime.cinema.name}
+                  </div>
+                  <div className="font-medium text-[20px]">
+                    <div className="flex flex-wrap gap-x-6 gap-y-4">
+                      {showtime.showtimes?.map(
+                        (showtimeDetails: ShowtimeDetails) => (
+                          <div
+                            className="p-2 border-sky-700 border-2 cursor-pointer hover:bg-sky-500 rounded"
+                            onClick={() =>
+                              navigate(`/booking/${showtimeDetails._id}`)
+                            }
+                          >
+                            {showtimeDetails.time}
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="font-bold text-center text-[24px] mt-5">
+              KHÔNG CÓ SUẤT CHIẾU PHÙ HỢP
+            </div>
+          )}
         </div>
       )}
     </Layout>

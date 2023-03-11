@@ -18,9 +18,7 @@ export const Layout = (props: {
     <>
       <AntLayout>
         <Header></Header>
-        <div className="px-[20px] py-[10px] lg:px-[50px] lg:py-[20px]">
-          {props.children}
-        </div>
+        <div className="sm:px-[20px] lg:px-[50px] p-0">{props.children}</div>
         <Footer></Footer>
       </AntLayout>
     </>
