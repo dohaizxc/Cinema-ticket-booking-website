@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Movie } from "../../interface/Interface";
 import { Tab } from "@headlessui/react";
 
-function classNames(...classes: any) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -43,7 +43,7 @@ export const Movies = () => {
                   onClick={() => setSelectedType(type.value)}
                   className={({ selected }) =>
                     classNames(
-                      "w-full rounded-full py-2.5 sm:text-base text-sm font-semibold leading-5 ",
+                      "w-full rounded-full py-2.5 sm:text-base text-sm font-semibold leading-5",
                       "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
                       selected
                         ? "bg-white shadow text-sky-700"
@@ -60,7 +60,7 @@ export const Movies = () => {
       </div>
       <div className="flex flex-wrap gap-x-5 gap-y-10 py-10 px-[50px]">
         {movieResults?.map((movie: Movie) => (
-          <div className="w-[192px]">
+          <div key={movie._id} className="w-[192px]">
             <img
               className="w-[192px] h-[276px] mx-auto cursor-pointer transition ease-in-out delay-150 hover:scale-110 duration-300"
               src={movie.image}
@@ -72,7 +72,7 @@ export const Movies = () => {
               {movie.genre.join(", ")}
             </div>
             <div>
-              <span className="font-medium"> Thời lượng: </span>
+              <span className="font-medium">Thời lượng: </span>
               {movie.duration} phút
             </div>
             <div>

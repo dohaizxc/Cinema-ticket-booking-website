@@ -33,36 +33,49 @@ export const Foods: React.FC<{
 
   return (
     <div>
-      <div className="grid grid-cols-3 border rounded-lg m-2 p-1">
-        <img src={food.image} className="p-4"></img>
-        <div className="col-span-2">
-          <div className="font-bold">{food.title}</div>
+      <div className="flex flex-col items-center border-2 rounded-lg m-3">
+        <img src={food.image} className="h-40 w-40"></img>
+        <div className="w-full bg-white rounded-b-lg">
+          <div className="font-bold text-center text-lg">{food.title}</div>
           {food.contents.map((content: string) => (
-            <div>{content}</div>
+            <div className="text-center h-10">{content}</div>
           ))}
-          <div>
-            <span className="font-bold">Giá: </span>
-            {food.price.toLocaleString("vi", {
-              style: "currency",
-              currency: "VND",
-            })}
-          </div>
-          <div className="flex py-2 items-center">
-            <button
-              className="flex items-center justify-center h-8 w-8 rounded-full bg-sky-300 hover:bg-sky-700"
-              onClick={handleDecreaseQuantity}
-            >
-              -
-            </button>
-            <div className="h-8 w-8 flex items-center justify-center bg-gray-100">
-              {food.quantity}
-            </div>
-            <button
-              className="flex items-center justify-center h-8 w-8 rounded-full bg-sky-300 hover:bg-sky-700"
-              onClick={handleIncreaseQuantity}
-            >
-              +
-            </button>
+
+          <div className="flex items-center justify-between mx-5 my-2">
+            <p className="font-bold text-xl">
+              {food.price.toLocaleString("vi", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </p>
+            {food.quantity === 0 ? (
+              <div className="h-10">
+                <button
+                  className="px-4 bg-sky-300 hover:bg-sky-700 hover:text-white rounded font-semibold py-2"
+                  onClick={handleIncreaseQuantity}
+                >
+                  ADD
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center h-10">
+                <button
+                  className="flex items-center justify-center h-6 w-6 rounded-full bg-sky-300 hover:bg-sky-700 hover:text-white  font-bold"
+                  onClick={handleDecreaseQuantity}
+                >
+                  -
+                </button>
+                <div className="h-8 w-8 flex items-center justify-center font-bold text-lg">
+                  {food.quantity}
+                </div>
+                <button
+                  className="flex items-center justify-center h-6 w-6 rounded-full bg-sky-300 hover:bg-sky-700 hover:text-white  font-bold"
+                  onClick={handleIncreaseQuantity}
+                >
+                  +
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

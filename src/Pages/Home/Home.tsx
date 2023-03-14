@@ -9,8 +9,10 @@ import "swiper/css/navigation";
 import { useGet } from "../../api/get";
 import { Movie } from "../../interface/Interface";
 import { useNavigate } from "react-router-dom";
+import { MovieCard } from "../../components/MovieCard";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-function classNames(...classes: any) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -29,6 +31,7 @@ const type = [
 
 export const Home = () => {
   const navigate = useNavigate();
+  const swiperBanner = useRef<SwiperType>();
   const swiperRef = useRef<SwiperType>();
   const [selectedType, setSelectedType] = useState<boolean>(true);
   const { fetchGet: fetchMovies, result: movieResults } = useGet<Movie[]>();
@@ -39,8 +42,23 @@ export const Home = () => {
 
   return (
     <Layout>
-      <div className="mx-[-20px] lg:mx-[-50px]">
+      <div className="relative">
+        <button
+          onClick={() => swiperBanner.current?.slidePrev()}
+          className="px-4 z-10 absolute top-1/2 left-0 transform -translate-y-1/2"
+        >
+          <ChevronLeftIcon className="h-10 w-10 rounded-full p-1 text-white border-2 border-gray-300" />
+        </button>
+        <button
+          onClick={() => swiperBanner.current?.slideNext()}
+          className="px-4 z-10 absolute top-1/2 right-0 transform -translate-y-1/2"
+        >
+          <ChevronRightIcon className="h-10 w-10 rounded-full p-1 text-white border-2 border-gray-300" />
+        </button>
         <Swiper
+          onBeforeInit={(swiper) => {
+            swiperBanner.current = swiper;
+          }}
           slidesPerView={1}
           spaceBetween={30}
           centeredSlides={true}
@@ -52,8 +70,7 @@ export const Home = () => {
           pagination={{
             clickable: true,
           }}
-          navigation={true}
-          modules={[Autoplay, Pagination, Navigation]}
+          modules={[Autoplay, Pagination]}
         >
           <SwiperSlide>
             <div className="flex items-center justify-center bg-gray-400 h-[300px]">
@@ -111,14 +128,14 @@ export const Home = () => {
               }}
               loop={true}
               autoplay={{
-                delay: 5000,
+                delay: 10000,
                 disableOnInteraction: false,
               }}
               slidesPerGroup={1}
               breakpoints={{
-                "@0.75": {
+                "@0": {
                   slidesPerView: 2,
-                  spaceBetween: 20,
+                  spaceBetween: 10,
                 },
                 "@1.00": {
                   slidesPerView: 3,
@@ -137,76 +154,23 @@ export const Home = () => {
               className="mx-16"
             >
               {movieResults?.map((movie: Movie) => (
-                <SwiperSlide className=" bg-white rounded relative">
-                  <div className="h-[400px] flex flex-col items-center">
-                    <img
-                      src={movie.image}
-                      className="h-[300px] w-full rounded"
-                    />
-                    <p className="line-clamp-2 font-bold text-center my-1">
-                      {movie.name}
-                    </p>
-
-                    <button
-                      className=" text-white font-semibold absolute bottom-3 bg-sky-600 px-5 py-2 rounded"
-                      onClick={() => {
-                        navigate(`/movie/${movie._id}`);
-                      }}
-                    >
-                      Mua vé
-                    </button>
-                  </div>
+                <SwiperSlide className=" bg-white rounded">
+                  <MovieCard movie={movie}></MovieCard>
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className="flex items-center justify-center absolute top-1/2 left-0 transform -translate-y-1/2">
-              <button
-                type="button"
-                onClick={() => swiperRef.current?.slidePrev()}
-                className="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-              >
-                <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                  <svg
-                    className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M15 19l-7-7 7-7"
-                    ></path>
-                  </svg>
-                </span>
-              </button>
-            </div>
-            <div className="flex items-center justify-center absolute top-1/2 right-0 transform -translate-y-1/2">
-              <button
-                type="button"
-                onClick={() => swiperRef.current?.slideNext()}
-                className="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-              >
-                <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                  <svg
-                    className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 5l7 7-7 7"
-                    ></path>
-                  </svg>
-                </span>
-              </button>
-            </div>
+            <button
+              onClick={() => swiperRef.current?.slidePrev()}
+              className="px-4 absolute top-1/2 left-0 transform -translate-y-1/2"
+            >
+              <ChevronLeftIcon className="h-10 w-10 text-black bg-gray-300 hover:bg-gray-600 hover:text-white rounded-full p-1" />
+            </button>
+            <button
+              onClick={() => swiperRef.current?.slideNext()}
+              className="px-4 absolute top-1/2 right-0 transform -translate-y-1/2"
+            >
+              <ChevronRightIcon className="h-10 w-10 text-black bg-gray-300 hover:bg-gray-600 hover:text-white rounded-full p-1" />
+            </button>
           </div>
         )}
       </div>

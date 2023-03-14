@@ -8,8 +8,14 @@ import { useGet } from "../../api/get";
 import { ChangePassword } from "./ChangePassword";
 import { BookingHistory } from "./BookingHistory";
 import { Membership } from "./Membership";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Profile = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const tab = searchParams.get("tab");
+
   const [type, setType] = React.useState<1 | 2 | 3 | 4>(1);
   const { fetchGet: fetchUser, result: user } = useGet<User>();
 
@@ -69,40 +75,48 @@ export const Profile = () => {
           <div className="flex flex-col pb-10">
             <button
               className={`font-medium border-b border-sky-300 text-base p-2 ${
-                type === 1 ? "bg-sky-600 text-white rounded" : "bg-sky-100"
+                tab === "userinfo"
+                  ? "bg-sky-600 text-white rounded"
+                  : "bg-sky-100"
               }`}
               onClick={() => {
-                setType(1);
+                navigate(`/profile?tab=userinfo`);
               }}
             >
               Thông tin người dùng
             </button>
             <button
               className={`font-medium border-b border-sky-300 text-base p-2 ${
-                type === 2 ? "bg-sky-600 text-white rounded" : "bg-sky-100"
+                tab === "changepassword"
+                  ? "bg-sky-600 text-white rounded"
+                  : "bg-sky-100"
               }`}
               onClick={() => {
-                setType(2);
+                navigate(`/profile?tab=changepassword`);
               }}
             >
               Đổi mật khẩu
             </button>
             <button
               className={`font-medium border-b border-sky-300 text-base p-2 ${
-                type === 3 ? "bg-sky-600 text-white rounded" : "bg-sky-100"
+                tab === "bookinghistory"
+                  ? "bg-sky-600 text-white rounded"
+                  : "bg-sky-100"
               }`}
               onClick={() => {
-                setType(3);
+                navigate(`/profile?tab=bookinghistory`);
               }}
             >
               Lịch sử đặt vé
             </button>
             <button
               className={`font-medium border-b border-sky-300 text-base p-2 ${
-                type === 4 ? "bg-sky-600 text-white rounded" : "bg-sky-100"
+                tab === "membership"
+                  ? "bg-sky-600 text-white rounded"
+                  : "bg-sky-100"
               }`}
               onClick={() => {
-                setType(4);
+                navigate(`/profile?tab=membership`);
               }}
             >
               Chính sách thành viên
@@ -116,14 +130,16 @@ export const Profile = () => {
           </div>
         </div>
         <div className="sm:w-2/3 w-full border border-sky-300">
-          {type === 1 && user && (
+          {tab === "userinfo" && user && (
             <UserInfo fetchGet={fetchUser} user={user}></UserInfo>
           )}
-          {type === 2 && user && <ChangePassword></ChangePassword>}
-          {type === 3 && user && (
+          {tab === "changepassword" && user && (
+            <ChangePassword></ChangePassword>
+          )}
+          {tab === "bookinghistory" && user && (
             <BookingHistory userId={user?._id}></BookingHistory>
           )}
-          {type === 4 && user && <Membership></Membership>}
+          {tab === "membership" && user && <Membership></Membership>}
         </div>
       </div>
     </Layout>

@@ -4,7 +4,6 @@ import { Layout } from "../../components/Layout";
 import { useGet } from "../../api/get";
 import { Ticket as TicketInterface } from "../../interface/Interface";
 import Barcode from "react-barcode";
-import { Modal } from "../../components/Modal/Modal";
 export const Ticket = () => {
   const param = useParams();
   const id = param.id;
@@ -13,8 +12,6 @@ export const Ticket = () => {
   React.useEffect(() => {
     fetchTicket("ticket/" + id);
   }, []);
-
-  console.log(ticket);
 
   return (
     <Layout>

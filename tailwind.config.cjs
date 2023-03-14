@@ -2,12 +2,7 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {
-      backgroundImage: {
-        "footer-booking": "url('./assets/ticket_bg.png')",
-        "footer-booking2": "url('./assets/ticket_bg2.jpg')",
-      },
-    },
+    extend: {},
   },
   plugins: [require("@tailwindcss/line-clamp")],
 };

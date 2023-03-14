@@ -7,7 +7,7 @@ export const ChangePassword = () => {
   return (
     <div>
       <div className="flex items-center justify-center bg-sky-300 rounded h-10 my-5 mx-20">
-        <h1 className="font-bold">ĐỔI MẬT KHẨU</h1>
+        <h1 className="font-semibold text-base">ĐỔI MẬT KHẨU</h1>
       </div>
       <div className="flex justify-center">
         <Form

@@ -16,7 +16,7 @@ export const BuyFood: React.FC<{
   return (
     <div>
       <LineWithText>MUA BẮP NƯỚC</LineWithText>
-      <div className="h-auto grid grid-cols-2 mx-20">
+      <div className="h-auto grid lg:grid-cols-3 sm:grid-cols-2 mx-20">
         {selectedFoods.map((food: Food) => (
           <Foods
             key={food.id}

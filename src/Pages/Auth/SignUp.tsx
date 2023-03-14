@@ -20,7 +20,6 @@ export const SignUp = () => {
 
   const onFinish = (values: any) => {
     delete values.confirmPassword;
-    console.log("userResult:", userResult);
     fetchUser(values, "auth/register");
   };
 

@@ -11,7 +11,6 @@ export const UserInfo: React.FC<{
   user: User;
 }> = ({ fetchGet, user }) => {
   const gender = ["Nam", "Nữ"];
-  console.log(user);
   const {
     fetchPatch: fetchUser,
     result: userResult,

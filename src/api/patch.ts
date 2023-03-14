@@ -20,15 +20,12 @@ export const usePatch = <T extends any>() => {
       .then((res) => {
         setIsLoading(false);
         if (!res.ok) setIsError(true);
-        console.log("isok", res);
-        console.log("token", token);
         return res.json();
       })
 
       .catch((err) => {
         setIsError(true);
         setIsLoading(false);
-        console.log("isok", err);
       });
     setResult(response);
     return response;

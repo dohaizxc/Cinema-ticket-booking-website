@@ -2,6 +2,10 @@ import React, { useRef, useState } from "react";
 import dayjs from "dayjs";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
+import {
+  ArrowLeftCircleIcon,
+  ArrowRightCircleIcon,
+} from "@heroicons/react/24/outline";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -39,9 +43,9 @@ export const ListDays: React.FC<{
           }}
           slidesPerGroup={1}
           breakpoints={{
-            "@0.75": {
+            "@0.00": {
               slidesPerView: 4,
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
             "@1.00": {
               slidesPerView: 6,
@@ -59,19 +63,28 @@ export const ListDays: React.FC<{
           className="mx-16"
           onSlideChange={(swiper) => {
             setShowPrevButton(swiper.activeIndex !== 0);
-            setShowNextButton(swiper.activeIndex !== swiper.slides.length - 1);
+            const currentSwiper = swiperRef.current;
+            if (currentSwiper) {
+              setShowNextButton(
+                swiper.activeIndex !==
+                  swiper.slides.length -
+                    Number(currentSwiper.params.slidesPerView)
+              );
+            }
           }}
         >
           {listDates.map((date: dayjs.Dayjs) => (
-            <SwiperSlide className=" bg-white rounded relative">
+            <SwiperSlide
+              key={date.date()}
+              className=" bg-white rounded relative"
+            >
               <div
-                key={date.date()}
                 onClick={() => handleDate(date)}
                 className={`grid grid-cols-2 text-[12px] lg:text-[16px] border-sky-700 border-[2px] p-1 lg:p-2 cursor-pointer hover:bg-sky-500 rounded
         ${selectedDate.date() === date.date() ? "bg-sky-500" : ""}`}
               >
                 <div className="self-center">{date.format("MM")}</div>
-                <div className="text-[32px] text-center font-bold row-span-2 self-center">
+                <div className="lg:text-3xl sm:text-xl text-base text-center font-bold row-span-2 self-center">
                   {date.format("DD")}
                 </div>
                 <div className="self-center">{date.format("ddd")}</div>
@@ -79,54 +92,20 @@ export const ListDays: React.FC<{
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="flex items-center justify-center absolute top-1/2 left-0 transform -translate-y-1/2">
-          <button
-            type="button"
-            onClick={() => swiperRef.current?.slidePrev()}
-            className={`flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none
+        <button
+          onClick={() => swiperRef.current?.slidePrev()}
+          className={`absolute top-1/2 left-0 transform -translate-y-1/2
               ${!showPrevButton ? "opacity-25 cursor-default" : ""}`}
-          >
-            <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-              <svg
-                className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M15 19l-7-7 7-7"
-                ></path>
-              </svg>
-            </span>
-          </button>
-        </div>
-        <div className="flex items-center justify-center absolute top-1/2 right-0 transform -translate-y-1/2">
-          <button
-            type="button"
-            onClick={() => swiperRef.current?.slideNext()}
-            className={`flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none
+        >
+          <ArrowLeftCircleIcon className="h-10 w-10 mx-4" />
+        </button>
+        <button
+          onClick={() => swiperRef.current?.slideNext()}
+          className={`absolute top-1/2 right-0 transform -translate-y-1/2
               ${!showNextButton ? "opacity-25 cursor-default" : ""}`}
-          >
-            <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-              <svg
-                className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M9 5l7 7-7 7"
-                ></path>
-              </svg>
-            </span>
-          </button>
-        </div>
+        >
+          <ArrowRightCircleIcon className="h-10 w-10 mx-4" />
+        </button>
       </div>
     </div>
   );

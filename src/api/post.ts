@@ -9,7 +9,6 @@ export const usePost = <T extends any>() => {
   const fetchPost = async (object: any, path: string) => {
     setIsLoading(true);
     setIsError(false);
-    console.log(object);
     const response = await fetch("http://localhost:3500/" + path, {
       method: "POST",
       body: JSON.stringify(object),
@@ -21,7 +20,6 @@ export const usePost = <T extends any>() => {
       .then((res) => {
         setIsLoading(false);
         if (!res.ok) setIsError(true);
-        console.log("isok", res.ok);
         return res.json();
       })
 

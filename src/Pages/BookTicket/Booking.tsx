@@ -10,6 +10,15 @@ import { Payment } from "./Payment";
 import { openNotification } from "../../components/Notifications";
 import { usePost } from "../../api/post";
 import { Modal } from "../../components/Modal/Modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
+import { EnvironmentOutlined, CalendarOutlined } from "@ant-design/icons";
+import {
+  ClockIcon,
+  CalendarDaysIcon,
+  MapPinIcon,
+} from "@heroicons/react/24/outline";
 
 export const Booking = () => {
   const navigate = useNavigate();
@@ -89,7 +98,6 @@ export const Booking = () => {
           navigate("/ticket/" + bookingResult?.ticket?._id);
         }
       } else {
-        console.log("bookingResult", bookingResult);
         openNotification(
           "error",
           "Vé bạn chọn đã có người đặt, vui lòng đặt lại"
@@ -155,7 +163,7 @@ export const Booking = () => {
         setOpenModal={setOpenModal}
         setType={setType}
       ></Modal>
-      {type != 3 && (
+      {/* {type != 3 && (
         <div>
           <LineWithText>BOOKING ONLINE</LineWithText>
           <div className="font-bold px-32 text-[18px]">
@@ -170,7 +178,7 @@ export const Booking = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
 
       {type === 1 && (
         <SelectSeats
@@ -190,88 +198,115 @@ export const Booking = () => {
         ></Payment>
       )}
 
-      <div className="grid place-items-center h-52 bg-gradient-to-r from-sky-300 to-indigo-300 my-[50px] mx-[70px]">
-        <div className="grid grid-cols-9">
-          <div
-            className="border-2 bg-gray-700 w-[75px] h-[75px] rounded-lg mx-auto my-auto  cursor-pointer"
-            onClick={() => handlePreviousClick(type)}
-          >
-            <i className="fa-sharp fa-solid fa-arrow-left text-[24px] mt-[13px] mx-[25px] text-white text-center"></i>
-            <div className="text-[12px] text-white text-center">PREVIOUS</div>
-          </div>
-          <img src={showtimeResult?.showtime.movieId.image}></img>
-
-          <div className="col-span-2 pl-5">
-            <div className="font-bold">
-              {showtimeResult?.showtime.movieId.name}
-            </div>
-            <div>{showtimeResult?.showtime.movieId.rated.substring(0, 3)}</div>
-          </div>
-          <div className="grid grid-cols-2 col-span-2">
-            <div>Rạp:</div>
-            <div className="font-bold">{showtimeResult?.cinema.name}</div>
-            <div>Suất chiếu:</div>
-            <div className="font-bold">
-              {showtimeResult?.showtime.time + ","}
-              <div> {showtimeResult?.showtime.date.substring(0, 10)}</div>
-            </div>
-            <div>Phòng chiếu:</div>
-            <div className="font-bold">
-              {showtimeResult?.showtime.roomId.name}
-            </div>
-            <div>Ghế:</div>
-            <div className="font-bold">
-              {listSelectedSeats?.map((seat: Seat) => (
-                <span key={seat.code}>{seat.code}, </span>
-              ))}
-            </div>
-          </div>
-          <div className="grid grid-cols-2  col-span-2">
-            <div>Vé phim:</div>
-            <div className="font-bold">
-              {" "}
-              {seatPrice.toLocaleString("vi", {
-                style: "currency",
-                currency: "VND",
-              })}
-            </div>
-            <div>Combo:</div>
-            <div className="font-bold">
-              {foodPrice.toLocaleString("vi", {
-                style: "currency",
-                currency: "VND",
-              })}
-            </div>
-            <div>Tổng:</div>
-            <div className="font-bold">
-              {" "}
-              {totalPrice.toLocaleString("vi", {
-                style: "currency",
-                currency: "VND",
-              })}
-            </div>
+      <div className="fixed bottom-0 mx-[70px]">
+        <div className="relative">
+          <div className="absolute top-1/2 left-0 transform -translate-y-1/2">
+            <button
+              className="border-2 bg-gray-700 w-[75px] h-[75px] rounded-lg"
+              onClick={() => handlePreviousClick(type)}
+            >
+              <i className="fa-sharp fa-solid fa-arrow-left text-[24px] mt-[13px] mx-[25px] text-white text-center"></i>
+              <div className="text-[12px] text-white text-center">PREVIOUS</div>
+            </button>
           </div>
 
-          <div
-            className="border-2 bg-sky-600 w-[75px] h-[75px] rounded-lg mx-auto my-auto cursor-pointer"
-            onClick={() => handleNextClick(type)}
-          >
-            {type === 3 ? (
-              <>
-                <i className="fa-solid fa-money-check-dollar text-[24px] mt-[13px] mx-[22px] text-white text-center"></i>
-                <div className="text-[12px] text-white text-center">
-                  PAYMENT
-                </div>
-              </>
-            ) : (
-              <>
-                <i className="fa-sharp fa-solid fa-arrow-right text-[24px] mt-[13px] mx-[25px] text-white text-center"></i>
-                <div className="text-[12px] text-white text-center">NEXT</div>
-              </>
-            )}
+          <div className="relative flex space-x-8 px-16 mx-20 py-2 bg-gradient-to-r from-sky-300 to-indigo-300 rounded">
+            <img
+              src={showtimeResult?.showtime.movieId.image}
+              className="w-[90px] h-[120px] rounded"
+            ></img>
+            <div className="flex flex-col justify-between w-[250px]">
+              <p className="font-bold">
+                {showtimeResult?.showtime.movieId.name}
+              </p>
+
+              <div className="flex items-center">
+                <MapPinIcon className="mr-2 h-5 w-5 inline-block" />
+                <p className="font-semibold">{showtimeResult?.cinema.name}</p>
+              </div>
+
+              <div className="flex items-center">
+                <ClockIcon className="mr-2 h-5 w-5 inline-block" />
+                <p className="font-semibold">
+                  {showtimeResult?.showtime.time} -{" "}
+                  {showtimeResult?.showtime.time_end}
+                </p>
+              </div>
+
+              <div className="flex items-center">
+                <CalendarDaysIcon className="mr-2 h-5 w-5 inline-block" />
+                <p className="font-semibold">
+                  {showtimeResult?.showtime.date.substring(0, 10)}
+                </p>
+              </div>
+            </div>
+            <div className="w-[150px]">
+              <p>
+                Phòng:{" "}
+                <span className="font-bold">
+                  {showtimeResult?.showtime.roomId.name}
+                </span>
+              </p>
+
+              <p>
+                Ghế:{" "}
+                <span className="font-bold">
+                  {listSelectedSeats?.map((seat: Seat) => (
+                    <span key={seat.code}>{seat.code}, </span>
+                  ))}
+                </span>
+              </p>
+            </div>
+            <div className="grid grid-cols-2 w-[150px]">
+              <div>Vé phim:</div>
+              <div className="font-bold">
+                {" "}
+                {seatPrice.toLocaleString("vi", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+              </div>
+              <div>Combo:</div>
+              <div className="font-bold">
+                {foodPrice.toLocaleString("vi", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+              </div>
+              <div>Tổng:</div>
+              <div className="font-bold text-xl">
+                {" "}
+                {totalPrice.toLocaleString("vi", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute top-1/2 right-0 transform -translate-y-1/2">
+            <button
+              className="border-2 bg-sky-600 w-[75px] h-[75px] rounded-lg"
+              onClick={() => handleNextClick(type)}
+            >
+              {type === 3 ? (
+                <>
+                  <i className="fa-solid fa-money-check-dollar text-[24px] mt-[13px] mx-[22px] text-white text-center"></i>
+                  <div className="text-[12px] text-white text-center">
+                    PAYMENT
+                  </div>
+                </>
+              ) : (
+                <>
+                  <i className="fa-sharp fa-solid fa-arrow-right text-[24px] mt-[13px] mx-[25px] text-white text-center"></i>
+                  <div className="text-[12px] text-white text-center">NEXT</div>
+                </>
+              )}
+            </button>
           </div>
         </div>
       </div>
+      <div className="h-[200px]"></div>
     </Layout>
   );
 };

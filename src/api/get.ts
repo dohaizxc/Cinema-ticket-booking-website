@@ -9,7 +9,6 @@ export const useGet = <T extends any>() => {
   const fetchGet = async (path: any) => {
     setIsLoading(true);
     setIsError(false);
-    console.log(token);
     const response = await fetch("http://localhost:3500/" + path, {
       method: "GET",
       headers: {

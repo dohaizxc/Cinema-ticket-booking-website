@@ -22,7 +22,6 @@ export const SelectSeats: React.FC<{
 
   const pickSeat = (seat: SeatInterface) => {
     if (soldSeats?.includes(seat.id)) return;
-    console.log(seat);
     const index = selectedSeats.indexOf(seat);
     if (index === -1) {
       setSelectedSeats([...selectedSeats, seat]);
@@ -36,12 +35,10 @@ export const SelectSeats: React.FC<{
     <div>
       <LineWithText>CHỌN GHẾ</LineWithText>
 
-      <div className="w-full">
-        <img
-          alt=""
-          className="h-[100px] px-48"
-          src="https://www.cgv.vn/skin/frontend/cgv/default/images/bg-cgv/bg-screen.png"
-        />
+      <div className="flex justify-center items-center mb-7">
+        <p className="font-semibold text-center text-lg border border-sky-500 w-[900px]">
+          SCREEN THIS WAY
+        </p>
       </div>
       <Space direction="vertical" align="center" className="w-full my-15">
         <Space>

@@ -12,7 +12,6 @@ export const LogIn = () => {
   const { fetchPost: fetchUser, result: userResult, isError } = usePost<any>();
 
   const onFinish = (values: any) => {
-    console.log("userResult:", userResult);
     fetchUser(values, "auth/userlogin");
   };
 

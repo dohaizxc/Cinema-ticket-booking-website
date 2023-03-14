@@ -12,6 +12,11 @@ import {
 } from "../../interface/Interface";
 import { ListDays } from "../../components/ListDays";
 import { Spin } from "antd";
+import {
+  ArrowDownCircleIcon,
+  PlayCircleIcon,
+  MapPinIcon,
+} from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 
 export const MovieDetails = () => {
@@ -41,6 +46,8 @@ export const MovieDetails = () => {
   const param = useParams();
   const id = param.id;
 
+  // const [showPopup, setShowPopup] = useState<boolean>(false);
+
   React.useEffect(() => {
     fetchMovieDetails("movie/" + id);
   }, []);
@@ -48,6 +55,10 @@ export const MovieDetails = () => {
   React.useEffect(() => {
     fetchProvinces("province");
   }, []);
+
+  React.useEffect(() => {
+    if (provincesResult) setSelectedProvince(provincesResult[0]);
+  }, [provincesResult]);
 
   React.useEffect(() => {
     if (selectedProvince) {
@@ -74,93 +85,188 @@ export const MovieDetails = () => {
     }
   }, [showtimesResult]);
 
-  console.log(showtimesResult);
-
   const handleProvinceClick = (province: Province) => {
     setSelectedProvince(province);
     setSelectedCinema(undefined);
     fetchCinemas("province/" + province._id);
   };
 
-  const handleCinemaClick = (cinema: Cinema) => {
-    setSelectedCinema(cinema);
-  };
-
   return (
     <Layout>
-      <LineWithText>THÔNG TIN PHIM</LineWithText>
-      <div className="grid grid-cols-3 px-24">
-        <img className="m-2 rounded" src={movie?.image}></img>
-        <div className="col-span-2 px-10">
-          <div className="font-bold text-[32px] pb-5">{movie?.name}</div>
-          <div className="pb-5">{movie?.description}</div>
-          <div>
-            <span className="font-medium">Đạo diễn: </span>
-            {movie?.director}
-          </div>
+      <div
+        className="hidden sm:block relative min-h-[400px] bg-cover"
+        style={{
+          backgroundImage: `url(${movie?.image})`,
+        }}
+      >
+        <div className="absolute inset-0 bg-gray-900 opacity-75 backdrop-filter backdrop-blur-sm"></div>
+        <div className="absolute inset-0 flex items-center justify-center text-white lg:px-24 px-10">
+          <img
+            className="lg:w-[220px] lg:h-[320px] sm:w-[200px] sm:h-[300px] w-[150px] h-[215px] rounded"
+            src={movie?.image}
+          ></img>
+          <div className="pl-10">
+            <div className="font-bold text-xl py-2">{movie?.name}</div>
+            <div>
+              <span className="font-medium">Đạo diễn: </span>
+              {movie?.director}
+            </div>
 
-          <div>
-            <span className="font-medium">Diễn viên: </span>
-            {movie?.actors}
-          </div>
-          <div>
-            <span className="font-medium">Thể loại: </span>
-            {movie?.genre.join(", ")}
-          </div>
-          <div>
-            <span className="font-medium"> Thời lượng: </span>
-            {movie?.duration} phút
-          </div>
-          <div>
-            <span className="font-medium">Ngày khởi chiếu: </span>
-            {movie?.releaseDate.substring(0, 10)}
-          </div>
-          <div>
-            <span className="font-medium"> Ngôn ngữ: </span>
-            {movie?.language}
-          </div>
-          <div>
-            <span className="font-medium"> Rated: </span>
-            {movie?.rated}
-          </div>
-          <button
-            className="font-bold bg-sky-600 text-white px-4 py-2 rounded-lg m-2"
-            onClick={() => {
-              window.open(movie?.trailer_url, "_blank");
-            }}
-          >
-            Xem trailer
-          </button>
+            <div>
+              <span className="font-medium">Diễn viên: </span>
+              {movie?.actors}
+            </div>
+            <div>
+              <span className="font-medium">Thể loại: </span>
+              {movie?.genre.join(", ")}
+            </div>
+            <div>
+              <span className="font-medium"> Thời lượng: </span>
+              {movie?.duration} phút
+            </div>
+            <div>
+              <span className="font-medium">Ngày khởi chiếu: </span>
+              {movie?.releaseDate.substring(0, 10)}
+            </div>
+            <div>
+              <span className="font-medium"> Ngôn ngữ: </span>
+              {movie?.language}
+            </div>
+            <div>
+              <span className="font-medium"> Rated: </span>
+              {movie?.rated}
+            </div>
+            <div className="py-2">{movie?.description}</div>
 
-          <button
-            className="font-bold bg-sky-600 text-white px-4 py-2 rounded-lg m-2"
-            onClick={() => {
-              window.scroll({
-                top: 500,
-                left: 100,
-                behavior: "smooth",
-              });
-            }}
-          >
-            Mua vé
-          </button>
+            <div className="flex items-center justify-center">
+              <button
+                className=" hover:text-sky-500"
+                onClick={() => {
+                  window.open(movie?.trailer_url, "_blank");
+                }}
+              >
+                <div className="flex items-center justify-center">
+                  <PlayCircleIcon className="w-10 h-10" />
+                  <p className="font-semibold text-base ml-2">XEM TRAILER</p>
+                </div>
+              </button>
+              <p className="font-thin text-xl mx-5 mb-1">|</p>
+              <button
+                className=" hover:text-sky-500"
+                onClick={() => {
+                  window.scroll({
+                    top: 500,
+                    left: 100,
+                    behavior: "smooth",
+                  });
+                }}
+              >
+                <div className="flex items-center justify-center">
+                  <ArrowDownCircleIcon className="w-10 h-10" />
+
+                  <p className="font-semibold text-base ml-2">MUA VÉ</p>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <LineWithText>LỊCH CHIẾU PHIM</LineWithText>
-      <div className="flex flex-wrap gap-x-10 gap-y-5 justify-center py-5">
+      <div
+        className="block sm:hidden relative h-[550px] bg-cover mx-[-20px] lg:mx-[-50px]"
+        style={{
+          backgroundImage: `url(${movie?.image})`,
+        }}
+      >
+        <div className="absolute inset-0 bg-gray-900 opacity-75 backdrop-filter backdrop-blur-sm"></div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-8">
+          <div className="flex items-center justify-center">
+            <img
+              className="w-[100px] h-[150px] rounded"
+              src={movie?.image}
+            ></img>
+            <div className="pl-4">
+              <div className="font-bold text-base py-2">{movie?.name}</div>
+              <div>
+                <span className="font-medium">Đạo diễn: </span>
+                {movie?.director}
+              </div>
+
+              <div>
+                <span className="font-medium">Diễn viên: </span>
+                {movie?.actors}
+              </div>
+              <div>
+                <span className="font-medium">Thể loại: </span>
+                {movie?.genre.join(", ")}
+              </div>
+              <div>
+                <span className="font-medium"> Thời lượng: </span>
+                {movie?.duration} phút
+              </div>
+              <div>
+                <span className="font-medium">Ngày khởi chiếu: </span>
+                {movie?.releaseDate.substring(0, 10)}
+              </div>
+              <div>
+                <span className="font-medium"> Ngôn ngữ: </span>
+                {movie?.language}
+              </div>
+              <div>
+                <span className="font-medium"> Rated: </span>
+                {movie?.rated}
+              </div>
+            </div>
+          </div>
+          <div className="py-2">{movie?.description}</div>
+
+          <div className="flex items-center justify-center">
+            <button
+              className=" hover:text-sky-500"
+              onClick={() => {
+                window.open(movie?.trailer_url, "_blank");
+              }}
+            >
+              <div className="flex items-center justify-center">
+                <PlayCircleIcon className="w-10 h-10" />
+                <p className="font-semibold text-base ml-2">XEM TRAILER</p>
+              </div>
+            </button>
+            <p className="font-thin text-xl mx-5 mb-1">|</p>
+            <button
+              className=" hover:text-sky-500"
+              onClick={() => {
+                window.scroll({
+                  top: 500,
+                  left: 100,
+                  behavior: "smooth",
+                });
+              }}
+            >
+              <div className="flex items-center justify-center">
+                <ArrowDownCircleIcon className="w-10 h-10" />
+
+                <p className="font-semibold text-base ml-2">MUA VÉ</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <LineWithText>TỈNH THÀNH</LineWithText>
+      <div className="flex flex-wrap sm:gap-x-10 gap-x-5 gap-y-5  justify-center py-5">
         {provincesResult?.map((province: Province) => (
           <div
             key={province._id}
             onClick={() => handleProvinceClick(province)}
-            className={`text-[16px] lg:text-[20px]  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
+            className={`text-base lg:text-lg  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
             ${selectedProvince?._id === province._id ? "bg-sky-500" : ""}`}
           >
             <div className="font-bold">{province.name}</div>
           </div>
         ))}
       </div>
-      <LineWithText>LỊCH CHIẾU PHIM</LineWithText>
+      <LineWithText>CHỌN NGÀY</LineWithText>
       <ListDays selectDay={setSelectedDate}></ListDays>
 
       <LineWithText>LỊCH CHIẾU PHIM</LineWithText>
@@ -174,12 +280,20 @@ export const MovieDetails = () => {
           {showtimes && showtimes.length > 0 ? (
             <div>
               {showtimes?.map((showtime: Showtime) => (
-                <div className=" py-5 px-10">
-                  <div className="font-bold text-[24px] pb-2">
+                <div className="flex sm:flex-row flex-col sm:items-center sm:py-5 mx-10">
+                  <div className="sm:text-xl text-base font-bold py-4 sm:w-1/3 w-full flex items-center">
+                    <button
+                      onClick={() => {
+                        window.open(showtime.cinema.address_url, "_blank");
+                      }}
+                    >
+                      <MapPinIcon className="sm:w-10 sm:h-10 h-6 w-6 sm:mr-2 mr-1" />
+                    </button>
                     {showtime.cinema.name}
                   </div>
-                  <div className="font-medium text-[20px]">
-                    <div className="flex flex-wrap gap-x-6 gap-y-4">
+
+                  <div className="font-medium sm:text-lg text-base sm:px-10 px-5">
+                    <div className="flex flex-wrap sm:gap-x-6 gap-x-3 gap-y-4">
                       {showtime.showtimes?.map(
                         (showtimeDetails: ShowtimeDetails) => (
                           <div

@@ -2,6 +2,7 @@ import React from "react";
 import { Ticket, User } from "../../interface/Interface";
 import { useGet } from "../../api/get";
 import { useNavigate } from "react-router-dom";
+import { Pagination } from "antd";
 
 export const BookingHistory: React.FC<{ userId: string }> = ({ userId }) => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export const BookingHistory: React.FC<{ userId: string }> = ({ userId }) => {
   return (
     <div>
       <div className="flex items-center justify-center bg-sky-300 rounded h-10 my-5 mx-20">
-        <h1 className="font-bold">LỊCH SỬ ĐẶT VÉ</h1>
+        <h1 className="font-semibold text-base">LỊCH SỬ ĐẶT VÉ</h1>
       </div>
       <div className="flex flex-col  space-y-5">
         {tickets?.map((ticket: Ticket) => (
@@ -86,6 +87,9 @@ export const BookingHistory: React.FC<{ userId: string }> = ({ userId }) => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex items-center justify-center">
+        <Pagination defaultCurrent={1} total={50} className="py-4" />
       </div>
     </div>
   );

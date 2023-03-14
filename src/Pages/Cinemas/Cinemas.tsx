@@ -12,8 +12,8 @@ import {
 } from "../../interface/Interface";
 import { Spin } from "antd";
 import dayjs from "dayjs";
-
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { MapPinIcon } from "@heroicons/react/24/outline";
 
 export const Cinemas = () => {
   const navigate = useNavigate();
@@ -39,8 +39,12 @@ export const Cinemas = () => {
     dayjs("2022-12-10")
   );
 
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const provinceParams = searchParams.get("province");
+  const cinemaParams = searchParams.get("cinema");
+
   React.useEffect(() => {
-    console.log(selectedDate?.format("YYYY-MM-DD"));
     if (selectedCinema) {
       fetchShowtimes(
         "showtime/cinema/" +
@@ -74,11 +78,15 @@ export const Cinemas = () => {
     setSelectedProvince(province);
     setSelectedCinema(undefined);
     fetchCinemas("province/" + province._id);
+    navigate("/cinema?province=" + province.name);
   };
 
   const handleCinemaClick = (cinema: Cinema) => {
     setSelectedCinema(cinema);
     setHidden(false);
+    navigate(
+      "/cinema?province=" + selectedProvince?.name + "&cinema=" + cinema.name
+    );
   };
 
   const handleLocationClick = (linkUrl: URL) => {
@@ -89,38 +97,38 @@ export const Cinemas = () => {
     <Layout>
       <LineWithText>DANH SÁCH RẠP</LineWithText>
 
-      <div className="flex flex-wrap gap-x-10 gap-y-5 justify-center py-5">
+      <div className="flex flex-wrap sm:gap-x-10 gap-x-5 gap-y-5 justify-center py-5">
         {provincesResult?.map((province: Province) => (
           <div
             key={province._id}
             onClick={() => handleProvinceClick(province)}
-            className={`text-[16px] lg:text-[20px]  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
-            ${selectedProvince?._id === province._id ? "bg-sky-500" : ""}`}
+            className={`text-base lg:text-lg px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
+            ${provinceParams === province.name ? "bg-sky-500" : ""}`}
           >
             <div className="font-bold">{province.name}</div>
           </div>
         ))}
       </div>
 
-      <div className="p-[24px] grid grid-cols-4 gap-5 lg:gap-10 px-[30px] lg:px-[100px] text-black text-center">
+      <div className="p-[24px] grid sm:grid-cols-4 grid-cols-2 gap-5 lg:gap-10 px-[30px] lg:px-[100px] text-black text-center">
         {cinemasResult?.map((cinema: Cinema) => (
           <div key={cinema._id}>
             <div
               onClick={() => handleCinemaClick(cinema)}
-              className={`font-bold text-[10px] lg:text-[16px] px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded-t 
-          ${selectedCinema?._id === cinema._id ? "bg-sky-500" : ""}`}
+              className={`font-bold text-[10px] lg:text-base px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded-t 
+          ${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
             >
               {cinema.name}
             </div>
-            <div className=" border-sky-700 border-x-[2px] p-2">
+            <p className="sm:block hidden border-sky-700 border-x-[2px] border-b-[2px] p-2">
               {cinema.address}
-            </div>
-            <p
-              className=" border-sky-700 border-[2px] p-2  cursor-pointer hover:bg-sky-500 rounded-b "
+            </p>
+            <button
+              className=" border-sky-700 border-x-[2px] border-b-[2px] p-2 w-full hover:bg-sky-500 rounded-b flex justify-center"
               onClick={() => handleLocationClick(cinema.address_url)}
             >
-              <i className="fa-solid fa-location-dot"></i>
-            </p>
+              <MapPinIcon className="h-6 w-6" />
+            </button>
           </div>
         ))}
       </div>
@@ -139,18 +147,18 @@ export const Cinemas = () => {
               {showtimes && showtimes.length > 0 ? (
                 <div>
                   {showtimes?.map((showtime: Showtime) => (
-                    <div className="grid grid-cols-7 px-32">
+                    <div className="flex lg:px-32 p-5">
                       <img
                         src={showtime.movie.image}
                         alt={showtime.movie.name}
-                        className="py-5 h-[300px] w-[200px]"
+                        className="rounded lg:h-[300px] lg:w-[200px] h-[150px] w-[100px]"
                       ></img>
-                      <div className="col-span-6 py-5 px-10">
-                        <div className="font-bold text-[24px] pb-2">
+                      <div className="lg:px-10 pl-5">
+                        <div className="font-bold sm:text-xl text-base pb-2">
                           {showtime.movie.name}
                         </div>
-                        <div className="font-medium text-[20px]">
-                          <div className="flex flex-wrap gap-x-6 gap-y-4">
+                        <div className="font-medium sm:text-lg text-base">
+                          <div className="flex flex-wrap sm:gap-x-6 gap-x-3 gap-y-4">
                             {showtime.showtimes?.map(
                               (showtimeDetails: ShowtimeDetails) => (
                                 <div
