@@ -47,7 +47,7 @@ export const SignUp = () => {
             <h1 className="font-bold text-center text-[24px] mt-5">ĐĂNG KÝ</h1>
             <Form
               name="basic"
-              initialValues={{ remember: true }}
+              initialValues={{ remember: false }}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
@@ -98,7 +98,7 @@ export const SignUp = () => {
               <div className="flex justify-between">
                 <Form.Item
                   name="gender"
-                  rules={[{ required: true, message: "gender!" }]}
+                  rules={[{ required: true, message: "Gender!" }]}
                 >
                   <Select
                     allowClear
@@ -135,7 +135,7 @@ export const SignUp = () => {
                   rules={[
                     {
                       required: true,
-                      message: "dayOfBirth!",
+                      message: "Input date of birth!",
                     },
                   ]}
                 >
@@ -176,7 +176,7 @@ export const SignUp = () => {
               >
                 <Input.Password
                   size="middle"
-                  placeholder="Enter your password"
+                  placeholder="Confirm your password"
                   prefix={<KeyOutlined className="site-form-item-icon" />}
                 />
               </Form.Item>
@@ -185,6 +185,13 @@ export const SignUp = () => {
                 name="remember"
                 valuePropName="checked"
                 className="px-10"
+                rules={[
+                  { required: true,
+                    transform: value => (value || undefined),  // Those two lines
+                    type: 'boolean',                           // Do the magic
+                    message: "Please agree the terms and conditions.",
+                  },
+                ]}
               >
                 <Checkbox>Đồng ý với điều khoản dịch vụ</Checkbox>
               </Form.Item>
