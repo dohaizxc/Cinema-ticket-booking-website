@@ -82,7 +82,7 @@ export const LogIn = () => {
                   htmlType="submit"
                   className="w-full h-10 text-center bg-sky-500 rounded"
                 >
-                  ĐĂNG KÝ
+                  ĐĂNG NHẬP
                 </Button>
               </Form.Item>
             </Form>
