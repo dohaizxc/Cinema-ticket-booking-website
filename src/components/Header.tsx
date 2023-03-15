@@ -65,9 +65,9 @@ export const Header = () => {
             RẠP
           </Link>
           <Link
-            to="/error"
+            to="/newsoffer"
             className={`text-sm font-semibold leading-6 ${
-              keyMenu === "error" ? "text-cyan-600" : ""
+              keyMenu === "newsoffer" ? "text-cyan-600" : ""
             } hover:text-cyan-500`}
           >
             ƯU ĐÃI
@@ -147,7 +147,7 @@ export const Header = () => {
                   RẠP
                 </Link>
                 <Link
-                  to="/error"
+                  to="/newsoffer"
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50"
                 >
                   ƯU ĐÃI

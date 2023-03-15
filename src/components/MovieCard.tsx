@@ -46,14 +46,19 @@ export const MovieCard: React.FC<{ movie: Movie }> = ({ movie }) => {
           </div>
         )}
       </div>
-      <button
-        className="line-clamp-2 font-bold text-center my-2 hover:text-sky-500"
+      <div
+        className="line-clamp-2 cursor-pointer font-bold text-center my-2 hover:text-sky-500"
         onClick={() => {
           navigate(`/movie/${movie._id}`);
         }}
       >
+        <span className="border border-red-500 rounded text-red-500 px-1 mx-1">
+          {movie.rated.substring(0, 1) === "P"
+            ? movie.rated.substring(0, 1)
+            : movie.rated.substring(0, 3)}
+        </span>
         {movie.name}
-      </button>
+      </div>
     </div>
   );
 };

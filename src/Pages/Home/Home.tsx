@@ -47,13 +47,13 @@ export const Home = () => {
           onClick={() => swiperBanner.current?.slidePrev()}
           className="px-4 z-10 absolute top-1/2 left-0 transform -translate-y-1/2"
         >
-          <ChevronLeftIcon className="h-10 w-10 rounded-full p-1 text-white border-2 border-gray-300" />
+          <ChevronLeftIcon className="sm:h-10 sm:w-10 h-8 w-8 rounded-full p-1 text-white border-2 border-gray-300" />
         </button>
         <button
           onClick={() => swiperBanner.current?.slideNext()}
           className="px-4 z-10 absolute top-1/2 right-0 transform -translate-y-1/2"
         >
-          <ChevronRightIcon className="h-10 w-10 rounded-full p-1 text-white border-2 border-gray-300" />
+          <ChevronRightIcon className="sm:h-10 sm:w-10 h-8 w-8 rounded-full p-1 text-white border-2 border-gray-300" />
         </button>
         <Swiper
           onBeforeInit={(swiper) => {
@@ -94,9 +94,9 @@ export const Home = () => {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="bg-white my-4 rounded">
+      <div className="bg-white my-4 rounded lg:mx-12 sm:mx-5 mx-0">
         <div className="flex items-center justify-center">
-          <div className="my-8 sm:w-1/2 w-3/5">
+          <div className="my-8 lg:w-1/2 sm:w-3/5 w-4/5">
             <Tab.Group>
               <Tab.List className="flex space-x-1 rounded-full bg-sky-900/20 p-1">
                 {type.map((type) => (
@@ -133,25 +133,25 @@ export const Home = () => {
               }}
               slidesPerGroup={1}
               breakpoints={{
-                "@0": {
+                "0": {
                   slidesPerView: 2,
                   spaceBetween: 10,
                 },
-                "@1.00": {
+                "768": {
                   slidesPerView: 3,
-                  spaceBetween: 20,
+                  spaceBetween: 10,
                 },
-                "@1.25": {
+                "820": {
                   slidesPerView: 4,
-                  spaceBetween: 20,
+                  spaceBetween: 10,
                 },
-                "@1.50": {
+                "1280": {
                   slidesPerView: 5,
                   spaceBetween: 20,
                 },
               }}
               modules={[Autoplay, Pagination, Navigation]}
-              className="mx-16"
+              className="sm:mx-16 mx-10"
             >
               {movieResults?.map((movie: Movie) => (
                 <SwiperSlide className=" bg-white rounded">
@@ -161,22 +161,51 @@ export const Home = () => {
             </Swiper>
             <button
               onClick={() => swiperRef.current?.slidePrev()}
-              className="px-4 absolute top-1/2 left-0 transform -translate-y-1/2"
+              className="sm:px-4 px-1 absolute top-1/2 left-0 transform -translate-y-1/2"
             >
-              <ChevronLeftIcon className="h-10 w-10 text-black bg-gray-300 hover:bg-gray-600 hover:text-white rounded-full p-1" />
+              <ChevronLeftIcon className="sm:h-10 sm:w-10 h-8 w-8 text-black bg-gray-300 hover:bg-gray-600 hover:text-white rounded-full p-1" />
             </button>
             <button
               onClick={() => swiperRef.current?.slideNext()}
-              className="px-4 absolute top-1/2 right-0 transform -translate-y-1/2"
+              className="sm:px-4 px-1 absolute top-1/2 right-0 transform -translate-y-1/2"
             >
-              <ChevronRightIcon className="h-10 w-10 text-black bg-gray-300 hover:bg-gray-600 hover:text-white rounded-full p-1" />
+              <ChevronRightIcon className="sm:h-10 sm:w-10 h-8 w-8 text-black bg-gray-300 hover:bg-gray-600 hover:text-white rounded-full p-1" />
             </button>
           </div>
         )}
+        <div className="flex justify-center items-center mb-5 hover:text-sky-500">
+          <button
+            className="flex items-center justify-center"
+            onClick={() => {
+              navigate(`/movie`);
+            }}
+          >
+            VIEW ALL
+            <ChevronRightIcon className="inline-block h-6 w-6" />
+          </button>
+        </div>
       </div>
-      <div className="bg-white my-5 sm:py-10">
+
+      <div className="grid sm:grid-cols-2 bg-white py-5 px-12 lg:mx-12 mx-5 my-5 rounded">
+        <div>
+          <p className="lg:text-3xl sm:text-xl text-base font-semibold">
+            Introducing an exclusive loyalty program that pays you back!
+          </p>
+          <div className="flex space-x-5 my-4">
+            <button className=" font-semibold bg-sky-300 hover:bg-sky-700 text-black hover:text-white px-5 py-2 mt-2 rounded">
+              KNOW MORE
+            </button>
+            <button className="font-semibold text-gray-400 hover:text-black px-5 py-2 mt-2">
+              ALREADY A MEMBER?
+            </button>
+          </div>
+        </div>
+        <div className="bg-[url('https://64.media.tumblr.com/bb52491bb4001d07c4f7542c44649f8a/940908fe8c3a4fcd-3e/s540x810/8439d3125bc1ac5fa63418b8e2a6eb5f3008b185.gif')]"></div>
+      </div>
+
+      <div className="bg-white m-5 sm:py-10 py-5 lg:mx-12 rounded">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
+          <h2 className="text-center sm:text-lg text-base font-semibold leading-8 text-gray-900">
             Nhiều phòng chiếu với đa dạng các định dạng
           </h2>
           <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
