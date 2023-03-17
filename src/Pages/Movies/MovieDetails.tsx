@@ -88,11 +88,13 @@ export const MovieDetails = () => {
 
   React.useEffect(() => {
     let listShowtimes: Showtime[] = [];
-    showtimesResult?.map((showtime: Showtime) => {
-      if (showtime.showtimes.length > 0) {
-        listShowtimes.push(showtime);
-      }
-    });
+    if (showtimesResult) {
+      showtimesResult.map((showtime: Showtime) => {
+        if (showtime.showtimes.length > 0) {
+          listShowtimes.push(showtime);
+        }
+      });
+    }
     if (listShowtimes) {
       setShowtimes(listShowtimes);
     }
@@ -172,8 +174,7 @@ export const MovieDetails = () => {
                     className=" hover:text-sky-500"
                     onClick={() => {
                       window.scroll({
-                        top: 500,
-                        left: 100,
+                        top: 450,
                         behavior: "smooth",
                       });
                     }}
@@ -262,8 +263,7 @@ export const MovieDetails = () => {
                   className=" hover:text-sky-500"
                   onClick={() => {
                     window.scroll({
-                      top: 500,
-                      left: 100,
+                      top: 600,
                       behavior: "smooth",
                     });
                   }}
@@ -332,15 +332,17 @@ export const MovieDetails = () => {
                                 <button
                                   className="w-16 p-2 border-sky-700 border-2 hover:bg-sky-500 rounded"
                                   onClick={() => {
-                                    if (user)
+                                    if (user) {
+                                      scroll(0, 0);
                                       navigate(
                                         `/booking/${showtimeDetails._id}`
                                       );
-                                    else {
+                                    } else {
                                       openNotification(
                                         "info",
                                         "Vui lòng đăng nhập để tiếp tục"
                                       );
+                                      scroll(0, 0);
                                       navigate(`/login`);
                                     }
                                   }}

@@ -22,7 +22,8 @@ export const Header = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    openNotification("success", "Logout");
+    openNotification("success", "Đăng xuất thành công");
+    scroll(0, 0);
     navigate("/login");
   };
 
@@ -72,7 +73,7 @@ export const Header = () => {
           >
             ƯU ĐÃI
           </Link>
-          {user ? (
+          {user && (
             <Link
               to="/profile"
               className={`text-sm font-semibold leading-6 ${
@@ -81,8 +82,6 @@ export const Header = () => {
             >
               TÀI KHOẢN
             </Link>
-          ) : (
-            <></>
           )}
         </div>
         <div className="hidden sm:flex sm:flex-1 sm:justify-end">
@@ -152,12 +151,14 @@ export const Header = () => {
                 >
                   ƯU ĐÃI
                 </Link>
-                <Link
-                  to="/profile"
-                  className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50"
-                >
-                  TÀI KHOẢN
-                </Link>
+                {user && (
+                  <Link
+                    to="/profile"
+                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50"
+                  >
+                    TÀI KHOẢN
+                  </Link>
+                )}
               </div>
               <div className="py-6">
                 {user ? (

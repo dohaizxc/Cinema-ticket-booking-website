@@ -88,7 +88,7 @@ export const Movies = () => {
           </Tab.Group>
         </div>
         {isLoading ? (
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center min-h-screen">
             <Spin size="large" tip="Loading..." />
           </div>
         ) : (
@@ -113,12 +113,14 @@ export const Movies = () => {
                   src={movie.image}
                   alt={movie.name}
                   onClick={() => {
+                    scroll(0, 0);
                     navigate(`/movie/${movie._id}`);
                   }}
                 ></img>
                 <div
                   className="line-clamp-2 cursor-pointer font-bold mt-3 hover:text-sky-500"
                   onClick={() => {
+                    scroll(0, 0);
                     navigate(`/movie/${movie._id}`);
                   }}
                 >
@@ -140,6 +142,7 @@ export const Movies = () => {
                   <button
                     className="px-4 py-2 border border-transparent rounded-md font-semibold text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out"
                     onClick={() => {
+                      scroll(0, 0);
                       navigate(`/movie/${movie._id}`);
                     }}
                   >

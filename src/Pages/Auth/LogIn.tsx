@@ -19,12 +19,13 @@ export const LogIn = () => {
   React.useEffect(() => {
     if (userResult) {
       if (!isError) {
-        openNotification("success", userResult.message);
+        openNotification("success", "Đăng nhập thành công");
         localStorage.setItem("token", userResult.accessToken);
         localStorage.setItem("user", JSON.stringify(userResult.foundUser));
+        scroll(0, 0);
         navigate("/");
       } else {
-        openNotification("error", userResult.message);
+        openNotification("error", "Tên tài khoản hoặc mật khẩu không đùng");
       }
     }
   }, [userResult]);
@@ -49,7 +50,7 @@ export const LogIn = () => {
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
-              className="w-2/3"
+              className="lg:w-2/3 md:w-4/5 w-2/3"
             >
               <Form.Item
                 name="email"

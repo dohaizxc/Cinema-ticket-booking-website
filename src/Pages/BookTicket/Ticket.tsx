@@ -24,14 +24,14 @@ export const Ticket = () => {
   return (
     <Layout>
       {ticket && (
-        <div className="flex flex-col items-center justify-center mx-20 my-10 space-y-4">
-          <h1 className="font-bold text-[20px] bg-sky-300 py-2 w-full text-center rounded">
+        <div className="flex flex-col items-center mx-20 my-5 space-y-4 min-h-screen">
+          <h1 className="font-bold text-lg bg-sky-300 py-2 w-full text-center rounded">
             THÔNG TIN VÉ
           </h1>
-          <div className="flex lg:flex-row flex-col lg:space-x-10 bg-sky-100 py-5 px-10">
+          <div className="flex lg:flex-row flex-col lg:justify-between lg:space-x-10 bg-sky-100 py-5 px-10 lg:h-[400px]">
             <img
               src={ticket.movieImage}
-              className="rounded w-[200px] h-[300px]"
+              className="rounded w-[240px] h-[350px] mt-2"
             ></img>
 
             <div className="flex flex-col justify-between">
@@ -71,7 +71,7 @@ export const Ticket = () => {
                     <span className="font-normal"> {ticket.seat}</span>
                   </div>
 
-                  <span className="mr-[50px]">
+                  <span>
                     {ticket.totalTicket.toLocaleString("it-IT", {
                       style: "currency",
                       currency: "VND",
@@ -82,7 +82,7 @@ export const Ticket = () => {
                   <div>
                     <div>BẮP NƯỚC:</div>
 
-                    <div className="ml-[50px] pl-50px">
+                    <div className="ml-10">
                       {ticket.foods?.map((food: Food) => {
                         return (
                           <div
@@ -92,7 +92,7 @@ export const Ticket = () => {
                             <span className="ml-0 font-normal">
                               {food.title} x{food.quantity}
                             </span>
-                            <span className="font-bold mr-[50px]">
+                            <span className="font-medium">
                               {food.price.toLocaleString("it-IT", {
                                 style: "currency",
                                 currency: "VND",
@@ -107,8 +107,7 @@ export const Ticket = () => {
 
                 <div className="w-full flex justify-between">
                   <span className="ml-0">TỔNG THANH TOÁN:</span>
-                  <span className="mr-[50px]">
-                    {" "}
+                  <span>
                     {(
                       (ticket.totalTicket ?? 0) + (ticket.totalFood ?? 0)
                     ).toLocaleString("it-IT", {
@@ -119,23 +118,26 @@ export const Ticket = () => {
                 </div>
 
                 <div className="w-full flex justify-between">
-                  <span className="ml-0">PHƯƠNG THỨC THANH TOÁN:</span>
-                  <span className="mr-[50px] font-normal">
-                    {ticket.paymentMethod}
-                  </span>
+                  <span className="mr-10">PHƯƠNG THỨC THANH TOÁN:</span>
+                  <span className="font-normal">{ticket.paymentMethod}</span>
                 </div>
               </div>
             </div>
-            <div className="p-5 bg-white rounded my-5 h-[260px]">
-              <QRCode
-                id="qrcode"
-                value={ticket.id.toString() ?? "undefined"}
-                size={200}
-                level={"H"}
-                includeMargin={false}
-              />
-              <p className="text-center font-bold my-2 text-base">
-                {ticket.id}
+            <div className="w-[240px]">
+              <div className="p-5 bg-white rounded my-5 h-[260px]">
+                <QRCode
+                  id="qrcode"
+                  value={ticket.id.toString() ?? "undefined"}
+                  size={200}
+                  level={"H"}
+                  includeMargin={false}
+                />
+                <p className="text-center font-bold my-2 text-base">
+                  {ticket.id}
+                </p>
+              </div>
+              <p className="text-center">
+                Vui lòng đưa mã QR này đến quầy vé để nhận vé của bạn
               </p>
             </div>
           </div>

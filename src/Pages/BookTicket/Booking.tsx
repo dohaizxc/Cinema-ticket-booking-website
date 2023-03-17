@@ -35,6 +35,7 @@ export const Booking = () => {
   const [paymentMethod, setPaymentMethod] = useState<any>();
 
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [ageVerification, setAgeVerification] = useState<boolean>(false);
 
   const param = useParams();
   const id = param.id;
@@ -43,15 +44,34 @@ export const Booking = () => {
   }, []);
 
   const handlePreviousClick = (type: number) => {
-    if (type > 1) {
+    if (type > 2) {
       window.scroll({
         top: 0,
         left: 0,
         behavior: "smooth",
       });
       setType(type - 1);
+    } else if (type === 2) {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+      setAgeVerification(false);
+      setType(type - 1);
     }
   };
+
+  React.useEffect(() => {
+    if (ageVerification) {
+      setType(2);
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [ageVerification]);
 
   const handleNextClick = (type: number) => {
     if (type === 1) {
@@ -59,13 +79,14 @@ export const Booking = () => {
         openNotification("info", "Vui lòng chọn ghế để tiếp tục");
         return;
       } else {
-        setOpenModal(true);
-        // window.scroll({
-        //   top: 0,
-        //   left: 0,
-        //   behavior: "smooth",
-        // });
-        // setType(type + 1);
+        if (showtimeResult?.showtime.movieId.rated.substring(0, 1) === "P") {
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          });
+          setType(type + 1);
+        } else setOpenModal(true);
       }
     } else {
       if (type < 3) {
@@ -90,6 +111,7 @@ export const Booking = () => {
       if (!isError) {
         if (bookingResult?.ticket?.Showtime) {
           openNotification("success", "Thanh toán thành công");
+          scroll(0, 0);
           navigate("/ticket/" + bookingResult?.ticket?._id);
         }
       } else {
@@ -156,7 +178,13 @@ export const Booking = () => {
       <Modal
         openModal={openModal}
         setOpenModal={setOpenModal}
-        setType={setType}
+        setConfirm={setAgeVerification}
+        title="Xác nhận độ tuổi"
+        content={
+          "Tôi xác nhận mua vé cho người xem từ " +
+          showtimeResult?.showtime.movieId.rated.substring(1, 3) +
+          " tuổi trở lên và hiểu rằng UIT CINEMA sẽ không hoàn tiền nếu không chứng thực độ tuổi của khán giả."
+        }
       ></Modal>
       {/* {type != 3 && (
         <div>
@@ -235,6 +263,16 @@ export const Booking = () => {
               ></img>
               <div className="flex flex-col justify-between space-y-1 lg:w-[300px] md:w-[200px] ">
                 <p className="font-bold">
+                  {showtimeResult?.showtime.movieId.rated.substring(0, 1) ===
+                  "P" ? (
+                    <span className="border border-green-600 rounded text-green-600 px-1 mr-1">
+                      P
+                    </span>
+                  ) : (
+                    <span className="border border-red-500 rounded text-red-500 px-1 mr-1">
+                      {showtimeResult?.showtime.movieId.rated.substring(0, 3)}
+                    </span>
+                  )}
                   {showtimeResult?.showtime.movieId.name}
                 </p>
 
@@ -276,9 +314,14 @@ export const Booking = () => {
               <p>
                 Ghế:{" "}
                 <span className="font-bold">
-                  {listSelectedSeats?.map((seat: Seat) => (
-                    <span key={seat.code}>{seat.code}, </span>
-                  ))}
+                  {listSelectedSeats?.map((seat: Seat) => {
+                    if (
+                      listSelectedSeats[listSelectedSeats.length - 1].id ==
+                      seat.id
+                    )
+                      return <span key={seat.code}>{seat.code}</span>;
+                    else return <span key={seat.code}>{seat.code}, </span>;
+                  })}
                 </span>
               </p>
             </div>

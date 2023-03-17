@@ -40,6 +40,7 @@ export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
                   <button
                     className="px-4 py-2 border border-transparent rounded-md font-semibold text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out mt-2"
                     onClick={() => {
+                      scroll(0, 0);
                       navigate(`/movie/${movie._id}`);
                     }}
                   >
@@ -54,14 +55,19 @@ export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
       <div
         className="line-clamp-2 cursor-pointer font-bold text-center my-2 hover:text-sky-500"
         onClick={() => {
+          scroll(0, 0);
           navigate(`/movie/${movie._id}`);
         }}
       >
-        <span className="border border-red-500 rounded text-red-500 px-1 mr-1">
-          {movie.rated.substring(0, 1) === "P"
-            ? movie.rated.substring(0, 1)
-            : movie.rated.substring(0, 3)}
-        </span>
+        {movie.rated.substring(0, 1) === "P" ? (
+          <span className="border border-green-500 rounded text-green-500 px-1 mr-1">
+            P
+          </span>
+        ) : (
+          <span className="border border-red-500 rounded text-red-500 px-1 mr-1">
+            {movie.rated.substring(0, 3)}
+          </span>
+        )}
         {movie.name}
       </div>
     </div>

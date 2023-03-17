@@ -6,8 +6,10 @@ import { InformationCircleIcon } from "@heroicons/react/24/outline";
 export const Modal: React.FC<{
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setType: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ openModal, setOpenModal, setType }) => {
+  setConfirm: React.Dispatch<React.SetStateAction<boolean>>;
+  title: string;
+  content: string;
+}> = ({ openModal, setOpenModal, setConfirm, title, content }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export const Modal: React.FC<{
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-sky-100 sm:mx-0 sm:h-10 sm:w-10">
-                      <ExclamationTriangleIcon
+                      <InformationCircleIcon
                         className="h-6 w-6 text-sky-600"
                         aria-hidden="true"
                       />
@@ -60,14 +62,10 @@ export const Modal: React.FC<{
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        Xác nhận độ tuổi
+                        {title}
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">
-                          Tôi xác nhận mua vé cho người xem từ 13 tuổi trở lên
-                          và hiểu rằng UIT CINEMA sẽ không hoàn tiền nếu không
-                          chứng thực độ tuổi của khán giả.
-                        </p>
+                        <p className="text-sm text-gray-500">{content}</p>
                       </div>
                     </div>
                   </div>
@@ -78,12 +76,7 @@ export const Modal: React.FC<{
                     className="inline-flex w-full justify-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-800 sm:ml-3 sm:w-auto"
                     onClick={() => {
                       setOpenModal(false);
-                      setType(2);
-                      window.scroll({
-                        top: 0,
-                        left: 0,
-                        behavior: "smooth",
-                      });
+                      setConfirm(true);
                     }}
                   >
                     Xác nhận

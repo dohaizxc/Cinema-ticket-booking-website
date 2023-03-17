@@ -102,27 +102,23 @@ export const Home = () => {
           modules={[Autoplay, Pagination]}
         >
           <SwiperSlide>
-            <div className="flex flex-col items-center justify-center bg-gray-400 h-[300px]">
-              <p className="font-bold text-3xl">Discover the magic of movies</p>
-              <p className="font-bold text-3xl">
-                with effortless online ticket booking
-              </p>
+            <div
+              className="flex relative flex-col items-center justify-center sm:h-[400px] h-[300px] bg-[url('https://wallpapercave.com/wp/wp11027148.png')] bg-cover bg-center
+            font-bold lg:text-3xl md:text-2xl text-xs text-white drop-shadow-lg"
+            >
+              <div className="absolute top-0 sm:h-[400px] h-[300px] bg-gray-800 opacity-50 w-full"></div>
+              <p className="mt-2 z-10">KHÁM PHÁ THẾ GIỚI ĐIỆN ẢNH MA THUẬT</p>
+              <p className="mt-2 z-10">CÙNG TRẢI NGHIỆM ĐẶT VÉ DỄ DÀNG</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="flex items-center justify-center bg-gray-400 h-[300px]">
-              <div className="font-bold text-3xl">Slide 2</div>
-            </div>
+            <div className="flex items-center justify-center sm:h-[400px] h-[300px] bg-[url('https://salidasteamplant.com/wp-content/uploads/2023/02/EEAAO-Film-Poster.jpg')] bg-cover bg-center"></div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="flex items-center justify-center bg-gray-400 h-[300px]">
-              <div className="font-bold text-3xl">Slide 3</div>
-            </div>
+            <div className="flex items-center justify-center sm:h-[400px] h-[300px] bg-[url('https://www.nollyverse.com/movie/img/missing.jpg')] bg-cover bg-center"></div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="flex items-center justify-center bg-gray-400 h-[300px]">
-              <div className="font-bold text-3xl">Slide 4</div>
-            </div>
+            <div className="flex items-center justify-center sm:h-[400px] h-[300px] bg-[url('https://wallpapercave.com/wp/wp11854124.jpg')] bg-cover bg-center"></div>
           </SwiperSlide>
         </Swiper>
       </div>
@@ -209,6 +205,7 @@ export const Home = () => {
           <button
             className="flex items-center justify-center text-base"
             onClick={() => {
+              scroll(0, 0);
               navigate(`/movie`);
             }}
           >
@@ -221,14 +218,27 @@ export const Home = () => {
       <div className="grid sm:grid-cols-2 bg-white py-5 px-12 lg:mx-12 mx-5 my-5 rounded drop-shadow-md">
         <div>
           <p className="lg:text-3xl sm:text-xl text-base font-semibold">
-            Introducing an exclusive loyalty program that pays you back!
+            Chương trình khách hàng thân thiết với nhiều ưu đãi độc quyền
           </p>
-          <div className="flex space-x-5 my-4">
-            <button className="px-4 py-2 border border-transparent rounded-md font-semibold text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out mt-2">
-              KNOW MORE
+          <div className="flex space-x-5 my-4 sm:text-sm text-xs">
+            <button
+              className="px-4 py-2 border border-transparent rounded-md font-semibold text-white
+             bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out mt-2"
+              onClick={() => {
+                scroll(0, 0);
+                navigate(`/newsoffer`);
+              }}
+            >
+              TÌM HIỂU THÊM
             </button>
-            <button className="font-semibold text-gray-400 hover:text-black px-5 py-2 mt-2">
-              ALREADY A MEMBER?
+            <button
+              className="font-semibold text-gray-400 hover:text-black px-5 py-2 mt-2"
+              onClick={() => {
+                scroll(0, 0);
+                navigate(`/newsoffer`);
+              }}
+            >
+              ĐÃ LÀ THÀNH VIÊN?
             </button>
           </div>
         </div>

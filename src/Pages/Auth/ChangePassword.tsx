@@ -5,8 +5,8 @@ export const ChangePassword = () => {
   const onFinish = (values: any) => {};
   const onFinishFailed = (values: any) => {};
   return (
-    <div>
-      <div className="flex items-center justify-center bg-sky-300 rounded h-10 my-5 lg:mx-20 mx-10">
+    <div className="min-h-screen bg-white rounded drop-shadow-md py-5">
+      <div className="flex items-center justify-center bg-sky-300 rounded h-10 mb-5 lg:mx-20 mx-10">
         <h1 className="font-semibold sm:text-base">ĐỔI MẬT KHẨU</h1>
       </div>
       <div className="flex justify-center">
@@ -67,7 +67,10 @@ export const ChangePassword = () => {
 
           <div className="flex justify-end">
             <Form.Item>
-              <button className="font-semibold bg-sky-300 hover:bg-sky-700 text-black hover:text-white px-5 py-2 rounded">
+              <button
+                className="px-4 py-2 border border-transparent rounded-md font-semibold text-white
+             bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out mt-2"
+              >
                 Đổi mật khẩu
               </button>
             </Form.Item>

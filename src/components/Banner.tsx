@@ -37,7 +37,12 @@ export const Banner = () => {
         modules={[Autoplay, Pagination]}
       >
         <SwiperSlide>
-          <div className="flex flex-col items-center justify-center bg-gradient-to-r from-sky-300 to-indigo-300 h-[85vh] rounded">
+          <div className="flex flex-col items-center justify-center bg-white sm:h-[85vh] h-[60vh]   rounded">
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/011/835/419/original/crossed-pair-retro-cinema-tickets-png.png"
+              className="w-2/3"
+            />
+
             <h1 className="font-bold text-xl my-5">ĐẶT VÉ NHANH CHÓNG</h1>
             <p className="text-base">
               Trải nghiệm thế giới phim kỳ diệu với UIT CINEMA
@@ -45,7 +50,11 @@ export const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex flex-col items-center justify-center bg-gradient-to-r from-sky-300 to-indigo-300 h-[85vh] rounded">
+          <div className="flex flex-col items-center justify-center bg-white sm:h-[85vh] h-[60vh]   rounded">
+            <img
+              src="https://icons.veryicon.com/png/o/miscellaneous/color-work-icon/promotion-2.png"
+              className="w-2/5"
+            />
             <h1 className="font-bold text-xl my-5">CHƯƠNG TRÌNH KHUYẾN MÃI</h1>
             <p className="text-base">
               Nhiều chương trình hấp dẫn dành cho thành viên UIT CINEMA
@@ -53,14 +62,22 @@ export const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex flex-col items-center justify-center  bg-gradient-to-r from-sky-300 to-indigo-300 h-[85vh] rounded">
+          <div className="flex flex-col items-center justify-center  bg-white sm:h-[85vh] h-[60vh]   rounded">
+            <img
+              src="https://cdn3.iconfinder.com/data/icons/cyber-monday-astute-vol-1-1/512/Earn_Reward_Points-512.png"
+              className="w-2/5"
+            />
             <h1 className="font-bold text-xl my-5">CHƯƠNG TRÌNH TÍCH ĐIỂM</h1>
             <p className="text-base">1 điểm = 1000 VND</p>
             <p className="text-base">tại các rạp trên toàn quốc</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex flex-col items-center justify-center  bg-gradient-to-r from-sky-300 to-indigo-300 h-[85vh] rounded">
+          <div className="flex flex-col items-center justify-center  bg-white sm:h-[85vh] h-[60vh]   rounded">
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/011/016/159/original/realistic-3d-gift-box-cutout-free-png.png"
+              className="w-2/5"
+            />
             <h1 className="font-bold text-xl my-5">QUÀ TẶNG SINH NHẬT</h1>
             <p className="text-base">Quà tặng sinh nhật</p>
             <p className="text-base">dành cho mọi thành viên UIT CINEMA</p>

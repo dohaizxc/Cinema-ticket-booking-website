@@ -107,7 +107,7 @@ export const Cinemas = () => {
 
   return (
     <Layout>
-      <div className="sm:mx-12 mx-2">
+      <div className="sm:mx-12 mx-2 min-h-screen">
         <LineWithText>DANH SÁCH RẠP</LineWithText>
 
         <div className="flex flex-wrap sm:gap-x-10 gap-x-5 gap-y-5 justify-center sm:py-5">
@@ -172,6 +172,7 @@ ${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
                             <div
                               className="font-bold sm:text-xl mb-4 cursor-pointer hover:text-sky-500"
                               onClick={() => {
+                                scroll(0, 0);
                                 navigate(`/movie/${showtime.movie._id}`);
                               }}
                             >
@@ -189,15 +190,17 @@ ${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
                                     <button
                                       className="sm:w-16 w-12 p-1 border-sky-700 border-2 hover:bg-sky-500 rounded"
                                       onClick={() => {
-                                        if (user)
+                                        if (user) {
+                                          scroll(0, 0);
                                           navigate(
                                             `/booking/${showtimeDetails._id}`
                                           );
-                                        else {
+                                        } else {
                                           openNotification(
                                             "info",
                                             "Vui lòng đăng nhập để tiếp tục"
                                           );
+                                          scroll(0, 0);
                                           navigate(`/login`);
                                         }
                                       }}

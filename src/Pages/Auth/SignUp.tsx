@@ -39,20 +39,21 @@ export const SignUp = () => {
 
   return (
     <Layout>
-      <div className="flex md:flex-row flex-col md:space-x-10 space-x-0 lg:mx-20 md:mx-10 m-5">
+      <div className="flex md:flex-row flex-col lg:space-x-10 md:space-x-5 space-x-0 lg:mx-20 m-5">
         <div className="lg:w-3/5 md:w-1/2 md:block hidden lg:h-[85vh] rounded drop-shadow-md">
           <Banner></Banner>
         </div>
 
         <div className="lg:w-2/5 md:w-1/2 w-full lg:h-[85vh] bg-white rounded drop-shadow-md">
           <div className="flex flex-col items-center">
-            <h1 className="font-bold text-center text-2xl">ĐĂNG KÝ</h1>
+            <h1 className="font-bold text-center text-2xl my-2">ĐĂNG KÝ</h1>
             <Form
               name="basic"
               initialValues={{ remember: true }}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
+              className="lg:w-2/3 md:w-4/5 w-2/3"
             >
               <Form.Item
                 name="name"
