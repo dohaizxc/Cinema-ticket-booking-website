@@ -3,7 +3,10 @@ import { Movie } from "../interface/Interface";
 import { useNavigate } from "react-router-dom";
 import { ClockIcon, CalendarDaysIcon } from "@heroicons/react/24/outline";
 
-export const MovieCard: React.FC<{ movie: Movie }> = ({ movie }) => {
+export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
+  movie,
+  type,
+}) => {
   const navigate = useNavigate();
   const [movieInfo, setMovieInfo] = useState<boolean>(false);
   return (
@@ -29,16 +32,18 @@ export const MovieCard: React.FC<{ movie: Movie }> = ({ movie }) => {
                 </div>
                 <div className="flex items-center">
                   <CalendarDaysIcon className="mr-2 h-6 w-6 inline-block" />
-                  <p> {movie.releaseDate.substring(0, 10)}</p>
+                  <p>
+                    {new Date(movie.releaseDate).toLocaleDateString("en-UK")}
+                  </p>
                 </div>
                 <div className="flex items-center justify-center">
                   <button
-                    className=" font-semibold bg-sky-300 hover:bg-sky-700 text-black hover:text-white px-5 py-2 mt-2 rounded"
+                    className="font-semibold bg-sky-300 hover:bg-sky-700 text-black hover:text-white px-5 py-2 mt-2 rounded"
                     onClick={() => {
                       navigate(`/movie/${movie._id}`);
                     }}
                   >
-                    Mua vé
+                    {type ? <>Mua vé</> : <>Chi tiết</>}
                   </button>
                 </div>
               </div>
@@ -52,7 +57,7 @@ export const MovieCard: React.FC<{ movie: Movie }> = ({ movie }) => {
           navigate(`/movie/${movie._id}`);
         }}
       >
-        <span className="border border-red-500 rounded text-red-500 px-1 mx-1">
+        <span className="border border-red-500 rounded text-red-500 px-1 mr-1">
           {movie.rated.substring(0, 1) === "P"
             ? movie.rated.substring(0, 1)
             : movie.rated.substring(0, 3)}

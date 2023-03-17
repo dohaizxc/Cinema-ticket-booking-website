@@ -6,8 +6,8 @@ export const ChangePassword = () => {
   const onFinishFailed = (values: any) => {};
   return (
     <div>
-      <div className="flex items-center justify-center bg-sky-300 rounded h-10 my-5 mx-20">
-        <h1 className="font-semibold text-base">ĐỔI MẬT KHẨU</h1>
+      <div className="flex items-center justify-center bg-sky-300 rounded h-10 my-5 lg:mx-20 mx-10">
+        <h1 className="font-semibold sm:text-base">ĐỔI MẬT KHẨU</h1>
       </div>
       <div className="flex justify-center">
         <Form
@@ -15,7 +15,7 @@ export const ChangePassword = () => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="on"
-          className="w-2/3"
+          className="lg:w-2/3 w-4/5"
         >
           <Form.Item
             name="oldPassword"
@@ -67,13 +67,9 @@ export const ChangePassword = () => {
 
           <div className="flex justify-end">
             <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="h-10 justify-end bg-sky-500 rounded-xl"
-              >
+              <button className="font-semibold bg-sky-300 hover:bg-sky-700 text-black hover:text-white px-5 py-2 rounded">
                 Đổi mật khẩu
-              </Button>
+              </button>
             </Form.Item>
           </div>
         </Form>

@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import { SelectSeats } from "./SelectSeats";
 import { Layout } from "../../components/Layout";
-import { LineWithText } from "../../components/LineWithText";
 import { useGet } from "../../api/get";
-import { Food, Seat, Showtime, Ticket } from "../../interface/Interface";
+import { Food, Seat, Showtime } from "../../interface/Interface";
 import { useNavigate, useParams } from "react-router-dom";
 import { BuyFood } from "./BuyFood";
 import { Payment } from "./Payment";
 import { openNotification } from "../../components/Notifications";
 import { usePost } from "../../api/post";
 import { Modal } from "../../components/Modal/Modal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { faClock } from "@fortawesome/free-regular-svg-icons";
-import { EnvironmentOutlined, CalendarOutlined } from "@ant-design/icons";
 import {
   ClockIcon,
   CalendarDaysIcon,
@@ -198,9 +193,9 @@ export const Booking = () => {
         ></Payment>
       )}
 
-      <div className="fixed bottom-0 mx-[70px]">
+      <div className="md:fixed md:bottom-0 md:left-1/2 md:transform md:-translate-x-1/2 md:py-0 py-10">
         <div className="relative">
-          <div className="absolute top-1/2 left-0 transform -translate-y-1/2">
+          <div className="z-10 absolute md:top-1/2 bottom-[-10px] md:left-0 left-10 transform -translate-y-1/2">
             <button
               className="border-2 bg-gray-700 w-[75px] h-[75px] rounded-lg"
               onClick={() => handlePreviousClick(type)}
@@ -210,34 +205,63 @@ export const Booking = () => {
             </button>
           </div>
 
-          <div className="relative flex space-x-8 px-16 mx-20 py-2 bg-gradient-to-r from-sky-300 to-indigo-300 rounded">
-            <img
-              src={showtimeResult?.showtime.movieId.image}
-              className="w-[90px] h-[120px] rounded"
-            ></img>
-            <div className="flex flex-col justify-between w-[250px]">
-              <p className="font-bold">
-                {showtimeResult?.showtime.movieId.name}
-              </p>
+          <div className="z-10 absolute md:top-1/2 bottom-[-10px] md:right-0 right-10 transform -translate-y-1/2">
+            <button
+              className="border-2 bg-sky-600 w-[75px] h-[75px] rounded-lg"
+              onClick={() => handleNextClick(type)}
+            >
+              {type === 3 ? (
+                <>
+                  <i className="fa-solid fa-money-check-dollar text-[24px] mt-[13px] mx-[22px] text-white text-center"></i>
+                  <div className="text-[12px] text-white text-center">
+                    PAYMENT
+                  </div>
+                </>
+              ) : (
+                <>
+                  <i className="fa-sharp fa-solid fa-arrow-right text-[24px] mt-[13px] mx-[25px] text-white text-center"></i>
+                  <div className="text-[12px] text-white text-center">NEXT</div>
+                </>
+              )}
+            </button>
+          </div>
 
-              <div className="flex items-center">
-                <MapPinIcon className="mr-2 h-5 w-5 inline-block" />
-                <p className="font-semibold">{showtimeResult?.cinema.name}</p>
-              </div>
-
-              <div className="flex items-center">
-                <ClockIcon className="mr-2 h-5 w-5 inline-block" />
-                <p className="font-semibold">
-                  {showtimeResult?.showtime.time} -{" "}
-                  {showtimeResult?.showtime.time_end}
+          <div className="relative md:h-auto h-[420px] flex md:flex-row md:space-x-5 space-x-0 flex-col md:space-y-0 space-y-5  lg:px-16 px-10 md:mx-20 mx-2 md:py-2 pt-5 bg-gradient-to-r from-sky-300 to-indigo-300 rounded">
+            <div className="flex justify-center items-center space-x-5">
+              <img
+                src={showtimeResult?.showtime.movieId.image}
+                className="w-[90px] h-[120px] rounded"
+              ></img>
+              <div className="flex flex-col justify-between space-y-1 lg:w-[300px] md:w-[200px] ">
+                <p className="font-bold">
+                  {showtimeResult?.showtime.movieId.name}
                 </p>
-              </div>
 
-              <div className="flex items-center">
-                <CalendarDaysIcon className="mr-2 h-5 w-5 inline-block" />
-                <p className="font-semibold">
-                  {showtimeResult?.showtime.date.substring(0, 10)}
-                </p>
+                <div className="flex items-center">
+                  <p className="font-semibold">
+                    <MapPinIcon className="mr-2 h-5 w-5 inline-block" />
+                    {showtimeResult?.cinema.name}
+                  </p>
+                </div>
+
+                <div className="flex items-center">
+                  <ClockIcon className="mr-2 h-5 w-5 inline-block" />
+                  <p className="font-semibold">
+                    {showtimeResult?.showtime.time} -{" "}
+                    {showtimeResult?.showtime.time_end}
+                  </p>
+                </div>
+
+                <div className="flex items-center">
+                  <CalendarDaysIcon className="mr-2 h-5 w-5 inline-block" />
+                  {showtimeResult && (
+                    <p className="font-semibold">
+                      {new Date(
+                        showtimeResult?.showtime.date
+                      ).toLocaleDateString("en-UK")}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
             <div className="w-[150px]">
@@ -282,27 +306,6 @@ export const Booking = () => {
                 })}
               </div>
             </div>
-          </div>
-
-          <div className="absolute top-1/2 right-0 transform -translate-y-1/2">
-            <button
-              className="border-2 bg-sky-600 w-[75px] h-[75px] rounded-lg"
-              onClick={() => handleNextClick(type)}
-            >
-              {type === 3 ? (
-                <>
-                  <i className="fa-solid fa-money-check-dollar text-[24px] mt-[13px] mx-[22px] text-white text-center"></i>
-                  <div className="text-[12px] text-white text-center">
-                    PAYMENT
-                  </div>
-                </>
-              ) : (
-                <>
-                  <i className="fa-sharp fa-solid fa-arrow-right text-[24px] mt-[13px] mx-[25px] text-white text-center"></i>
-                  <div className="text-[12px] text-white text-center">NEXT</div>
-                </>
-              )}
-            </button>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Layout } from "../../components/Layout";
 import { MailOutlined, KeyOutlined, GoogleOutlined } from "@ant-design/icons";
 import { Input, Form, Button } from "antd";
@@ -6,9 +6,13 @@ import { Link } from "react-router-dom";
 import { usePost } from "../../api/post";
 import { openNotification } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperType, Autoplay, Pagination } from "swiper";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 export const LogIn = () => {
   const navigate = useNavigate();
+  const swiperBanner = useRef<SwiperType>();
   const { fetchPost: fetchUser, result: userResult, isError } = usePost<any>();
 
   const onFinish = (values: any) => {
@@ -34,20 +38,88 @@ export const LogIn = () => {
 
   return (
     <Layout>
-      <div className="flex space-x-4 mx-20">
-        <div className="lg:w-3/5 w-0 lg:border border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen"></div>
+      <div className="flex space-x-4 lg:mx-20 md:mx-10 mx-5">
+        <div className="lg:w-3/5 md:w-1/2 w-0 lg:border border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen">
+          <div className="relative">
+            <button
+              onClick={() => swiperBanner.current?.slidePrev()}
+              className="hidden md:block px-4 z-10 absolute top-1/2 left-0 transform -translate-y-1/2"
+            >
+              <ChevronLeftIcon className="sm:h-10 sm:w-10 h-8 w-8" />
+            </button>
+            <button
+              onClick={() => swiperBanner.current?.slideNext()}
+              className="hidden md:block px-4 z-10 absolute top-1/2 right-0 transform -translate-y-1/2"
+            >
+              <ChevronRightIcon className="sm:h-10 sm:w-10 h-8 w-8" />
+            </button>
+            <Swiper
+              onBeforeInit={(swiper) => {
+                swiperBanner.current = swiper;
+              }}
+              slidesPerView={1}
+              spaceBetween={30}
+              centeredSlides={true}
+              loop={true}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                clickable: true,
+              }}
+              modules={[Autoplay, Pagination]}
+            >
+              <SwiperSlide>
+                <div className="flex flex-col items-center justify-center border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen">
+                  <h1 className="font-bold text-xl my-5">ĐẶT VÉ NHANH CHÓNG</h1>
+                  <p className="text-base">
+                    Trải nghiệm thế giới phim kỳ diệu với UIT CINEMA
+                  </p>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="flex flex-col items-center justify-center border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen">
+                  <h1 className="font-bold text-xl my-5">
+                    CHƯƠNG TRÌNH KHUYẾN MÃI
+                  </h1>
+                  <p className="text-base">
+                    Nhiều chương trình hấp dẫn dành cho thành viên UIT CINEMA
+                  </p>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="flex flex-col items-center justify-center border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen">
+                  <h1 className="font-bold text-xl my-5">
+                    CHƯƠNG TRÌNH TÍCH ĐIỂM
+                  </h1>
+                  <p className="text-base">1 điểm = 1000 VND</p>
+                  <p className="text-base">tại các rạp trên toàn quốc</p>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="flex flex-col items-center justify-center border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen">
+                  <h1 className="font-bold text-xl my-5">QUÀ TẶNG SINH NHẬT</h1>
+                  <p className="text-base">Quà tặng sinh nhật</p>
+                  <p className="text-base">
+                    dành cho mọi thành viên UIT CINEMA
+                  </p>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+          </div>
+        </div>
 
-        <div className="lg:w-2/5 w-full border border-sky-500 h-screen bg-white">
+        <div className="lg:w-2/5 md:w-1/2 w-full border border-sky-500 h-screen bg-white">
           <div className="flex flex-col items-center">
-            <h1 className="font-bold text-center text-[24px] my-10">
-              ĐĂNG NHẬP
-            </h1>
+            <h1 className="font-bold text-center text-2xl my-10">ĐĂNG NHẬP</h1>
             <Form
               name="basic"
               initialValues={{ remember: true }}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
+              className="w-2/3"
             >
               <Form.Item
                 name="email"
@@ -82,7 +154,7 @@ export const LogIn = () => {
                   htmlType="submit"
                   className="w-full h-10 text-center bg-sky-500 rounded"
                 >
-                  ĐĂNG KÝ
+                  ĐĂNG NHẬP
                 </Button>
               </Form.Item>
             </Form>

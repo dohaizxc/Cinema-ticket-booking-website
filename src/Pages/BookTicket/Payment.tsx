@@ -10,7 +10,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 const payments = [
   {
     name: "Thẻ Mastercard",
@@ -54,7 +53,7 @@ export const Payment: React.FC<{
   return (
     <div>
       <LineWithText>THANH TOÁN</LineWithText>
-      <div className="grid sm:grid-cols-2 mx-20 space-x-10 ">
+      <div className="grid sm:grid-cols-2 sm:mx-20 mx-5 sm:space-x-10 ">
         <div className="space-y-4">
           <div className="border border-sky-300 rounded h-auto py-4 px-7 space-y-3">
             <TagsOutlined className="text-[24px]" />
@@ -176,7 +175,7 @@ export const Payment: React.FC<{
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 sm:mt-0 mt-4">
           <div className="border border-sky-300 rounded h-auto p-4 space-y-3">
             <p className="text-center font-bold text-[16px]">
               THÔNG TIN ĐƠN HÀNG

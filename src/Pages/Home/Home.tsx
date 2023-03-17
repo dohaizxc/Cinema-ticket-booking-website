@@ -10,7 +10,11 @@ import { useGet } from "../../api/get";
 import { Movie } from "../../interface/Interface";
 import { useNavigate } from "react-router-dom";
 import { MovieCard } from "../../components/MovieCard";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ArrowRightIcon,
+} from "@heroicons/react/24/outline";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -35,10 +39,35 @@ export const Home = () => {
   const swiperRef = useRef<SwiperType>();
   const [selectedType, setSelectedType] = useState<boolean>(true);
   const { fetchGet: fetchMovies, result: movieResults } = useGet<Movie[]>();
+  const [movies, setMovies] = useState<Movie[]>();
+
+  const nowDay = new Date("2022-12-20");
+  nowDay.setHours(0, 0, 0, 0);
+
+  const nowShowing = movieResults?.filter((movie: Movie) => {
+    return new Date(movie.releaseDate) <= nowDay;
+  }, []);
+
+  const comingSoon = movieResults?.filter((movie: Movie) => {
+    return new Date(movie.releaseDate) > nowDay;
+  }, []);
 
   useEffect(() => {
     fetchMovies("movie");
   }, []);
+
+  useEffect(() => {
+    setMovies(
+      movieResults?.filter((movie: Movie) => {
+        return new Date(movie.releaseDate) <= nowDay;
+      }, [])
+    );
+  }, [movieResults]);
+
+  useEffect(() => {
+    if (selectedType === true) setMovies(nowShowing);
+    else setMovies(comingSoon);
+  }, [selectedType]);
 
   return (
     <Layout>
@@ -73,8 +102,11 @@ export const Home = () => {
           modules={[Autoplay, Pagination]}
         >
           <SwiperSlide>
-            <div className="flex items-center justify-center bg-gray-400 h-[300px]">
-              <div className="font-bold text-3xl">Slide 1</div>
+            <div className="flex flex-col items-center justify-center bg-gray-400 h-[300px]">
+              <p className="font-bold text-3xl">Discover the magic of movies</p>
+              <p className="font-bold text-3xl">
+                with effortless online ticket booking
+              </p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -94,7 +126,7 @@ export const Home = () => {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="bg-white my-4 rounded lg:mx-12 sm:mx-5 mx-0">
+      <div className="bg-white my-5 rounded lg:mx-12 sm:mx-5 mx-0">
         <div className="flex items-center justify-center">
           <div className="my-8 lg:w-1/2 sm:w-3/5 w-4/5">
             <Tab.Group>
@@ -120,7 +152,7 @@ export const Home = () => {
             </Tab.Group>
           </div>
         </div>
-        {movieResults && (
+        {movies && (
           <div className="relative">
             <Swiper
               onBeforeInit={(swiper) => {
@@ -153,9 +185,9 @@ export const Home = () => {
               modules={[Autoplay, Pagination, Navigation]}
               className="sm:mx-16 mx-10"
             >
-              {movieResults?.map((movie: Movie) => (
-                <SwiperSlide className=" bg-white rounded">
-                  <MovieCard movie={movie}></MovieCard>
+              {movies?.map((movie: Movie) => (
+                <SwiperSlide key={movie._id} className=" bg-white rounded">
+                  <MovieCard movie={movie} type={selectedType}></MovieCard>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -175,13 +207,13 @@ export const Home = () => {
         )}
         <div className="flex justify-center items-center mb-5 hover:text-sky-500">
           <button
-            className="flex items-center justify-center"
+            className="flex items-center justify-center text-base"
             onClick={() => {
               navigate(`/movie`);
             }}
           >
             VIEW ALL
-            <ChevronRightIcon className="inline-block h-6 w-6" />
+            <ArrowRightIcon className="inline-block h-5 w-5 ml-2" />
           </button>
         </div>
       </div>

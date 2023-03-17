@@ -16,7 +16,6 @@ export const Profile = () => {
   const searchParams = new URLSearchParams(location.search);
   const tab = searchParams.get("tab");
 
-  const [type, setType] = React.useState<1 | 2 | 3 | 4>(1);
   const { fetchGet: fetchUser, result: user } = useGet<User>();
 
   React.useEffect(() => {
@@ -29,7 +28,7 @@ export const Profile = () => {
 
   return (
     <Layout>
-      <div className="flex sm:flex-row flex-col sm:space-x-10 space-x-0 px-20">
+      <div className="flex sm:flex-row flex-col sm:space-x-10 space-x-0 lg:px-20 px-10">
         <div className="sm:w-1/3 w-full bg-white rounded">
           <div className="rounded bg-gradient-to-r from-sky-300 to-indigo-300 pb-4">
             <div className="bg-[url('https://order.thecoffeehouse.com/_nuxt/img/Leaves.5c9ad83.svg')] bg-cover bg-no-repeat">

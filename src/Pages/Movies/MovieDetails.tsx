@@ -4,7 +4,6 @@ import { LineWithText } from "../../components/LineWithText";
 import { useGet } from "../../api/get";
 import { useParams, useNavigate } from "react-router-dom";
 import {
-  Cinema,
   Movie,
   Province,
   Showtime,
@@ -24,33 +23,35 @@ export const MovieDetails = () => {
   const { fetchGet: fetchMovieDetails, result: movie } = useGet<Movie>();
   const { fetchGet: fetchProvinces, result: provincesResult } =
     useGet<Province[]>();
-  const { fetchGet: fetchCinemas, result: cinemasResult } = useGet<Cinema[]>();
   const {
     fetchGet: fetchShowtimes,
     result: showtimesResult,
     isLoading,
   } = useGet<Showtime[]>();
-  const [selectedDate, setSelectedDate] = React.useState<dayjs.Dayjs>(
+  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs>(
     dayjs("2022-12-10")
   );
 
-  const [showtimes, setShowtimes] = useState<Showtime[]>();
-  const [selectedProvince, setSelectedProvince] = useState<
-    Province | undefined
-  >(undefined);
+  const nowDay = new Date("2022-12-20");
+  nowDay.setHours(0, 0, 0, 0);
 
-  const [selectedCinema, setSelectedCinema] = useState<Cinema | undefined>(
-    undefined
-  );
+  const [showtimes, setShowtimes] = useState<Showtime[]>();
+  const [selectedProvince, setSelectedProvince] = useState<Province>();
 
   const param = useParams();
   const id = param.id;
 
-  // const [showPopup, setShowPopup] = useState<boolean>(false);
-
   React.useEffect(() => {
     fetchMovieDetails("movie/" + id);
   }, []);
+
+  const [type, setType] = useState<boolean>(false);
+
+  React.useEffect(() => {
+    if (movie) {
+      setType(new Date(movie.releaseDate) <= nowDay);
+    }
+  }, [movie]);
 
   React.useEffect(() => {
     fetchProvinces("province");
@@ -87,14 +88,14 @@ export const MovieDetails = () => {
 
   const handleProvinceClick = (province: Province) => {
     setSelectedProvince(province);
-    setSelectedCinema(undefined);
-    fetchCinemas("province/" + province._id);
   };
 
   return (
     <Layout>
       <div
-        className="hidden sm:block relative min-h-[400px] bg-cover"
+        className={`hidden sm:block relative bg-cover ${
+          type ? "min-h-[400px]" : "min-h-screen"
+        }`}
         style={{
           backgroundImage: `url(${movie?.image})`,
         }}
@@ -126,7 +127,9 @@ export const MovieDetails = () => {
             </div>
             <div>
               <span className="font-medium">Ngày khởi chiếu: </span>
-              {movie?.releaseDate.substring(0, 10)}
+              {movie && (
+                <>{new Date(movie.releaseDate).toLocaleDateString("en-UK")}</>
+              )}
             </div>
             <div>
               <span className="font-medium"> Ngôn ngữ: </span>
@@ -150,30 +153,36 @@ export const MovieDetails = () => {
                   <p className="font-semibold text-base ml-2">XEM TRAILER</p>
                 </div>
               </button>
-              <p className="font-thin text-xl mx-5 mb-1">|</p>
-              <button
-                className=" hover:text-sky-500"
-                onClick={() => {
-                  window.scroll({
-                    top: 500,
-                    left: 100,
-                    behavior: "smooth",
-                  });
-                }}
-              >
-                <div className="flex items-center justify-center">
-                  <ArrowDownCircleIcon className="w-10 h-10" />
+              {type && (
+                <>
+                  <p className="font-thin text-xl mx-5 mb-1">|</p>
+                  <button
+                    className=" hover:text-sky-500"
+                    onClick={() => {
+                      window.scroll({
+                        top: 500,
+                        left: 100,
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                    <div className="flex items-center justify-center">
+                      <ArrowDownCircleIcon className="w-10 h-10" />
 
-                  <p className="font-semibold text-base ml-2">MUA VÉ</p>
-                </div>
-              </button>
+                      <p className="font-semibold text-base ml-2">MUA VÉ</p>
+                    </div>
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
       </div>
 
       <div
-        className="block sm:hidden relative h-[550px] bg-cover mx-[-20px] lg:mx-[-50px]"
+        className={`block sm:hidden relative bg-cover mx-[-20px] lg:mx-[-50px] ${
+          type ? "min-h-[550px]" : "min-h-screen"
+        }`}
         style={{
           backgroundImage: `url(${movie?.image})`,
         }}
@@ -206,7 +215,9 @@ export const MovieDetails = () => {
               </div>
               <div>
                 <span className="font-medium">Ngày khởi chiếu: </span>
-                {movie?.releaseDate.substring(0, 10)}
+                {movie && (
+                  <>{new Date(movie.releaseDate).toLocaleDateString("en-UK")}</>
+                )}
               </div>
               <div>
                 <span className="font-medium"> Ngôn ngữ: </span>
@@ -232,88 +243,102 @@ export const MovieDetails = () => {
                 <p className="font-semibold text-base ml-2">XEM TRAILER</p>
               </div>
             </button>
-            <p className="font-thin text-xl mx-5 mb-1">|</p>
-            <button
-              className=" hover:text-sky-500"
-              onClick={() => {
-                window.scroll({
-                  top: 500,
-                  left: 100,
-                  behavior: "smooth",
-                });
-              }}
-            >
-              <div className="flex items-center justify-center">
-                <ArrowDownCircleIcon className="w-10 h-10" />
+            {type && (
+              <>
+                <p className="font-thin text-xl mx-5 mb-1">|</p>
+                <button
+                  className=" hover:text-sky-500"
+                  onClick={() => {
+                    window.scroll({
+                      top: 500,
+                      left: 100,
+                      behavior: "smooth",
+                    });
+                  }}
+                >
+                  <div className="flex items-center justify-center">
+                    <ArrowDownCircleIcon className="w-10 h-10" />
 
-                <p className="font-semibold text-base ml-2">MUA VÉ</p>
-              </div>
-            </button>
+                    <p className="font-semibold text-base ml-2">MUA VÉ</p>
+                  </div>
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
 
-      <LineWithText>TỈNH THÀNH</LineWithText>
-      <div className="flex flex-wrap sm:gap-x-10 gap-x-5 gap-y-5  justify-center py-5">
-        {provincesResult?.map((province: Province) => (
-          <div
-            key={province._id}
-            onClick={() => handleProvinceClick(province)}
-            className={`text-base lg:text-lg  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
+      {type && (
+        <div className="sm:mx-12 mx-2">
+          <LineWithText>TỈNH THÀNH</LineWithText>
+          <div className="flex flex-wrap sm:gap-x-10 gap-x-5 gap-y-5  justify-center py-5">
+            {provincesResult?.map((province: Province) => (
+              <div
+                key={province._id}
+                onClick={() => handleProvinceClick(province)}
+                className={`text-base lg:text-lg  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
             ${selectedProvince?._id === province._id ? "bg-sky-500" : ""}`}
-          >
-            <div className="font-bold">{province.name}</div>
+              >
+                <div className="font-bold">{province.name}</div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <LineWithText>CHỌN NGÀY</LineWithText>
-      <ListDays selectDay={setSelectedDate}></ListDays>
+          <LineWithText>CHỌN NGÀY</LineWithText>
+          <ListDays selectDay={setSelectedDate}></ListDays>
 
-      <LineWithText>LỊCH CHIẾU PHIM</LineWithText>
+          <LineWithText>LỊCH CHIẾU PHIM</LineWithText>
 
-      {isLoading ? (
-        <div className="flex justify-center items-center">
-          <Spin size="large" tip="Loading..." />
-        </div>
-      ) : (
-        <div>
-          {showtimes && showtimes.length > 0 ? (
-            <div>
-              {showtimes?.map((showtime: Showtime) => (
-                <div className="flex sm:flex-row flex-col sm:items-center sm:py-5 mx-10">
-                  <div className="sm:text-xl text-base font-bold py-4 sm:w-1/3 w-full flex items-center">
-                    <button
-                      onClick={() => {
-                        window.open(showtime.cinema.address_url, "_blank");
-                      }}
-                    >
-                      <MapPinIcon className="sm:w-10 sm:h-10 h-6 w-6 sm:mr-2 mr-1" />
-                    </button>
-                    {showtime.cinema.name}
-                  </div>
-
-                  <div className="font-medium sm:text-lg text-base sm:px-10 px-5">
-                    <div className="flex flex-wrap sm:gap-x-6 gap-x-3 gap-y-4">
-                      {showtime.showtimes?.map(
-                        (showtimeDetails: ShowtimeDetails) => (
-                          <div
-                            className="p-2 border-sky-700 border-2 cursor-pointer hover:bg-sky-500 rounded"
-                            onClick={() =>
-                              navigate(`/booking/${showtimeDetails._id}`)
-                            }
-                          >
-                            {showtimeDetails.time}
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
+          {isLoading ? (
+            <div className="flex justify-center items-center my-6">
+              <Spin size="large" tip="Loading..." />
             </div>
           ) : (
-            <div className="font-bold text-center text-[24px] mt-5">
-              KHÔNG CÓ SUẤT CHIẾU PHÙ HỢP
+            <div>
+              {showtimes && showtimes.length > 0 ? (
+                <div className="lg:mx-10 m-5">
+                  {showtimes?.map((showtime: Showtime) => (
+                    <div>
+                      <div className="flex sm:flex-row flex-col sm:items-center sm:py-5 mx-10">
+                        <div className="sm:text-xl text-base font-bold py-4 sm:w-2/5 w-full flex items-center">
+                          <button
+                            onClick={() => {
+                              window.open(
+                                showtime.cinema.address_url,
+                                "_blank"
+                              );
+                            }}
+                          >
+                            <MapPinIcon className="sm:w-10 sm:h-10 h-6 w-6 sm:mr-2 mr-1" />
+                          </button>
+                          {showtime.cinema.name}
+                        </div>
+
+                        <div className="font-medium sm:text-lg text-base sm:px-10 px-5">
+                          <div className="flex flex-wrap sm:gap-x-6 gap-x-3 gap-y-4">
+                            {showtime.showtimes?.map(
+                              (showtimeDetails: ShowtimeDetails) => (
+                                <button
+                                  className="w-16 p-2 border-sky-700 border-2 hover:bg-sky-500 rounded"
+                                  onClick={() =>
+                                    navigate(`/booking/${showtimeDetails._id}`)
+                                  }
+                                >
+                                  {showtimeDetails.time}
+                                </button>
+                              )
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="border border-gray-400 sm:my-0 my-5" />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="font-semibold text-center text-xl my-10">
+                  KHÔNG CÓ SUẤT CHIẾU PHÙ HỢP
+                </div>
+              )}
             </div>
           )}
         </div>
