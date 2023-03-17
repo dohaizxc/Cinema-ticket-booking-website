@@ -112,26 +112,27 @@ export const Cinemas = () => {
         </div>
 
         <div className="p-6 grid sm:grid-cols-4 grid-cols-2 gap-5 lg:gap-10 px-5 lg:px-24 text-black text-center">
-          {cinemasResult?.map((cinema: Cinema) => (
-            <div key={cinema._id}>
-              <div
-                onClick={() => handleCinemaClick(cinema)}
-                className={`font-bold lg:text-base px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded-t 
-    ${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
-              >
-                {cinema.name}
+          {cinemasResult &&
+            cinemasResult.map((cinema: Cinema) => (
+              <div key={cinema._id}>
+                <div
+                  onClick={() => handleCinemaClick(cinema)}
+                  className={`font-bold lg:text-base px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded-t 
+${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
+                >
+                  {cinema.name}
+                </div>
+                <p className="sm:block hidden border-sky-700 border-x-[2px] border-b-[2px] p-2">
+                  {cinema.address}
+                </p>
+                <button
+                  className=" border-sky-700 border-x-[2px] border-b-[2px] p-2 w-full hover:bg-sky-500 rounded-b flex justify-center"
+                  onClick={() => handleLocationClick(cinema.address_url)}
+                >
+                  <MapPinIcon className="sm:h-6 sm:w-6 h-4 w-4" />
+                </button>
               </div>
-              <p className="sm:block hidden border-sky-700 border-x-[2px] border-b-[2px] p-2">
-                {cinema.address}
-              </p>
-              <button
-                className=" border-sky-700 border-x-[2px] border-b-[2px] p-2 w-full hover:bg-sky-500 rounded-b flex justify-center"
-                onClick={() => handleLocationClick(cinema.address_url)}
-              >
-                <MapPinIcon className="sm:h-6 sm:w-6 h-4 w-4" />
-              </button>
-            </div>
-          ))}
+            ))}
         </div>
 
         {!hidden && (

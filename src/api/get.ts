@@ -9,7 +9,8 @@ export const useGet = <T extends any>() => {
   const fetchGet = async (path: any) => {
     setIsLoading(true);
     setIsError(false);
-    const response = await fetch("http://localhost:3500/" + path, {
+    const url = import.meta.env.VITE_BACKEND_URL;
+    const response = await fetch(url + path, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

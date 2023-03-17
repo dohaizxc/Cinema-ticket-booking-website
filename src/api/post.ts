@@ -9,7 +9,8 @@ export const usePost = <T extends any>() => {
   const fetchPost = async (object: any, path: string) => {
     setIsLoading(true);
     setIsError(false);
-    const response = await fetch("http://localhost:3500/" + path, {
+    const url = import.meta.env.VITE_BACKEND_URL;
+    const response = await fetch(url + path, {
       method: "POST",
       body: JSON.stringify(object),
       headers: {
