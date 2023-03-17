@@ -1,18 +1,15 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Layout } from "../../components/Layout";
-import { MailOutlined, KeyOutlined, GoogleOutlined } from "@ant-design/icons";
-import { Input, Form, Button } from "antd";
+import { MailOutlined, KeyOutlined } from "@ant-design/icons";
+import { Input, Form } from "antd";
 import { Link } from "react-router-dom";
 import { usePost } from "../../api/post";
 import { openNotification } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Swiper as SwiperType, Autoplay, Pagination } from "swiper";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { Banner } from "../../components/Banner";
 
 export const LogIn = () => {
   const navigate = useNavigate();
-  const swiperBanner = useRef<SwiperType>();
   const { fetchPost: fetchUser, result: userResult, isError } = usePost<any>();
 
   const onFinish = (values: any) => {
@@ -38,81 +35,14 @@ export const LogIn = () => {
 
   return (
     <Layout>
-      <div className="flex space-x-4 lg:mx-20 md:mx-10 mx-5">
-        <div className="lg:w-3/5 md:w-1/2 w-0 lg:border border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen">
-          <div className="relative">
-            <button
-              onClick={() => swiperBanner.current?.slidePrev()}
-              className="hidden md:block px-4 z-10 absolute top-1/2 left-0 transform -translate-y-1/2"
-            >
-              <ChevronLeftIcon className="sm:h-10 sm:w-10 h-8 w-8" />
-            </button>
-            <button
-              onClick={() => swiperBanner.current?.slideNext()}
-              className="hidden md:block px-4 z-10 absolute top-1/2 right-0 transform -translate-y-1/2"
-            >
-              <ChevronRightIcon className="sm:h-10 sm:w-10 h-8 w-8" />
-            </button>
-            <Swiper
-              onBeforeInit={(swiper) => {
-                swiperBanner.current = swiper;
-              }}
-              slidesPerView={1}
-              spaceBetween={30}
-              centeredSlides={true}
-              loop={true}
-              autoplay={{
-                delay: 5000,
-                disableOnInteraction: false,
-              }}
-              pagination={{
-                clickable: true,
-              }}
-              modules={[Autoplay, Pagination]}
-            >
-              <SwiperSlide>
-                <div className="flex flex-col items-center justify-center border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen">
-                  <h1 className="font-bold text-xl my-5">ĐẶT VÉ NHANH CHÓNG</h1>
-                  <p className="text-base">
-                    Trải nghiệm thế giới phim kỳ diệu với UIT CINEMA
-                  </p>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="flex flex-col items-center justify-center border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen">
-                  <h1 className="font-bold text-xl my-5">
-                    CHƯƠNG TRÌNH KHUYẾN MÃI
-                  </h1>
-                  <p className="text-base">
-                    Nhiều chương trình hấp dẫn dành cho thành viên UIT CINEMA
-                  </p>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="flex flex-col items-center justify-center border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen">
-                  <h1 className="font-bold text-xl my-5">
-                    CHƯƠNG TRÌNH TÍCH ĐIỂM
-                  </h1>
-                  <p className="text-base">1 điểm = 1000 VND</p>
-                  <p className="text-base">tại các rạp trên toàn quốc</p>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="flex flex-col items-center justify-center border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen">
-                  <h1 className="font-bold text-xl my-5">QUÀ TẶNG SINH NHẬT</h1>
-                  <p className="text-base">Quà tặng sinh nhật</p>
-                  <p className="text-base">
-                    dành cho mọi thành viên UIT CINEMA
-                  </p>
-                </div>
-              </SwiperSlide>
-            </Swiper>
-          </div>
+      <div className="flex md:flex-row flex-col md:space-x-10 space-x-0 lg:mx-20 md:mx-10 m-5">
+        <div className="lg:w-3/5 md:w-1/2 md:block hidden lg:h-[85vh] rounded drop-shadow-md">
+          <Banner></Banner>
         </div>
 
-        <div className="lg:w-2/5 md:w-1/2 w-full border border-sky-500 h-screen bg-white">
+        <div className="lg:w-2/5 md:w-1/2 w-full lg:h-[85vh] bg-white rounded drop-shadow-md">
           <div className="flex flex-col items-center">
-            <h1 className="font-bold text-center text-2xl my-10">ĐĂNG NHẬP</h1>
+            <h1 className="font-bold text-center text-2xl my-8">ĐĂNG NHẬP</h1>
             <Form
               name="basic"
               initialValues={{ remember: true }}
@@ -149,29 +79,28 @@ export const LogIn = () => {
               </Form.Item>
 
               <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="w-full h-10 text-center bg-sky-500 rounded"
+                <button
+                  className="w-full px-4 py-2 border border-transparent rounded-md font-semibol
+                 text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out"
                 >
                   ĐĂNG NHẬP
-                </Button>
+                </button>
               </Form.Item>
             </Form>
 
-            <div className="flex justify-between w-2/3 py-3">
+            <div className="flex justify-between w-2/3 mb-3 mt-[-10px]">
               <div className="flex items-center">
                 <input
                   type="checkbox"
                   id="myCheckbox"
-                  className="form-checkbox h-5 w-5 text-blue-600 border-blue-600 rounded-sm checked:bg-green-500 checked:border-green-500"
+                  className="form-checkbox h-5 w-5"
                 />
                 <label className="ml-2">Nhớ tài khoản</label>
               </div>
 
               <div>Quên mật khẩu</div>
             </div>
-            <div className="flex items-center w-2/3">
+            {/* <div className="flex items-center w-2/3 my-1">
               <div className="w-1/2 h-0.5 bg-gray-500"></div>
               <div className="text-center px-2 w-1/4">
                 <span className="font-medium text-gray-500">HOẶC</span>
@@ -179,15 +108,22 @@ export const LogIn = () => {
               <div className="w-1/2 h-0.5 bg-gray-500"></div>
             </div>
 
-            <GoogleOutlined className="text-[24px] py-4" />
+            <div className="flex space-x-4">
+              <GoogleOutlined className="text-3xl py-3" />
+              <FacebookOutlined className="text-3xl py-3" />
+            </div> */}
 
-            <p>
+            <p className="my-4 mb-12">
               Chưa có tài khoản?{" "}
               <Link to="/signup" className={"text-sky-500"}>
                 Đăng ký ngay
               </Link>
             </p>
           </div>
+        </div>
+
+        <div className="lg:w-3/5 md:w-1/2 md:hidden block h-screen rounded drop-shadow-md mt-5">
+          <Banner></Banner>
         </div>
       </div>
     </Layout>

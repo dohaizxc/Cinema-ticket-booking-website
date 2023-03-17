@@ -8,6 +8,7 @@ import {
   Province,
   Showtime,
   ShowtimeDetails,
+  User,
 } from "../../interface/Interface";
 import { ListDays } from "../../components/ListDays";
 import { Spin } from "antd";
@@ -17,6 +18,7 @@ import {
   MapPinIcon,
 } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
+import { openNotification } from "../../components/Notifications";
 
 export const MovieDetails = () => {
   const navigate = useNavigate();
@@ -40,6 +42,16 @@ export const MovieDetails = () => {
 
   const param = useParams();
   const id = param.id;
+
+  const [user, setUser] = React.useState<User>();
+
+  React.useEffect(() => {
+    const object = localStorage.getItem("user");
+    if (object) {
+      const userLocal: User = JSON.parse(object);
+      setUser(userLocal);
+    }
+  }, []);
 
   React.useEffect(() => {
     fetchMovieDetails("movie/" + id);
@@ -271,7 +283,7 @@ export const MovieDetails = () => {
       {type && (
         <div className="sm:mx-12 mx-2">
           <LineWithText>TỈNH THÀNH</LineWithText>
-          <div className="flex flex-wrap sm:gap-x-10 gap-x-5 gap-y-5  justify-center py-5">
+          <div className="flex flex-wrap sm:gap-x-10 gap-x-5 gap-y-5  justify-center sm:py-2">
             {provincesResult?.map((province: Province) => (
               <div
                 key={province._id}
@@ -295,11 +307,11 @@ export const MovieDetails = () => {
           ) : (
             <div>
               {showtimes && showtimes.length > 0 ? (
-                <div className="lg:mx-10 m-5">
+                <div className="lg:mx-10">
                   {showtimes?.map((showtime: Showtime) => (
                     <div>
                       <div className="flex sm:flex-row flex-col sm:items-center sm:py-5 mx-10">
-                        <div className="sm:text-xl text-base font-bold py-4 sm:w-2/5 w-full flex items-center">
+                        <div className="sm:text-xl text-base font-bold sm:py-4 pb-4 sm:w-2/5 w-full flex items-center">
                           <button
                             onClick={() => {
                               window.open(
@@ -319,9 +331,19 @@ export const MovieDetails = () => {
                               (showtimeDetails: ShowtimeDetails) => (
                                 <button
                                   className="w-16 p-2 border-sky-700 border-2 hover:bg-sky-500 rounded"
-                                  onClick={() =>
-                                    navigate(`/booking/${showtimeDetails._id}`)
-                                  }
+                                  onClick={() => {
+                                    if (user)
+                                      navigate(
+                                        `/booking/${showtimeDetails._id}`
+                                      );
+                                    else {
+                                      openNotification(
+                                        "info",
+                                        "Vui lòng đăng nhập để tiếp tục"
+                                      );
+                                      navigate(`/login`);
+                                    }
+                                  }}
                                 >
                                   {showtimeDetails.time}
                                 </button>
@@ -330,7 +352,7 @@ export const MovieDetails = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="border border-gray-400 sm:my-0 my-5" />
+                      <div className="border border-gray-400 my-5" />
                     </div>
                   ))}
                 </div>

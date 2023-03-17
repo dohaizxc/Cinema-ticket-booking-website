@@ -28,7 +28,7 @@ export const Header = () => {
 
   return (
     <header className="bg-sky-100">
-      <nav className="flex max-w-7xl items-center justify-between p-3 sm:px-4 lg:px-10">
+      <nav className="flex w-full items-center justify-between p-3 sm:px-4 lg:px-10">
         <div className="flex sm:flex-1">
           <Link
             to="/"

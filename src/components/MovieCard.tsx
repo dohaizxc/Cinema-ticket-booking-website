@@ -38,7 +38,7 @@ export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
                 </div>
                 <div className="flex items-center justify-center">
                   <button
-                    className="font-semibold bg-sky-300 hover:bg-sky-700 text-black hover:text-white px-5 py-2 mt-2 rounded"
+                    className="px-4 py-2 border border-transparent rounded-md font-semibold text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out mt-2"
                     onClick={() => {
                       navigate(`/movie/${movie._id}`);
                     }}

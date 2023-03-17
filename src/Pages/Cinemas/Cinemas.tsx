@@ -9,11 +9,13 @@ import {
   Cinema,
   Showtime,
   ShowtimeDetails,
+  User,
 } from "../../interface/Interface";
 import { Spin } from "antd";
 import dayjs from "dayjs";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MapPinIcon } from "@heroicons/react/24/outline";
+import { openNotification } from "../../components/Notifications";
 
 export const Cinemas = () => {
   const navigate = useNavigate();
@@ -43,6 +45,16 @@ export const Cinemas = () => {
   const searchParams = new URLSearchParams(location.search);
   const provinceParams = searchParams.get("province");
   const cinemaParams = searchParams.get("cinema");
+
+  const [user, setUser] = React.useState<User>();
+
+  React.useEffect(() => {
+    const object = localStorage.getItem("user");
+    if (object) {
+      const userLocal: User = JSON.parse(object);
+      setUser(userLocal);
+    }
+  }, []);
 
   React.useEffect(() => {
     if (selectedCinema) {
@@ -98,7 +110,7 @@ export const Cinemas = () => {
       <div className="sm:mx-12 mx-2">
         <LineWithText>DANH SÁCH RẠP</LineWithText>
 
-        <div className="flex flex-wrap sm:gap-x-10 gap-x-5 gap-y-5 justify-center py-5">
+        <div className="flex flex-wrap sm:gap-x-10 gap-x-5 gap-y-5 justify-center sm:py-5">
           {provincesResult?.map((province: Province) => (
             <div
               key={province._id}
@@ -111,7 +123,7 @@ export const Cinemas = () => {
           ))}
         </div>
 
-        <div className="p-6 grid sm:grid-cols-4 grid-cols-2 gap-5 lg:gap-10 px-5 lg:px-24 text-black text-center">
+        <div className="lg:p-6 pt-5 grid sm:grid-cols-4 grid-cols-2 gap-5 lg:gap-10 px-5 lg:px-24 text-black text-center">
           {cinemasResult &&
             cinemasResult.map((cinema: Cinema) => (
               <div key={cinema._id}>
@@ -149,7 +161,7 @@ ${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
                 {showtimes && showtimes.length > 0 ? (
                   <div>
                     {showtimes?.map((showtime: Showtime) => (
-                      <div className="lg:mx-32 m-5">
+                      <div className="lg:mx-32 my-5 mx-2">
                         <div className="flex">
                           <img
                             src={showtime.movie.image}
@@ -158,7 +170,7 @@ ${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
                           ></img>
                           <div className="lg:px-10 pl-5">
                             <div
-                              className="font-bold sm:text-xl text-base mb-4 cursor-pointer hover:text-sky-500"
+                              className="font-bold sm:text-xl mb-4 cursor-pointer hover:text-sky-500"
                               onClick={() => {
                                 navigate(`/movie/${showtime.movie._id}`);
                               }}
@@ -170,17 +182,25 @@ ${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
                               </span>
                               {showtime.movie.name}
                             </div>
-                            <div className="font-medium sm:text-lg text-base">
-                              <div className="flex flex-wrap sm:gap-x-6 gap-x-3 gap-y-4">
+                            <div className="font-medium sm:text-lg">
+                              <div className="flex flex-wrap sm:gap-x-6 gap-x-3 gap-y-3">
                                 {showtime.showtimes?.map(
                                   (showtimeDetails: ShowtimeDetails) => (
                                     <button
-                                      className="w-16 p-2 border-sky-700 border-2 hover:bg-sky-500 rounded"
-                                      onClick={() =>
-                                        navigate(
-                                          `/booking/${showtimeDetails._id}`
-                                        )
-                                      }
+                                      className="sm:w-16 w-12 p-1 border-sky-700 border-2 hover:bg-sky-500 rounded"
+                                      onClick={() => {
+                                        if (user)
+                                          navigate(
+                                            `/booking/${showtimeDetails._id}`
+                                          );
+                                        else {
+                                          openNotification(
+                                            "info",
+                                            "Vui lòng đăng nhập để tiếp tục"
+                                          );
+                                          navigate(`/login`);
+                                        }
+                                      }}
                                     >
                                       {showtimeDetails.time}
                                     </button>

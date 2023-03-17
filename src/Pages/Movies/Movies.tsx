@@ -63,7 +63,7 @@ export const Movies = () => {
 
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-center lg:mx-12 mx-5 mb-5">
+      <div className="flex flex-col items-center justify-center lg:mx-12 sm:mx-5 mx-0 mb-5">
         <div className="my-8 lg:w-1/2 sm:w-3/5 w-4/5">
           <Tab.Group>
             <Tab.List className="flex space-x-1 rounded-full bg-sky-900/20 p-1">
@@ -99,11 +99,11 @@ export const Movies = () => {
                 className="sm:w-[192px] w-[170px] sm:h-[455px] h-[420px] relative"
               >
                 {movie.rated.substring(0, 1) === "P" ? (
-                  <p className="absolute top-2 left-2 bg-green-500 rounded-full font-semibold text-white text-base py-2 px-[15px] z-30">
+                  <p className="absolute top-2 left-2 bg-green-500 rounded-full font-semibold text-white py-1 px-[11px] z-10">
                     P
                   </p>
                 ) : (
-                  <p className="absolute top-2 left-2 bg-red-500 rounded-full font-semibold text-white text-base p-2 z-30">
+                  <p className="absolute top-2 left-2 bg-red-500 rounded-full font-semibold text-white p-1 z-10">
                     {movie.rated.substring(0, 3)}
                   </p>
                 )}
@@ -112,6 +112,9 @@ export const Movies = () => {
                   className="sm:w-[192px] sm:h-[276px] w-[170px] h-[240px] mx-auto cursor-pointer transition ease-in-out delay-150 hover:scale-110 duration-300 rounded"
                   src={movie.image}
                   alt={movie.name}
+                  onClick={() => {
+                    navigate(`/movie/${movie._id}`);
+                  }}
                 ></img>
                 <div
                   className="line-clamp-2 cursor-pointer font-bold mt-3 hover:text-sky-500"
@@ -135,7 +138,7 @@ export const Movies = () => {
                 </div>
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
                   <button
-                    className="font-semibold bg-sky-300 hover:bg-sky-700 text-black hover:text-white sm:px-5 px-2 py-2 rounded"
+                    className="px-4 py-2 border border-transparent rounded-md font-semibold text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out"
                     onClick={() => {
                       navigate(`/movie/${movie._id}`);
                     }}

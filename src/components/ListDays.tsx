@@ -35,7 +35,7 @@ export const ListDays: React.FC<{
   };
 
   return (
-    <div className="py-3">
+    <div className="sm:py-2">
       <div className="relative">
         <Swiper
           onBeforeInit={(swiper) => {

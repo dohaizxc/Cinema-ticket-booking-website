@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Layout } from "../../components/Layout";
 import { useGet } from "../../api/get";
-import { Ticket as TicketInterface } from "../../interface/Interface";
+import { Food, Ticket as TicketInterface } from "../../interface/Interface";
 import {
   ClockIcon,
   CalendarDaysIcon,
@@ -83,9 +83,12 @@ export const Ticket = () => {
                     <div>BẮP NƯỚC:</div>
 
                     <div className="ml-[50px] pl-50px">
-                      {ticket.foods?.map((food, index) => {
+                      {ticket.foods?.map((food: Food) => {
                         return (
-                          <div className="w-full flex justify-between">
+                          <div
+                            key={food.id}
+                            className="w-full flex justify-between"
+                          >
                             <span className="ml-0 font-normal">
                               {food.title} x{food.quantity}
                             </span>

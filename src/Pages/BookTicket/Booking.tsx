@@ -193,7 +193,8 @@ export const Booking = () => {
         ></Payment>
       )}
 
-      <div className="md:fixed md:bottom-0 md:left-1/2 md:transform md:-translate-x-1/2 md:py-0 py-10">
+      <div className="md:sticky md:bottom-0 mx-auto md:py-0 py-10">
+        {/* <div className="md:fixed md:bottom-0 md:left-1/2 md:transform md:-translate-x-1/2 md:py-0 py-10"> */}
         <div className="relative">
           <div className="z-10 absolute md:top-1/2 bottom-[-10px] md:left-0 left-10 transform -translate-y-1/2">
             <button
@@ -309,7 +310,7 @@ export const Booking = () => {
           </div>
         </div>
       </div>
-      <div className="h-[200px]"></div>
+      <div className="h-[40px]"></div>
     </Layout>
   );
 };

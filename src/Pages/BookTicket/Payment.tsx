@@ -191,7 +191,7 @@ export const Payment: React.FC<{
             </div>
 
             {listFoods.map((food: Food) => (
-              <div>
+              <div key={food.id}>
                 {food.quantity > 0 && (
                   <div>
                     <div className="flex justify-between">

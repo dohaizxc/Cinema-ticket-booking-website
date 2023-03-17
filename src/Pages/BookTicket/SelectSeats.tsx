@@ -35,47 +35,63 @@ export const SelectSeats: React.FC<{
     <div>
       <LineWithText>CHỌN GHẾ</LineWithText>
 
-      <div className="flex justify-center items-center mb-7">
-        <p className="font-semibold text-center text-lg border border-sky-500 w-[900px]">
-          SCREEN THIS WAY
-        </p>
+      <div className="overflow-x-scroll">
+        <div className="flex justify-center items-center mb-7">
+          <p className="font-semibold text-center text-lg border bg-sky-200 rounded w-[800px]">
+            SCREEN
+          </p>
+        </div>
+        <div className="w-[1024px] lg:w-full flex flex-col justify-center items-center lg:space-y-1">
+          <div className="flex space-x-2 lg:space-x-3">
+            {seatMap.firstRow.map((seat) => (
+              <Seat
+                key={seat.id}
+                seat={seat}
+                status={status(seat)}
+                pickSeat={pickSeat}
+              />
+            ))}
+          </div>
+          <div className="lg:space-y-1">
+            {seatMap.insideRows.map((insideRow, index) => (
+              <div key={index} className="flex space-x-2 lg:space-x-3">
+                {insideRow?.map((seat) => (
+                  <Seat
+                    key={seat.id}
+                    seat={seat}
+                    status={status(seat)}
+                    pickSeat={pickSeat}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="flex space-x-2 lg:space-x-3">
+            {seatMap.lastRow.map((seat) => (
+              <Seat
+                key={seat.id}
+                seat={seat}
+                status={status(seat)}
+                pickSeat={pickSeat}
+              />
+            ))}
+          </div>
+
+          <div className="flex items-center font-medium space-x-2 lg:space-x-3 py-5">
+            <div className="h-8 w-8 bg-[#82bdf5] rounded"></div>
+            <p className="pr-5">Standard</p>
+
+            <div className="h-8 w-8 bg-[#f7adf2] rounded"></div>
+            <p className="pr-5">Sweetbox</p>
+
+            <div className="h-8 w-8 bg-[#fc6060] rounded"></div>
+            <p className="pr-5">Selected</p>
+
+            <div className="h-8 w-8 bg-[#B8C4BF] rounded"></div>
+            <p>Unavailable</p>
+          </div>
+        </div>
       </div>
-      <Space direction="vertical" align="center" className="w-full my-15">
-        <Space>
-          {seatMap.firstRow.map((seat) => (
-            <Seat
-              key={seat.id}
-              seat={seat}
-              status={status(seat)}
-              pickSeat={pickSeat}
-            />
-          ))}
-        </Space>
-        <Space direction="vertical">
-          {seatMap.insideRows.map((insideRow, index) => (
-            <Space key={index}>
-              {insideRow?.map((seat) => (
-                <Seat
-                  key={seat.id}
-                  seat={seat}
-                  status={status(seat)}
-                  pickSeat={pickSeat}
-                />
-              ))}
-            </Space>
-          ))}
-        </Space>
-        <Space>
-          {seatMap.lastRow.map((seat) => (
-            <Seat
-              key={seat.id}
-              seat={seat}
-              status={status(seat)}
-              pickSeat={pickSeat}
-            />
-          ))}
-        </Space>
-      </Space>
     </div>
   );
 };

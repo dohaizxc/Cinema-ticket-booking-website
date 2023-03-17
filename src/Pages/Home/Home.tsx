@@ -126,7 +126,7 @@ export const Home = () => {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="bg-white my-5 rounded lg:mx-12 sm:mx-5 mx-0">
+      <div className="bg-white my-5 rounded lg:mx-12 sm:mx-5 mx-0 drop-shadow-md">
         <div className="flex items-center justify-center">
           <div className="my-8 lg:w-1/2 sm:w-3/5 w-4/5">
             <Tab.Group>
@@ -218,13 +218,13 @@ export const Home = () => {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 bg-white py-5 px-12 lg:mx-12 mx-5 my-5 rounded">
+      <div className="grid sm:grid-cols-2 bg-white py-5 px-12 lg:mx-12 mx-5 my-5 rounded drop-shadow-md">
         <div>
           <p className="lg:text-3xl sm:text-xl text-base font-semibold">
             Introducing an exclusive loyalty program that pays you back!
           </p>
           <div className="flex space-x-5 my-4">
-            <button className=" font-semibold bg-sky-300 hover:bg-sky-700 text-black hover:text-white px-5 py-2 mt-2 rounded">
+            <button className="px-4 py-2 border border-transparent rounded-md font-semibold text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out mt-2">
               KNOW MORE
             </button>
             <button className="font-semibold text-gray-400 hover:text-black px-5 py-2 mt-2">
@@ -235,7 +235,7 @@ export const Home = () => {
         <div className="bg-[url('https://64.media.tumblr.com/bb52491bb4001d07c4f7542c44649f8a/940908fe8c3a4fcd-3e/s540x810/8439d3125bc1ac5fa63418b8e2a6eb5f3008b185.gif')]"></div>
       </div>
 
-      <div className="bg-white m-5 sm:py-10 py-5 lg:mx-12 rounded">
+      <div className="bg-white m-5 sm:py-10 py-5 lg:mx-12 rounded drop-shadow-md">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-center sm:text-lg text-base font-semibold leading-8 text-gray-900">
             Nhiều phòng chiếu với đa dạng các định dạng

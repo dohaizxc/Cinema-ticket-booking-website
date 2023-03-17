@@ -11,8 +11,8 @@ import { Input, Form, Select, DatePicker, Button } from "antd";
 import { Link } from "react-router-dom";
 import Checkbox from "antd/es/checkbox/Checkbox";
 import { usePost } from "../../api/post";
-import { User } from "../../interface/Interface";
 import { openNotification } from "../../components/Notifications";
+import { Banner } from "../../components/Banner";
 
 export const SignUp = () => {
   const { fetchPost: fetchUser, result: userResult, isError } = usePost<any>();
@@ -39,12 +39,14 @@ export const SignUp = () => {
 
   return (
     <Layout>
-      <div className="flex space-x-4 mx-20">
-        <div className="lg:w-3/5 w-0 lg:border border-sky-500 bg-gradient-to-r from-sky-300 to-indigo-300 h-screen"></div>
+      <div className="flex md:flex-row flex-col md:space-x-10 space-x-0 lg:mx-20 md:mx-10 m-5">
+        <div className="lg:w-3/5 md:w-1/2 md:block hidden lg:h-[85vh] rounded drop-shadow-md">
+          <Banner></Banner>
+        </div>
 
-        <div className="lg:w-2/5 w-full border border-sky-500 h-auto bg-white">
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="font-bold text-center text-[24px] mt-5">ĐĂNG KÝ</h1>
+        <div className="lg:w-2/5 md:w-1/2 w-full lg:h-[85vh] bg-white rounded drop-shadow-md">
+          <div className="flex flex-col items-center">
+            <h1 className="font-bold text-center text-2xl">ĐĂNG KÝ</h1>
             <Form
               name="basic"
               initialValues={{ remember: true }}
@@ -181,34 +183,31 @@ export const SignUp = () => {
                 />
               </Form.Item>
 
-              <Form.Item
+              {/* <Form.Item
                 name="remember"
                 valuePropName="checked"
                 className="px-10"
               >
                 <Checkbox>Đồng ý với điều khoản dịch vụ</Checkbox>
-              </Form.Item>
+              </Form.Item> */}
 
               <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="w-full h-10 text-center bg-sky-500 rounded"
+                <button
+                  className="w-full px-4 py-2 border border-transparent rounded-md font-semibol
+                 text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out"
                 >
                   ĐĂNG KÝ
-                </Button>
+                </button>
               </Form.Item>
             </Form>
 
-            <div className="flex items-center w-2/3">
+            {/* <div className="flex items-center w-2/3">
               <div className="w-1/2 h-0.5 bg-gray-500"></div>
               <div className="text-center px-2 w-1/4">
                 <span className="font-middle text-gray-500">HOẶC</span>
               </div>
               <div className="w-1/2 h-0.5 bg-gray-500"></div>
-            </div>
-
-            <GoogleOutlined className="text-[24px] py-2" />
+            </div> */}
 
             <p>
               Đã có tài khoản?{" "}
