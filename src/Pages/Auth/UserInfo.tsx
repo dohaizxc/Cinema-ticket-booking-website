@@ -28,6 +28,7 @@ export const UserInfo: React.FC<{
         openNotification("success", "Chỉnh sửa thông tin thành công");
       } else {
         openNotification("error", "Chỉnh sửa thông tin thất bại");
+        fetchGet("user/" + user?._id);
       }
     }
   }, [userResult]);

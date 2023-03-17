@@ -49,7 +49,7 @@ export const BookingHistory: React.FC<{ userId: string }> = ({ userId }) => {
         </div>
       ) : (
         <>
-          {currentPage ? (
+          {tickets && tickets.length > 0 ? (
             <>
               <div className="flex flex-col space-y-5">
                 {currentTickets?.map((ticket: Ticket) => (
@@ -135,17 +135,21 @@ export const BookingHistory: React.FC<{ userId: string }> = ({ userId }) => {
                 ))}
               </div>
               <div className="flex items-center justify-center">
-                <Pagination
-                  current={currentPage}
-                  pageSize={imagesPerPage}
-                  total={tickets?.length}
-                  onChange={handlePageChange}
-                  className="pt-5"
-                />
+                {tickets && tickets.length > 5 && (
+                  <Pagination
+                    current={currentPage}
+                    pageSize={imagesPerPage}
+                    total={tickets?.length}
+                    onChange={handlePageChange}
+                    className="pt-5"
+                  />
+                )}
               </div>
             </>
           ) : (
-            <p className="my-5">Không có lịch sử đặt vé</p>
+            <p className="my-5 text-center font-medium text-base">
+              Không có lịch sử đặt vé
+            </p>
           )}
         </>
       )}
