@@ -3,6 +3,10 @@ import { Layout } from "../../components/Layout";
 import { StarIcon, TicketIcon, GiftIcon } from "@heroicons/react/24/outline";
 import { Tab } from "@headlessui/react";
 
+import sliver from "../../assets/sliver.png";
+import gold from "../../assets/gold.png";
+import diamond from "../../assets/diamond.png";
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -50,10 +54,7 @@ export const NewsOffer = () => {
           </Tab.Group>
         </div>
         <div className="flex lg:flex-row flex-col lg:space-x-12 bg-gray-200 lg:p-10 sm:p-5 p-10 lg:mx-16 sm:mx-2 mx-10 my-5 rounded">
-          <img
-            src="./src/assets/sliver.png"
-            className="lg:w-1/4 w-full rounded"
-          />
+          <img src={sliver} className="lg:w-1/4 w-full rounded" />
           <div className="lg:w-3/4 w-full lg:text-base text-sm">
             <div className="flex lg:flex-row flex-col lg:items-center lg:space-x-10 font-medium lg:space-y-0 space-y-2 lg:my-0 my-2">
               <div className="flex lg:flex-col flex-row items-center lg:space-y-2 lg:space-x-0 space-x-2">
@@ -83,10 +84,7 @@ export const NewsOffer = () => {
         </div>
 
         <div className="flex lg:flex-row flex-col lg:space-x-12 bg-yellow-100 lg:p-10 sm:p-5 p-10 lg:mx-16 sm:mx-2 mx-10 my-5 rounded">
-          <img
-            src="./src/assets/gold.png"
-            className="lg:w-1/4 w-full rounded"
-          />
+          <img src={gold} className="lg:w-1/4 w-full rounded" />
           <div className="lg:w-3/4 w-full lg:text-base text-sm">
             <div className="flex lg:flex-row flex-col lg:items-center lg:space-x-10 font-medium lg:space-y-0 space-y-2 lg:my-0 my-2">
               <div className="flex lg:flex-col flex-row items-center lg:space-y-2 lg:space-x-0 space-x-2">
@@ -115,10 +113,7 @@ export const NewsOffer = () => {
           </div>
         </div>
         <div className="flex lg:flex-row flex-col lg:space-x-12 bg-sky-200 lg:p-10 sm:p-5 p-10 lg:mx-16 sm:mx-2 mx-10 my-5 rounded">
-          <img
-            src="./src/assets/diamond.png"
-            className="lg:w-1/4 w-full rounded"
-          />
+          <img src={diamond} className="lg:w-1/4 w-full rounded" />
           <div className="lg:w-3/4 w-full lg:text-base text-sm">
             <div className="flex lg:flex-row flex-col lg:items-center lg:space-x-10 font-medium lg:space-y-0 space-y-2 lg:my-0 my-2">
               <div className="flex lg:flex-col flex-row items-center lg:space-y-2 lg:space-x-0 space-x-2">

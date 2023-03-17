@@ -36,8 +36,8 @@ export const SelectSeats: React.FC<{
       <LineWithText>CHỌN GHẾ</LineWithText>
 
       <div className="overflow-x-scroll">
-        <div className="flex justify-center items-center mb-7">
-          <p className="font-semibold text-center text-lg border bg-sky-200 rounded w-[800px]">
+        <div className="w-[1024px] lg:w-full flex justify-center items-center mb-7">
+          <p className="font-semibold text-center text-lg border bg-sky-200 rounded w-3/4">
             SCREEN
           </p>
         </div>
