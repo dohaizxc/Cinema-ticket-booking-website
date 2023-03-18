@@ -38,13 +38,13 @@ export const BookingHistory: React.FC<{ userId: string }> = ({ userId }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white rounded drop-shadow-md py-5">
+    <div className="sm:min-h-screen bg-white rounded drop-shadow-md py-5">
       <div className="flex items-center justify-center bg-sky-300 rounded h-10 mb-5 lg:mx-20 mx-10">
         <h1 className="font-semibold sm:text-base">LỊCH SỬ ĐẶT VÉ</h1>
       </div>
 
       {isLoading ? (
-        <div className="flex justify-center min-h-screen">
+        <div className="flex justify-center sm:min-h-screen">
           <Spin size="large" tip="Loading..." />
         </div>
       ) : (

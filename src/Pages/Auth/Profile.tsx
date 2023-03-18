@@ -28,7 +28,7 @@ export const Profile = () => {
 
   return (
     <Layout>
-      <div className="flex sm:flex-row flex-col sm:space-x-10 space-x-0 lg:px-20 px-5 my-5">
+      <div className="flex sm:flex-row flex-col sm:space-x-10 space-x-0 sm:space-y-0 space-y-5 lg:px-20 px-5 my-5">
         <div className="sm:w-1/3 w-full bg-white rounded drop-shadow-md">
           <div className="rounded bg-gradient-to-r from-sky-300 to-indigo-300 pb-4">
             <div className="bg-[url('https://order.thecoffeehouse.com/_nuxt/img/Leaves.5c9ad83.svg')] bg-cover bg-no-repeat">
