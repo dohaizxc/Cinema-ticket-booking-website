@@ -9,6 +9,7 @@ import { ChangePassword } from "./ChangePassword";
 import { BookingHistory } from "./BookingHistory";
 import { Membership } from "./Membership";
 import { useLocation, useNavigate } from "react-router-dom";
+import { openNotification } from "../../components/Notifications";
 
 export const Profile = () => {
   const navigate = useNavigate();
@@ -25,6 +26,13 @@ export const Profile = () => {
       fetchUser("user/" + userLocal._id);
     }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    openNotification("success", "Đăng xuất thành công");
+    scroll(0, 0);
+    navigate("/login");
+  };
 
   return (
     <Layout>
@@ -122,7 +130,7 @@ export const Profile = () => {
             </button>
             <button
               className="font-medium text-base bg-sky-100 p-2"
-              onClick={() => {}}
+              onClick={handleLogout}
             >
               Đăng xuất
             </button>
