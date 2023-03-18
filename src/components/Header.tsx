@@ -97,7 +97,7 @@ export const Header = () => {
           </Link>
           {user && (
             <Link
-              to="/profile"
+              to="/profile?tab=userinfo"
               className={`text-sm font-semibold leading-6 ${
                 keyMenu === "profile" ? "text-cyan-600" : ""
               } hover:text-cyan-500`}
@@ -175,7 +175,7 @@ export const Header = () => {
                 </Link>
                 {user && (
                   <Link
-                    to="/profile"
+                    to="/profile?tab=userinfo"
                     className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50"
                   >
                     TÀI KHOẢN
