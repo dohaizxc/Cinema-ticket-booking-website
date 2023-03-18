@@ -123,7 +123,7 @@ export const LogIn = () => {
           </div>
         </div>
 
-        <div className="lg:w-3/5 md:w-1/2 md:hidden block h-screen rounded drop-shadow-md mt-5">
+        <div className="lg:w-3/5 md:w-1/2 md:hidden block sm:h-screen rounded drop-shadow-md mt-5">
           <Banner></Banner>
         </div>
       </div>

@@ -44,16 +44,18 @@ export const SignUp = () => {
           <Banner></Banner>
         </div>
 
-        <div className="lg:w-2/5 md:w-1/2 w-full lg:h-[85vh] bg-white rounded drop-shadow-md">
+        <div className="lg:w-2/5 md:w-1/2 w-full lg:h-[85vh] sm:py-0 py-6 bg-white rounded drop-shadow-md">
           <div className="flex flex-col items-center">
-            <h1 className="font-bold text-center text-2xl my-2">ĐĂNG KÝ</h1>
+            <h1 className="font-bold text-center text-2xl sm:my-2 mb-6">
+              ĐĂNG KÝ
+            </h1>
             <Form
               name="basic"
               initialValues={{ remember: true }}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
-              className="lg:w-2/3 md:w-4/5 w-2/3"
+              className="lg:w-2/3 md:w-4/5 w-3/4"
             >
               <Form.Item
                 name="name"
@@ -217,6 +219,9 @@ export const SignUp = () => {
               </Link>
             </p>
           </div>
+        </div>
+        <div className="lg:w-3/5 md:w-1/2 md:hidden block sm:h-screen rounded drop-shadow-md mt-5">
+          <Banner></Banner>
         </div>
       </div>
     </Layout>
