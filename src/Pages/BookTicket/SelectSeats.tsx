@@ -9,7 +9,7 @@ export const SelectSeats: React.FC<{
   setListSelectedSeats: React.Dispatch<React.SetStateAction<SeatInterface[]>>;
 }> = ({ soldSeats, setListSelectedSeats }) => {
   const [selectedSeats, setSelectedSeats] = React.useState<SeatInterface[]>([]);
-  const myRef = useRef(null);
+  const myRef = useRef<HTMLDivElement>(null);
 
   const status = (seat: SeatInterface) => {
     if (soldSeats?.includes(seat.id)) return 2;
@@ -33,7 +33,9 @@ export const SelectSeats: React.FC<{
   };
 
   useEffect(() => {
-    myRef.current.scrollLeft += 155;
+    if (myRef.current) {
+      myRef.current.scrollLeft += 155;
+    }
   }, []);
   return (
     <div>
