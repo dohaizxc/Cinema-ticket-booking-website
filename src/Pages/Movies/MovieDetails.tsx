@@ -310,7 +310,7 @@ export const MovieDetails = () => {
                 <div className="lg:mx-10">
                   {showtimes?.map((showtime: Showtime) => (
                     <div>
-                      <div className="flex sm:flex-row flex-col sm:items-center sm:py-5 mx-10">
+                      <div className="flex sm:flex-row flex-col sm:items-center sm:py-5 sm:mx-10 mx-5">
                         <div className="sm:text-xl text-base font-bold sm:py-4 pb-4 sm:w-2/5 w-full flex items-center">
                           <button
                             onClick={() => {
@@ -330,7 +330,7 @@ export const MovieDetails = () => {
                             {showtime.showtimes?.map(
                               (showtimeDetails: ShowtimeDetails) => (
                                 <button
-                                  className="w-16 p-2 border-sky-700 border-2 hover:bg-sky-500 rounded"
+                                  className="sm:w-16 w-12 p-1 border-sky-700 border-2 hover:bg-sky-500 rounded"
                                   onClick={() => {
                                     if (user) {
                                       scroll(0, 0);

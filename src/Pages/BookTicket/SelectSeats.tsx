@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Space } from "antd";
 import { seatMap, seats } from "../../components/seats";
 import { Seat } from "../../components/Seat";
@@ -9,6 +9,7 @@ export const SelectSeats: React.FC<{
   setListSelectedSeats: React.Dispatch<React.SetStateAction<SeatInterface[]>>;
 }> = ({ soldSeats, setListSelectedSeats }) => {
   const [selectedSeats, setSelectedSeats] = React.useState<SeatInterface[]>([]);
+  const myRef = useRef(null);
 
   const status = (seat: SeatInterface) => {
     if (soldSeats?.includes(seat.id)) return 2;
@@ -31,11 +32,14 @@ export const SelectSeats: React.FC<{
     }
   };
 
+  useEffect(() => {
+    myRef.current.scrollLeft += 155;
+  }, []);
   return (
     <div>
       <LineWithText>CHỌN GHẾ</LineWithText>
 
-      <div className="overflow-x-scroll lg:overflow-x-hidden">
+      <div className="overflow-x-scroll lg:overflow-x-hidden" ref={myRef}>
         <div className="w-[1024px] lg:w-full flex justify-center items-center mb-7">
           <p className="font-semibold text-center text-lg border bg-sky-200 rounded w-3/4">
             SCREEN

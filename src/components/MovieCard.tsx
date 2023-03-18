@@ -10,13 +10,13 @@ export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
   const navigate = useNavigate();
   const [movieInfo, setMovieInfo] = useState<boolean>(false);
   return (
-    <div className="h-[375px] flex flex-col items-center">
+    <div className="min-[400px]:h-[375px] h-[325px] flex flex-col items-center">
       <div className="relative">
         <img
           src={movie.image}
           onMouseEnter={() => setMovieInfo(true)}
           onMouseLeave={() => setMovieInfo(false)}
-          className="h-[300px] w-full rounded cursor-pointer relative"
+          className="min-[400px]:h-[300px] h-[250px] w-full rounded cursor-pointer relative"
         />
         {movieInfo && (
           <div

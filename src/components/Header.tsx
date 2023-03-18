@@ -4,6 +4,7 @@ import { User } from "../interface/Interface";
 import { openNotification } from "./Notifications";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+// import { Modal } from "./Modal/Modal";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ export const Header = () => {
   const keyMenu = location.pathname.split("/")[1];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = React.useState<User>();
+  // const [openModal, setOpenModal] = useState<boolean>(false);
+  // const [confirm, setConfirm] = useState<boolean>(false);
 
   React.useEffect(() => {
     const object = localStorage.getItem("user");
@@ -27,8 +30,27 @@ export const Header = () => {
     navigate("/login");
   };
 
+  // const handleLogout = () => {
+  //   setOpenModal(true);
+  // };
+
+  // React.useEffect(() => {
+  //   if (confirm) {
+  //     localStorage.clear();
+  //     openNotification("success", "Đăng xuất thành công");
+  //     scroll(0, 0);
+  //     navigate("/login");
+  //   }
+  // }, [confirm]);
+
   return (
     <header className="bg-sky-100">
+      {/* <Modal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        setConfirm={setConfirm}
+        title="Bạn có muốn đăng xuất?"
+      ></Modal> */}
       <nav className="flex w-full items-center justify-between p-3 sm:px-4 lg:px-10">
         <div className="flex sm:flex-1">
           <Link

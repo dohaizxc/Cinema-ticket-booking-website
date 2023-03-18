@@ -215,14 +215,14 @@ export const Home = () => {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 bg-white py-5 px-12 lg:mx-12 mx-5 my-5 rounded drop-shadow-md">
+      <div className="grid sm:grid-cols-2 bg-white py-5 sm:px-12 px-5 lg:mx-12 mx-5 my-5 rounded drop-shadow-md">
         <div>
           <p className="lg:text-3xl sm:text-xl text-base font-semibold">
             Chương trình khách hàng thân thiết với nhiều ưu đãi độc quyền
           </p>
           <div className="flex space-x-5 my-4 sm:text-sm text-xs">
             <button
-              className="px-4 py-2 border border-transparent rounded-md font-semibold text-white
+              className="sm:px-4 px-2 py-2 border border-transparent rounded-md font-semibold text-white
              bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out mt-2"
               onClick={() => {
                 scroll(0, 0);
