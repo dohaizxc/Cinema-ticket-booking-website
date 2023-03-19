@@ -155,6 +155,7 @@ export const SignUp = () => {
                   <DatePicker
                     size="middle"
                     disabledDate={disabledDate}
+                    defaultPickerValue={dayjs("2000-01-01")}
                     format="DD/MM/YYYY"
                   />
                 </Form.Item>
