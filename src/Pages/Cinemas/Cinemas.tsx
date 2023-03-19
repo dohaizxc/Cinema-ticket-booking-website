@@ -161,7 +161,10 @@ ${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
                 {showtimes && showtimes.length > 0 ? (
                   <div>
                     {showtimes?.map((showtime: Showtime) => (
-                      <div className="lg:mx-32 my-5 mx-2">
+                      <div
+                        key={showtime.movie._id}
+                        className="lg:mx-32 my-5 mx-2"
+                      >
                         <div className="flex">
                           <img
                             src={showtime.movie.image}
@@ -188,6 +191,7 @@ ${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
                                 {showtime.showtimes?.map(
                                   (showtimeDetails: ShowtimeDetails) => (
                                     <button
+                                      key={showtimeDetails._id}
                                       className="sm:w-16 w-12 p-1 border-sky-700 border-2 hover:bg-sky-500 rounded"
                                       onClick={() => {
                                         if (user) {

@@ -1,10 +1,11 @@
 import React from "react";
-import { Button, DatePicker, Form, Input, Select } from "antd";
+import { DatePicker, Form, Input, Select } from "antd";
 import { PhoneOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import { User } from "../../interface/Interface";
 import moment from "moment";
 import { usePatch } from "../../api/patch";
 import { openNotification } from "../../components/Notifications";
+import dayjs from "dayjs";
 
 export const UserInfo: React.FC<{
   fetchGet: (path: any) => Promise<any>;
@@ -34,6 +35,14 @@ export const UserInfo: React.FC<{
   }, [userResult]);
 
   const onFinishFailed = (values: any) => {};
+
+  const disabledDate = (current: dayjs.Dayjs) => {
+    return (
+      current &&
+      (current < dayjs("1950-01-01") || current > dayjs("2010-12-31"))
+    );
+  };
+
   return (
     <div className="sm:min-h-screen bg-white rounded drop-shadow-md py-5">
       <div className="flex items-center justify-center bg-sky-300 rounded h-10 mb-5 lg:mx-20 mx-10">
@@ -134,7 +143,11 @@ export const UserInfo: React.FC<{
                 },
               ]}
             >
-              <DatePicker size="large" format="DD/MM/YYYY" />
+              <DatePicker
+                disabledDate={disabledDate}
+                size="large"
+                format="DD/MM/YYYY"
+              />
             </Form.Item>
           </div>
 

@@ -28,7 +28,7 @@ export const Ticket = () => {
           <h1 className="font-bold text-lg bg-sky-300 py-2 w-full text-center rounded">
             THÔNG TIN VÉ
           </h1>
-          <div className="flex lg:flex-row flex-col lg:justify-between lg:space-x-10 bg-sky-100 py-5 px-10 lg:h-[400px]">
+          <div className="flex lg:flex-row flex-col lg:justify-between lg:space-x-16 bg-sky-100 py-5 px-10 lg:h-[400px]">
             <img
               src={ticket.movieImage}
               className="rounded w-[240px] h-[350px] mt-2"
@@ -93,10 +93,13 @@ export const Ticket = () => {
                               {food.title} x{food.quantity}
                             </span>
                             <span className="font-medium">
-                              {food.price.toLocaleString("it-IT", {
-                                style: "currency",
-                                currency: "VND",
-                              })}
+                              {(food.price * food.quantity).toLocaleString(
+                                "it-IT",
+                                {
+                                  style: "currency",
+                                  currency: "VND",
+                                }
+                              )}
                             </span>
                           </div>
                         );

@@ -29,8 +29,8 @@ export const NewsOffer = () => {
 
   return (
     <Layout>
-      <div className="flex lg:flex-col sm:flex-row flex-col justify-center items-center w-screen">
-        <div className="my-8 lg:w-1/2 sm:w-3/5 w-4/5">
+      <div className="flex justify-center items-center lg:mx-12 sm:mx-5 mx-0">
+        <div className="mt-8 mb-2 lg:w-1/2 sm:w-3/5 w-4/5">
           <Tab.Group>
             <Tab.List className="flex space-x-1 rounded-full bg-sky-900/20 p-1">
               {type.map((type) => (
@@ -53,6 +53,8 @@ export const NewsOffer = () => {
             </Tab.List>
           </Tab.Group>
         </div>
+      </div>
+      <div className="flex lg:flex-col sm:flex-row flex-col justify-center items-center w-screen">
         <div className="flex lg:flex-row flex-col lg:space-x-12 bg-gray-200 lg:p-10 sm:p-5 p-10 lg:mx-16 sm:mx-2 mx-10 my-5 rounded drop-shadow-md">
           <img src={sliver} className="lg:w-1/4 w-full rounded" />
           <div className="lg:w-3/4 w-full lg:text-base text-sm">

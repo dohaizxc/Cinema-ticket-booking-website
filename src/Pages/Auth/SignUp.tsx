@@ -7,12 +7,13 @@ import {
   GoogleOutlined,
   MailOutlined,
 } from "@ant-design/icons";
-import { Input, Form, Select, DatePicker, Button } from "antd";
+import { Input, Form, Select, DatePicker } from "antd";
 import { Link } from "react-router-dom";
 import Checkbox from "antd/es/checkbox/Checkbox";
 import { usePost } from "../../api/post";
 import { openNotification } from "../../components/Notifications";
 import { Banner } from "../../components/Banner";
+import dayjs from "dayjs";
 
 export const SignUp = () => {
   const { fetchPost: fetchUser, result: userResult, isError } = usePost<any>();
@@ -35,6 +36,13 @@ export const SignUp = () => {
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const disabledDate = (current: dayjs.Dayjs) => {
+    return (
+      current &&
+      (current < dayjs("1950-01-01") || current > dayjs("2010-12-31"))
+    );
   };
 
   return (
@@ -144,7 +152,11 @@ export const SignUp = () => {
                     },
                   ]}
                 >
-                  <DatePicker size="middle" />
+                  <DatePicker
+                    size="middle"
+                    disabledDate={disabledDate}
+                    format="DD/MM/YYYY"
+                  />
                 </Form.Item>
               </div>
 

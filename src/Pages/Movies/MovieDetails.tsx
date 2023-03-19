@@ -88,7 +88,7 @@ export const MovieDetails = () => {
 
   React.useEffect(() => {
     let listShowtimes: Showtime[] = [];
-    if (showtimesResult) {
+    if (showtimesResult && showtimesResult.length > 0) {
       showtimesResult.map((showtime: Showtime) => {
         if (showtime.showtimes.length > 0) {
           listShowtimes.push(showtime);
@@ -193,7 +193,7 @@ export const MovieDetails = () => {
       </div>
 
       <div
-        className={`block sm:hidden relative bg-cover mx-[-20px] lg:mx-[-50px] ${
+        className={`block sm:hidden relative bg-cover ${
           type ? "min-h-[550px]" : "min-h-screen"
         }`}
         style={{
@@ -309,7 +309,7 @@ export const MovieDetails = () => {
               {showtimes && showtimes.length > 0 ? (
                 <div className="lg:mx-10">
                   {showtimes?.map((showtime: Showtime) => (
-                    <div>
+                    <div key={showtime.cinema._id}>
                       <div className="flex sm:flex-row flex-col sm:items-center sm:py-5 sm:mx-10 mx-5">
                         <div className="sm:text-xl text-base font-bold sm:py-4 pb-4 sm:w-2/5 w-full flex items-center">
                           <button
@@ -325,12 +325,13 @@ export const MovieDetails = () => {
                           {showtime.cinema.name}
                         </div>
 
-                        <div className="font-medium sm:text-lg text-base sm:px-10 px-5">
+                        <div className="font-medium sm:text-lg sm:px-10 px-5">
                           <div className="flex flex-wrap sm:gap-x-6 gap-x-3 gap-y-4">
                             {showtime.showtimes?.map(
                               (showtimeDetails: ShowtimeDetails) => (
                                 <button
-                                  className="sm:w-16 w-12 p-1 border-sky-700 border-2 hover:bg-sky-500 rounded"
+                                  key={showtimeDetails._id}
+                                  className="sm:w-16 w-12 px-1 border-sky-700 border-2 hover:bg-sky-500 rounded"
                                   onClick={() => {
                                     if (user) {
                                       scroll(0, 0);
