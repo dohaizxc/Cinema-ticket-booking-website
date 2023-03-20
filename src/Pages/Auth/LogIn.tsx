@@ -124,7 +124,7 @@ export const LogIn = () => {
                 Đăng ký ngay
               </Link>
             </p>
-            <div className="mt-[-20px] w-2/3">
+            <div className="mt-[-20px] w-2/3 mb-4">
               <p className="font-medium">Account for testing</p>
               <p className="font-medium">
                 Email: <span className="font-normal">testing@gmail.com</span>
