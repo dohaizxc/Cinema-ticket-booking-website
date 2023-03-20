@@ -105,6 +105,18 @@ export const Cinemas = () => {
     window.open(linkUrl, "_blank");
   };
 
+  const handleShowtimeClick = (showtimeId: string) => {
+    if (user) {
+      scroll(0, 0);
+      navigate(`/booking/${showtimeId}`);
+    } else {
+      localStorage.setItem("link", `/booking/${showtimeId}`);
+      openNotification("info", "Vui lòng đăng nhập để tiếp tục");
+      scroll(0, 0);
+      navigate(`/login`);
+    }
+  };
+
   return (
     <Layout>
       <div className="sm:mx-12 mx-2 min-h-screen">
@@ -193,21 +205,9 @@ ${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
                                     <button
                                       key={showtimeDetails._id}
                                       className="sm:w-16 w-12 p-1 border-sky-700 border-2 hover:bg-sky-500 rounded"
-                                      onClick={() => {
-                                        if (user) {
-                                          scroll(0, 0);
-                                          navigate(
-                                            `/booking/${showtimeDetails._id}`
-                                          );
-                                        } else {
-                                          openNotification(
-                                            "info",
-                                            "Vui lòng đăng nhập để tiếp tục"
-                                          );
-                                          scroll(0, 0);
-                                          navigate(`/login`);
-                                        }
-                                      }}
+                                      onClick={() =>
+                                        handleShowtimeClick(showtimeDetails._id)
+                                      }
                                     >
                                       {showtimeDetails.time}
                                     </button>

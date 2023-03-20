@@ -44,9 +44,8 @@ export const Banner = () => {
             />
 
             <h1 className="font-bold text-xl my-5">ĐẶT VÉ NHANH CHÓNG</h1>
-            <p className="text-base">
-              Trải nghiệm thế giới phim kỳ diệu với UIT CINEMA
-            </p>
+            <p className="text-base">Khám phá thế giới điện ảnh ma thuật</p>
+            <p className="text-base">cùng trải nghiệm đặt vé dễ dàng</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
@@ -56,9 +55,8 @@ export const Banner = () => {
               className="w-2/5"
             />
             <h1 className="font-bold text-xl my-5">CHƯƠNG TRÌNH KHUYẾN MÃI</h1>
-            <p className="text-base">
-              Nhiều chương trình hấp dẫn dành cho thành viên UIT CINEMA
-            </p>
+            <p className="text-base">Nhiều chương trình ưu đãi hấp dẫn</p>
+            <p className="text-base">dành cho thành viên UIT CINEMA</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>

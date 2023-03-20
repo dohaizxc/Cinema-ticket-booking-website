@@ -23,7 +23,11 @@ export const LogIn = () => {
         localStorage.setItem("token", userResult.accessToken);
         localStorage.setItem("user", JSON.stringify(userResult.foundUser));
         scroll(0, 0);
-        navigate("/");
+        const link = localStorage.getItem("link");
+        if (link) {
+          navigate(link);
+          window.localStorage.removeItem("link");
+        } else navigate("/");
       } else {
         openNotification("error", "Tên tài khoản hoặc mật khẩu không đùng");
       }
@@ -120,6 +124,15 @@ export const LogIn = () => {
                 Đăng ký ngay
               </Link>
             </p>
+            <div className="mt-[-20px] w-2/3">
+              <p className="font-medium">Account for testing</p>
+              <p className="font-medium">
+                Email: <span className="font-normal">testing@gmail.com</span>
+              </p>
+              <p className="font-medium">
+                Password: <span className="font-normal">testing123</span>
+              </p>
+            </div>
           </div>
         </div>
 
