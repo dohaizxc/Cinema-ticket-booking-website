@@ -43,19 +43,27 @@ export const ListDays: React.FC<{
           }}
           slidesPerGroup={1}
           breakpoints={{
-            "@0.00": {
+            "0": {
               slidesPerView: 4,
               spaceBetween: 10,
             },
-            "@1.00": {
+            "500": {
+              slidesPerView: 5,
+              spaceBetween: 15,
+            },
+            "640": {
               slidesPerView: 6,
-              spaceBetween: 20,
+              spaceBetween: 15,
             },
-            "@1.25": {
+            "768": {
+              slidesPerView: 7,
+              spaceBetween: 15,
+            },
+            "820": {
               slidesPerView: 8,
-              spaceBetween: 20,
+              spaceBetween: 15,
             },
-            "@1.50": {
+            "1280": {
               slidesPerView: 10,
               spaceBetween: 20,
             },

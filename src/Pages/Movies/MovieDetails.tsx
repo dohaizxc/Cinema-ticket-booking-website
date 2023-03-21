@@ -322,7 +322,7 @@ export const MovieDetails = () => {
                 <div className="lg:mx-10">
                   {showtimes?.map((showtime: Showtime) => (
                     <div key={showtime.cinema._id}>
-                      <div className="flex sm:flex-row flex-col sm:items-center sm:py-5 sm:mx-10 mx-5">
+                      <div className="flex sm:flex-row flex-col sm:items-center sm:ml-10 ml-5">
                         <div className="sm:text-xl text-base font-bold sm:py-4 pb-4 sm:w-2/5 w-full flex items-center">
                           <button
                             onClick={() => {
@@ -337,7 +337,7 @@ export const MovieDetails = () => {
                           {showtime.cinema.name}
                         </div>
 
-                        <div className="font-medium sm:text-lg sm:px-10 px-5">
+                        <div className="font-medium sm:text-lg">
                           <div className="flex flex-wrap sm:gap-x-6 gap-x-3 gap-y-4">
                             {showtime.showtimes?.map(
                               (showtimeDetails: ShowtimeDetails) => (
