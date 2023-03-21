@@ -29,7 +29,7 @@ export const Steps: React.FC<{ currentStep: number }> = ({ currentStep }) => {
                 <CheckIcon className="sm:h-5 sm:w-5 h-4 w-4 text-sky-500" />
               </span>
             ) : step.id === currentStep ? (
-              <div className="relative mr-2">
+              <div className="relative mr-2 h-8 w-8 bg-[#e6f4ff] rounded-full">
                 <svg
                   aria-hidden="true"
                   className="w-8 h-8 animate-spin fill-sky-500"
