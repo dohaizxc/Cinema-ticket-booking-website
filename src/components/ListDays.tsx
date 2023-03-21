@@ -47,9 +47,9 @@ export const ListDays: React.FC<{
               slidesPerView: 4,
               spaceBetween: 10,
             },
-            "500": {
+            "390": {
               slidesPerView: 5,
-              spaceBetween: 15,
+              spaceBetween: 8,
             },
             "640": {
               slidesPerView: 6,
@@ -68,7 +68,7 @@ export const ListDays: React.FC<{
               spaceBetween: 20,
             },
           }}
-          className="mx-16"
+          className="sm:mx-16 mx-8"
           onSlideChange={(swiper) => {
             setShowPrevButton(swiper.activeIndex !== 0);
             const currentSwiper = swiperRef.current;
@@ -105,14 +105,14 @@ export const ListDays: React.FC<{
           className={`absolute top-1/2 left-0 transform -translate-y-1/2
               ${!showPrevButton ? "opacity-25 cursor-default" : ""}`}
         >
-          <ArrowLeftCircleIcon className="h-10 w-10 mx-4" />
+          <ArrowLeftCircleIcon className="sm:h-10 sm:w-10 h-7 w-7 sm:mx-4" />
         </button>
         <button
           onClick={() => swiperRef.current?.slideNext()}
           className={`absolute top-1/2 right-0 transform -translate-y-1/2
               ${!showNextButton ? "opacity-25 cursor-default" : ""}`}
         >
-          <ArrowRightCircleIcon className="h-10 w-10 mx-4" />
+          <ArrowRightCircleIcon className="sm:h-10 sm:w-10 h-7 w-7 sm:mx-4" />
         </button>
       </div>
     </div>
