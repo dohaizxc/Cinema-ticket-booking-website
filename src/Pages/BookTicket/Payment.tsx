@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { LineWithText } from "../../components/LineWithText";
 import { TagsOutlined } from "@ant-design/icons";
 import { Food } from "../../interface/Interface";
 import { RadioGroup } from "@headlessui/react";
@@ -52,7 +51,6 @@ export const Payment: React.FC<{
 
   return (
     <div>
-      <LineWithText>THANH TOÁN</LineWithText>
       <div className="grid sm:grid-cols-2 sm:mx-20 mx-5 sm:space-x-10 ">
         <div className="space-y-4">
           <div className="border border-sky-300 rounded h-auto py-4 px-7 space-y-3">

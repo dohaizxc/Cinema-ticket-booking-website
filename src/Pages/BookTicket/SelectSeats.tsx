@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { Space } from "antd";
-import { seatMap, seats } from "../../components/seats";
+import { seatMap } from "../../components/seats";
 import { Seat } from "../../components/Seat";
-import { LineWithText } from "../../components/LineWithText";
 import { Seat as SeatInterface } from "../../interface/Interface";
 export const SelectSeats: React.FC<{
   soldSeats: number[] | undefined;
@@ -39,8 +37,6 @@ export const SelectSeats: React.FC<{
   }, []);
   return (
     <div>
-      <LineWithText>CHỌN GHẾ</LineWithText>
-
       <div className="overflow-x-scroll lg:overflow-x-hidden" ref={myRef}>
         <div className="w-[1024px] lg:w-full flex justify-center items-center mb-7">
           <p className="font-semibold text-center text-lg border bg-sky-200 rounded w-3/4">

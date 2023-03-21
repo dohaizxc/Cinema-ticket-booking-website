@@ -10,6 +10,7 @@ import {
   BuildingOfficeIcon,
 } from "@heroicons/react/24/outline";
 import QRCode from "qrcode.react";
+import { Steps } from "../../components/Steps";
 
 export const Ticket = () => {
   const navigate = useNavigate();

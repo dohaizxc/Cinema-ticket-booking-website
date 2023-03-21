@@ -14,6 +14,7 @@ import {
   CalendarDaysIcon,
   MapPinIcon,
 } from "@heroicons/react/24/outline";
+import { Steps } from "../../components/Steps";
 
 export const Booking = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export const Booking = () => {
     result: bookingResult,
     isError,
   } = usePost<any>();
-  const [type, setType] = useState<number>(1);
+  const [step, setStep] = useState<number>(1);
   const [listSelectedSeats, setListSelectedSeats] = useState<Seat[]>([]);
   const [listFoods, setListFoods] = useState<Food[]>([]);
   const [foodPrice, setFoodPrice] = useState<number>(0);
@@ -43,28 +44,28 @@ export const Booking = () => {
     fetchShowtime("showtime/" + id);
   }, []);
 
-  const handlePreviousClick = (type: number) => {
-    if (type > 2) {
+  const handlePreviousClick = (step: number) => {
+    if (step > 2) {
       window.scroll({
         top: 0,
         left: 0,
         behavior: "smooth",
       });
-      setType(type - 1);
-    } else if (type === 2) {
+      setStep(step - 1);
+    } else if (step === 2) {
       window.scroll({
         top: 0,
         left: 0,
         behavior: "smooth",
       });
       setAgeVerification(false);
-      setType(type - 1);
+      setStep(step - 1);
     }
   };
 
   React.useEffect(() => {
     if (ageVerification) {
-      setType(2);
+      setStep(2);
       window.scroll({
         top: 0,
         left: 0,
@@ -73,8 +74,8 @@ export const Booking = () => {
     }
   }, [ageVerification]);
 
-  const handleNextClick = (type: number) => {
-    if (type === 1) {
+  const handleNextClick = (step: number) => {
+    if (step === 1) {
       if (seatPrice === 0) {
         openNotification("info", "Vui lòng chọn ghế để tiếp tục");
         return;
@@ -85,18 +86,18 @@ export const Booking = () => {
             left: 0,
             behavior: "smooth",
           });
-          setType(type + 1);
+          setStep(step + 1);
         } else setOpenModal(true);
       }
     } else {
-      if (type < 3) {
+      if (step < 3) {
         window.scroll({
           top: 0,
           left: 0,
           behavior: "smooth",
         });
-        setType(type + 1);
-      } else if (type === 3) {
+        setStep(step + 1);
+      } else if (step === 3) {
         if (paymentMethod) {
           bookTicket();
         } else {
@@ -186,33 +187,21 @@ export const Booking = () => {
           " tuổi trở lên và hiểu rằng UIT CINEMA sẽ không hoàn tiền nếu không chứng thực độ tuổi của khán giả."
         }
       ></Modal>
-      {/* {type != 3 && (
-        <div>
-          <LineWithText>BOOKING ONLINE</LineWithText>
-          <div className="font-bold px-32 text-[18px]">
-            <div>
-              {showtimeResult?.cinema.name} | Phòng{" "}
-              {showtimeResult?.showtime.roomId.name} | Số ghế (240/240)
-            </div>
-            <div>
-              {showtimeResult?.showtime.date.substring(0, 10)} |{" "}
-              {showtimeResult?.showtime.time} -{" "}
-              {showtimeResult?.showtime.time_end}
-            </div>
-          </div>
-        </div>
-      )} */}
 
-      {type === 1 && (
+      <div className="py-5">
+        <Steps currentStep={step}></Steps>
+      </div>
+
+      {step === 1 && (
         <SelectSeats
           soldSeats={showtimeResult?.showtime.seats}
           setListSelectedSeats={setListSelectedSeats}
         ></SelectSeats>
       )}
 
-      {type === 2 && <BuyFood setListFoods={setListFoods}></BuyFood>}
+      {step === 2 && <BuyFood setListFoods={setListFoods}></BuyFood>}
 
-      {type === 3 && (
+      {step === 3 && (
         <Payment
           seatPrice={seatPrice}
           listFoods={listFoods}
@@ -227,7 +216,7 @@ export const Booking = () => {
           <div className="z-10 absolute md:top-1/2 bottom-[-10px] md:left-0 left-10 transform -translate-y-1/2">
             <button
               className="border-2 bg-gray-700 w-[75px] h-[75px] rounded-lg"
-              onClick={() => handlePreviousClick(type)}
+              onClick={() => handlePreviousClick(step)}
             >
               <i className="fa-sharp fa-solid fa-arrow-left text-[24px] mt-[13px] mx-[25px] text-white text-center"></i>
               <div className="text-[12px] text-white text-center">PREVIOUS</div>
@@ -237,9 +226,9 @@ export const Booking = () => {
           <div className="z-10 absolute md:top-1/2 bottom-[-10px] md:right-0 right-10 transform -translate-y-1/2">
             <button
               className="border-2 bg-sky-600 w-[75px] h-[75px] rounded-lg"
-              onClick={() => handleNextClick(type)}
+              onClick={() => handleNextClick(step)}
             >
-              {type === 3 ? (
+              {step === 3 ? (
                 <>
                   <i className="fa-solid fa-money-check-dollar text-[24px] mt-[13px] mx-[22px] text-white text-center"></i>
                   <div className="text-[12px] text-white text-center">
