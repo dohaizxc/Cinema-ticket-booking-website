@@ -33,7 +33,7 @@ export const Foods: React.FC<{
 
   return (
     <div>
-      <div className="flex flex-col items-center border-2 rounded-lg m-3">
+      <div className="flex flex-col items-center border rounded-lg m-3 bg-white drop-shadow-md">
         <img src={food.image} className="h-40 w-40"></img>
         <div className="w-full bg-white rounded-b-lg">
           <div className="font-bold text-center text-lg">{food.title}</div>
