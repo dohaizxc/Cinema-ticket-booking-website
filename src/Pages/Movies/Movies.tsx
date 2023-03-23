@@ -3,26 +3,8 @@ import { Layout } from "../../components/Layout";
 import { useGet } from "../../api/get";
 import { useNavigate } from "react-router-dom";
 import { Movie } from "../../interface/Interface";
-import { Tab } from "@headlessui/react";
 import { Spin } from "antd";
 import { Tabs } from "../../components/Tabs";
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
-const type = [
-  {
-    id: 1,
-    title: "PHIM ĐANG CHIẾU",
-    value: true,
-  },
-  {
-    id: 2,
-    title: "PHIM SẮP CHIẾU",
-    value: false,
-  },
-];
 
 export const Movies = () => {
   const navigate = useNavigate();

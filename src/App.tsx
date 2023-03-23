@@ -13,6 +13,8 @@ import { Profile } from "./Pages/Auth/Profile";
 import { Ticket } from "./Pages/BookTicket/Ticket";
 import { Example } from "./Pages/Auth/Example";
 import { NewsOffer } from "./Pages/NewsOffer/NewsOffer";
+import { NewsOfferDetails } from "./Pages/NewsOffer/NewsOfferDetails";
+import { MembershipPage } from "./Pages/NewsOffer/MembershipPage";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/cinema" element={<Cinemas />} />
         <Route path="/newsoffer" element={<NewsOffer />} />
+        <Route path="/newsoffer/membership" element={<MembershipPage />} />
+        <Route path="/newsoffer/detail/:id" element={<NewsOfferDetails />} />
         <Route path="/booking/:id" element={<Booking />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />

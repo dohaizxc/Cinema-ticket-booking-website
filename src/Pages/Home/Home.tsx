@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Layout } from "../../components/Layout";
-import { Tab } from "@headlessui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType, Autoplay, Pagination, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useGet } from "../../api/get";
-import { Movie } from "../../interface/Interface";
+import { Movie, NewsOffer } from "../../interface/Interface";
 import { useNavigate } from "react-router-dom";
-import { MovieCard } from "../../components/MovieCard";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -18,14 +16,56 @@ import {
 import { FilmFormats } from "../../components/FilmFormats";
 import { Tabs } from "../../components/Tabs";
 import star from "../../assets/star.gif";
+import { SwiperSlides } from "../../components/SwiperSlides";
+import { Spin } from "antd";
+
+const newofferBreakpoints = {
+  "0": {
+    slidesPerView: 2,
+    spaceBetween: 10,
+  },
+  "768": {
+    slidesPerView: 3,
+    spaceBetween: 10,
+  },
+  "820": {
+    slidesPerView: 4,
+    spaceBetween: 10,
+  },
+  "1280": {
+    slidesPerView: 4,
+    spaceBetween: 20,
+  },
+};
+
+const movieBreakpoints = {
+  "0": {
+    slidesPerView: 2,
+    spaceBetween: 10,
+  },
+  "768": {
+    slidesPerView: 3,
+    spaceBetween: 10,
+  },
+  "820": {
+    slidesPerView: 4,
+    spaceBetween: 10,
+  },
+  "1280": {
+    slidesPerView: 5,
+    spaceBetween: 20,
+  },
+};
 
 export const Home = () => {
   const navigate = useNavigate();
   const swiperBanner = useRef<SwiperType>();
-  const swiperRef = useRef<SwiperType>();
   const [selectedTab, setSelectedTab] = useState<boolean>(true);
-  const { fetchGet: fetchMovies, result: movieResults } = useGet<Movie[]>();
-  const [movies, setMovies] = useState<Movie[]>();
+  const {
+    fetchGet: fetchMovies,
+    result: movieResults,
+    isLoading: isMoviesLoading,
+  } = useGet<Movie[]>();
 
   const nowDay = new Date("2022-12-20");
   nowDay.setHours(0, 0, 0, 0);
@@ -42,18 +82,30 @@ export const Home = () => {
     fetchMovies("movie");
   }, []);
 
-  useEffect(() => {
-    setMovies(
-      movieResults?.filter((movie: Movie) => {
-        return new Date(movie.releaseDate) <= nowDay;
-      }, [])
-    );
-  }, [movieResults]);
+  const [selectedTabNews, setSelectedTabNews] = useState<boolean>(true);
+
+  const {
+    fetchGet: fetchNews,
+    result: newsResults,
+    isLoading: isNewsLoading,
+  } = useGet<NewsOffer[]>();
+  const {
+    fetchGet: fetchOffer,
+    result: offerResults,
+    isLoading: isOfferLoading,
+  } = useGet<NewsOffer[]>();
 
   useEffect(() => {
-    if (selectedTab === true) setMovies(nowShowing);
-    else setMovies(comingSoon);
-  }, [selectedTab]);
+    fetchOffer("newsoffer/offer");
+  }, []);
+
+  useEffect(() => {
+    if (selectedTabNews) {
+      fetchOffer("newsoffer/offer");
+    } else {
+      fetchNews("newsoffer/news");
+    }
+  }, [selectedTabNews]);
 
   return (
     <Layout>
@@ -114,59 +166,29 @@ export const Home = () => {
           tab1="PHIM ĐANG CHIẾU"
           tab2="PHIM SẮP CHIẾU"
         ></Tabs>
-        {movies && (
-          <div className="relative">
-            <Swiper
-              onBeforeInit={(swiper) => {
-                swiperRef.current = swiper;
-              }}
-              loop={true}
-              autoplay={{
-                delay: 10000,
-                disableOnInteraction: false,
-              }}
-              slidesPerGroup={1}
-              breakpoints={{
-                "0": {
-                  slidesPerView: 2,
-                  spaceBetween: 10,
-                },
-                "768": {
-                  slidesPerView: 3,
-                  spaceBetween: 10,
-                },
-                "820": {
-                  slidesPerView: 4,
-                  spaceBetween: 10,
-                },
-                "1280": {
-                  slidesPerView: 5,
-                  spaceBetween: 20,
-                },
-              }}
-              modules={[Autoplay, Pagination, Navigation]}
-              className="sm:mx-16 mx-10"
-            >
-              {movies?.map((movie: Movie) => (
-                <SwiperSlide key={movie._id} className=" bg-white rounded">
-                  <MovieCard movie={movie} type={selectedTab}></MovieCard>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <button
-              onClick={() => swiperRef.current?.slidePrev()}
-              className="sm:px-4 px-1 absolute top-1/2 left-0 transform -translate-y-1/2"
-            >
-              <ChevronLeftIcon className="sm:h-10 sm:w-10 h-8 w-8 text-black bg-gray-300 hover:bg-gray-600 hover:text-white rounded-full p-1" />
-            </button>
-            <button
-              onClick={() => swiperRef.current?.slideNext()}
-              className="sm:px-4 px-1 absolute top-1/2 right-0 transform -translate-y-1/2"
-            >
-              <ChevronRightIcon className="sm:h-10 sm:w-10 h-8 w-8 text-black bg-gray-300 hover:bg-gray-600 hover:text-white rounded-full p-1" />
-            </button>
+
+        {isMoviesLoading ? (
+          <div className="flex justify-center h-96">
+            <Spin size="large" tip="Loading..." />
           </div>
+        ) : (
+          <>
+            {selectedTab && (
+              <SwiperSlides
+                movies={nowShowing}
+                breakpoints={movieBreakpoints}
+              ></SwiperSlides>
+            )}
+
+            {!selectedTab && (
+              <SwiperSlides
+                movies={comingSoon}
+                breakpoints={movieBreakpoints}
+              ></SwiperSlides>
+            )}
+          </>
         )}
+
         <div className="flex justify-center items-center mb-5 hover:text-sky-500">
           <button
             className="flex items-center justify-center text-base"
@@ -175,7 +197,7 @@ export const Home = () => {
               navigate(`/movie`);
             }}
           >
-            VIEW ALL
+            XEM THÊM
             <ArrowRightIcon className="inline-block h-5 w-5 ml-2" />
           </button>
         </div>
@@ -192,7 +214,7 @@ export const Home = () => {
              bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out mt-2"
               onClick={() => {
                 scroll(0, 0);
-                navigate(`/newsoffer`);
+                navigate(`/newsoffer/membership`);
               }}
             >
               TÌM HIỂU THÊM
@@ -201,7 +223,7 @@ export const Home = () => {
               className="font-semibold text-gray-400 hover:text-black px-5 py-2 mt-2"
               onClick={() => {
                 scroll(0, 0);
-                navigate(`/newsoffer`);
+                navigate(`/newsoffer/membership`);
               }}
             >
               ĐÃ LÀ THÀNH VIÊN?
@@ -213,6 +235,56 @@ export const Home = () => {
             src={star}
             className="h-[220px] absolute right-0 top-[-20px]"
           ></img>
+        </div>
+      </div>
+
+      <div className="bg-white my-5 rounded lg:mx-12 sm:mx-5 mx-0 drop-shadow-md">
+        <Tabs
+          setSelectedTab={setSelectedTabNews}
+          tab1="ƯU ĐÃI"
+          tab2="TIN TỨC"
+        ></Tabs>
+        {selectedTabNews && (
+          <>
+            {isOfferLoading ? (
+              <div className="flex justify-center h-60">
+                <Spin size="large" tip="Loading..." />
+              </div>
+            ) : (
+              <SwiperSlides
+                newsOffers={offerResults}
+                breakpoints={newofferBreakpoints}
+              ></SwiperSlides>
+            )}
+          </>
+        )}
+
+        {!selectedTabNews && (
+          <>
+            {isNewsLoading ? (
+              <div className="flex justify-center h-60">
+                <Spin size="large" tip="Loading..." />
+              </div>
+            ) : (
+              <SwiperSlides
+                newsOffers={newsResults}
+                breakpoints={newofferBreakpoints}
+              ></SwiperSlides>
+            )}
+          </>
+        )}
+
+        <div className="flex justify-center items-center my-5 hover:text-sky-500">
+          <button
+            className="flex items-center justify-center text-base"
+            onClick={() => {
+              scroll(0, 0);
+              navigate(`/newsoffer`);
+            }}
+          >
+            XEM THÊM
+            <ArrowRightIcon className="inline-block h-5 w-5 ml-2" />
+          </button>
         </div>
       </div>
 

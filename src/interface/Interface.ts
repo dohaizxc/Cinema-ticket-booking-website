@@ -1,5 +1,3 @@
-import dayjs from "dayjs";
-
 export interface Movie {
   name: string;
   image: string;
@@ -94,4 +92,15 @@ export interface User {
   password: string;
   dayOfBirth: Date;
   gender: string;
+}
+
+export interface NewsOffer {
+  id: string;
+  name: string;
+  img: string;
+  date: string;
+  contents: string[];
+  address: string;
+  objects: string[];
+  others: string[];
 }
