@@ -25,24 +25,19 @@ export const Ticket = () => {
   return (
     <Layout>
       {ticket && (
-        <div className="flex flex-col items-center mx-20 my-5 space-y-4 min-h-screen">
+        <div className="flex flex-col items-center sm:mx-20 mx-5 my-5 space-y-4 min-h-screen">
           <h1 className="font-bold text-lg bg-sky-300 py-2 w-full text-center rounded">
             THÔNG TIN VÉ
           </h1>
-          <div className="flex lg:flex-row flex-col lg:justify-between lg:space-x-16 bg-sky-100 py-5 px-10 lg:h-[400px]">
+          <div className="flex lg:flex-row flex-col lg:justify-between lg:space-x-16 bg-sky-100 py-5 sm:px-10 px-5 lg:h-[400px]">
             <img
               src={ticket.movieImage}
               className="rounded w-[240px] h-[350px] mt-2"
             ></img>
 
             <div className="flex flex-col justify-between">
-              <div className="space-y-1 mb-5 text-base font-medium">
-                <div
-                  className="line-clamp-2 cursor-pointer my-2 hover:text-sky-500 font-bold"
-                  onClick={() => {
-                    navigate(`/movie/${ticket._id}`);
-                  }}
-                >
+              <div className="space-y-1 mb-5 sm:text-base text-sm font-medium">
+                <div className="line-clamp-2 my-2 font-bold">
                   <span className="border border-red-500 rounded text-red-500 px-1 mr-2">
                     C13
                   </span>
@@ -65,7 +60,7 @@ export const Ticket = () => {
                   Phòng {ticket.room}
                 </p>
               </div>
-              <div className="text-base font-medium">
+              <div className="sm:text-base text-sm font-medium">
                 <div className="w-full flex justify-between mt-12">
                   <div className="ml-0">
                     GHẾ:
@@ -73,7 +68,7 @@ export const Ticket = () => {
                   </div>
 
                   <span>
-                    {ticket.totalTicket.toLocaleString("it-IT", {
+                    {ticket.totalTicket.toLocaleString("vi", {
                       style: "currency",
                       currency: "VND",
                     })}
@@ -95,7 +90,7 @@ export const Ticket = () => {
                             </span>
                             <span className="font-medium">
                               {(food.price * food.quantity).toLocaleString(
-                                "it-IT",
+                                "vi",
                                 {
                                   style: "currency",
                                   currency: "VND",
@@ -114,7 +109,7 @@ export const Ticket = () => {
                   <span>
                     {(
                       (ticket.totalTicket ?? 0) + (ticket.totalFood ?? 0)
-                    ).toLocaleString("it-IT", {
+                    ).toLocaleString("vi", {
                       style: "currency",
                       currency: "VND",
                     })}
@@ -122,7 +117,7 @@ export const Ticket = () => {
                 </div>
 
                 <div className="w-full flex justify-between">
-                  <span className="mr-10">PHƯƠNG THỨC THANH TOÁN:</span>
+                  <span className="sm:mr-10 mr-2">PHƯƠNG THỨC THANH TOÁN:</span>
                   <span className="font-normal">{ticket.paymentMethod}</span>
                 </div>
               </div>

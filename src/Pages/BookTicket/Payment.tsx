@@ -222,12 +222,7 @@ export const Payment: React.FC<{
 
             <div className="flex justify-between font-bold text-[16px]">
               <p>Khuyến mãi</p>
-              <p>
-                {totalPrice.toLocaleString("vi", {
-                  style: "currency",
-                  currency: "VND",
-                })}
-              </p>
+              <p>0 ₫</p>
             </div>
 
             <div className="flex justify-between font-bold text-[16px]">

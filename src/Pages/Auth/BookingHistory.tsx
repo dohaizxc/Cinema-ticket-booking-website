@@ -61,13 +61,7 @@ export const BookingHistory: React.FC<{ userId: string }> = ({ userId }) => {
 
                     <div className="flex flex-col justify-between">
                       <div className="space-y-1 mb-5 font-medium">
-                        <div
-                          className="line-clamp-2 cursor-pointer my-2 hover:text-sky-500 font-bold"
-                          onClick={() => {
-                            scroll(0, 0);
-                            navigate(`/movie/${ticket._id}`);
-                          }}
-                        >
+                        <div className="line-clamp-2 my-2 font-bold">
                           <span className="border border-red-500 rounded text-red-500 px-1 mr-2">
                             C13
                           </span>
@@ -103,7 +97,7 @@ export const BookingHistory: React.FC<{ userId: string }> = ({ userId }) => {
                             {(
                               (ticket.totalTicket ?? 0) +
                               (ticket.totalFood ?? 0)
-                            ).toLocaleString("it-IT", {
+                            ).toLocaleString("vi", {
                               style: "currency",
                               currency: "VND",
                             })}
