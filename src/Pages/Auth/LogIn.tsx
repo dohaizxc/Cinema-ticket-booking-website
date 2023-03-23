@@ -8,7 +8,6 @@ import { openNotification } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
 import { Banner } from "../../components/Banner";
 
-
 export const LogIn = () => {
   const navigate = useNavigate();
   const { fetchPost: fetchUser, result: userResult, isError } = usePost<any>();
@@ -16,6 +15,14 @@ export const LogIn = () => {
   const onFinish = (values: any) => {
     fetchUser(values, "auth/userlogin");
   };
+
+  React.useEffect(() => {
+    const object = localStorage.getItem("user");
+    if (object) {
+      scroll(0, 0);
+      navigate(`/`);
+    }
+  }, []);
 
   React.useEffect(() => {
     if (userResult) {

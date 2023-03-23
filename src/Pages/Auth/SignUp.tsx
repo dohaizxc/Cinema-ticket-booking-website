@@ -8,7 +8,7 @@ import {
   MailOutlined,
 } from "@ant-design/icons";
 import { Input, Form, Select, DatePicker } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Checkbox from "antd/es/checkbox/Checkbox";
 import { usePost } from "../../api/post";
 import { openNotification } from "../../components/Notifications";
@@ -44,6 +44,16 @@ export const SignUp = () => {
       (current < dayjs("1950-01-01") || current > dayjs("2010-12-31"))
     );
   };
+
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    const object = localStorage.getItem("user");
+    if (object) {
+      scroll(0, 0);
+      navigate(`/`);
+    }
+  }, []);
 
   return (
     <Layout>

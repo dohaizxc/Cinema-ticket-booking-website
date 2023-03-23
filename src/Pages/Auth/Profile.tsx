@@ -34,6 +34,14 @@ export const Profile = () => {
     navigate("/login");
   };
 
+  React.useEffect(() => {
+    const object = localStorage.getItem("user");
+    if (!object) {
+      scroll(0, 0);
+      navigate(`/`);
+    }
+  }, []);
+
   return (
     <Layout>
       <div className="flex sm:flex-row flex-col sm:space-x-10 space-x-0 sm:space-y-0 space-y-5 lg:px-20 px-5 my-5">
