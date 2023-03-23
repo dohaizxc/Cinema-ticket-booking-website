@@ -301,7 +301,9 @@ export const MovieDetails = () => {
                 key={province._id}
                 onClick={() => handleProvinceClick(province)}
                 className={`text-base lg:text-lg  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
-            ${selectedProvince?._id === province._id ? "bg-sky-500" : ""}`}
+            ${
+              selectedProvince?._id === province._id ? "bg-sky-500" : "bg-white"
+            }`}
               >
                 <div className="font-bold">{province.name}</div>
               </div>
@@ -343,7 +345,7 @@ export const MovieDetails = () => {
                               (showtimeDetails: ShowtimeDetails) => (
                                 <button
                                   key={showtimeDetails._id}
-                                  className="sm:w-16 w-12 px-1 border-sky-700 border-2 hover:bg-sky-500 rounded"
+                                  className="sm:w-16 w-12 px-1 bg-white border-sky-700 border-2 hover:bg-sky-500 rounded"
                                   onClick={() =>
                                     handleShowtimeClick(showtimeDetails._id)
                                   }

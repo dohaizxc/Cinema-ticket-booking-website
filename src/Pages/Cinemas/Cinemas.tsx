@@ -128,7 +128,7 @@ export const Cinemas = () => {
               key={province._id}
               onClick={() => handleProvinceClick(province)}
               className={`text-base lg:text-lg px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
-      ${provinceParams === province.name ? "bg-sky-500" : ""}`}
+      ${provinceParams === province.name ? "bg-sky-500" : "bg-white"}`}
             >
               <div className="font-bold">{province.name}</div>
             </div>
@@ -142,15 +142,15 @@ export const Cinemas = () => {
                 <div
                   onClick={() => handleCinemaClick(cinema)}
                   className={`font-bold lg:text-base px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded-t 
-${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
+${cinemaParams === cinema.name ? "bg-sky-500" : "bg-white"}`}
                 >
                   {cinema.name}
                 </div>
-                <p className="sm:block hidden border-sky-700 border-x-[2px] border-b-[2px] p-2">
+                <p className="sm:block hidden bg-white border-sky-700 border-x-[2px] border-b-[2px] p-2">
                   {cinema.address}
                 </p>
                 <button
-                  className=" border-sky-700 border-x-[2px] border-b-[2px] p-2 w-full hover:bg-sky-500 rounded-b flex justify-center"
+                  className=" border-sky-700 border-x-[2px] border-b-[2px] bg-white p-2 w-full hover:bg-sky-500 rounded-b flex justify-center"
                   onClick={() => handleLocationClick(cinema.address_url)}
                 >
                   <MapPinIcon className="sm:h-6 sm:w-6 h-4 w-4" />
@@ -204,7 +204,7 @@ ${cinemaParams === cinema.name ? "bg-sky-500" : ""}`}
                                   (showtimeDetails: ShowtimeDetails) => (
                                     <button
                                       key={showtimeDetails._id}
-                                      className="sm:w-16 w-12 p-1 border-sky-700 border-2 hover:bg-sky-500 rounded"
+                                      className="sm:w-16 w-12 p-1 bg-white border-sky-700 border-2 hover:bg-sky-500 rounded"
                                       onClick={() =>
                                         handleShowtimeClick(showtimeDetails._id)
                                       }
