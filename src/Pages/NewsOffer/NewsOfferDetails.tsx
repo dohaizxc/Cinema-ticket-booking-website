@@ -3,6 +3,7 @@ import { Layout } from "../../components/Layout";
 import { useGet } from "../../api/get";
 import { NewsOffer } from "../../interface/Interface";
 import { useParams } from "react-router-dom";
+import errImage from "../../assets/img/news_detail_img_d1.jpg";
 
 export const NewsOfferDetails = () => {
   const { fetchGet, result: newsOffer } = useGet<NewsOffer>();
@@ -29,7 +30,7 @@ export const NewsOfferDetails = () => {
               <img
                 className="sm:w-72 w-60 h-fit rounded mx-auto"
                 src={newsOffer.img}
-                alt="Ảnh minh họa"
+                alt={errImage}
               />
               <div className="sm:w-3/5 sm:mt-0 mt-5 w-full space-y-2 sm:text-base text-xs">
                 <p>
