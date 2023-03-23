@@ -25,17 +25,17 @@ export const Ticket = () => {
   return (
     <Layout>
       {ticket && (
-        <div className="flex flex-col items-center sm:mx-20 mx-5 my-5 space-y-4 min-h-screen">
+        <div className="flex flex-col items-center sm:mx-20 mx-10 my-5 space-y-4 min-h-screen">
           <h1 className="font-bold text-lg bg-sky-300 py-2 w-full text-center rounded">
             THÔNG TIN VÉ
           </h1>
-          <div className="flex lg:flex-row flex-col lg:justify-between lg:space-x-16 bg-sky-100 py-5 sm:px-10 px-5 lg:h-[400px]">
+          <div className="flex lg:flex-row flex-col lg:justify-between lg:space-x-16 bg-sky-100 py-5 sm:px-10 px-8 lg:h-[400px] w-full">
             <img
               src={ticket.movieImage}
-              className="rounded w-[240px] h-[350px] mt-2"
+              className="rounded sm:w-[240px] sm:h-[350px] h-[300px] w-fit mt-2 mx-auto"
             ></img>
 
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col justify-between sm:mt-0 mt-2">
               <div className="space-y-1 mb-5 sm:text-base text-sm font-medium">
                 <div className="line-clamp-2 my-2 font-bold">
                   <span className="border border-red-500 rounded text-red-500 px-1 mr-2">
@@ -44,19 +44,19 @@ export const Ticket = () => {
                   {ticket.movieName}
                 </div>
                 <p className="flex">
-                  <MapPinIcon className="h-6 w-6 mr-1" />
+                  <MapPinIcon className="sm:h-6 sm:w-6 h-5 w-5 mr-1" />
                   {ticket.cinemaName}
                 </p>
                 <p className="flex">
-                  <CalendarDaysIcon className="h-6 w-6 mr-1" />
+                  <CalendarDaysIcon className="sm:h-6 sm:w-6 h-5 w-5 mr-1" />
                   {ticket.date}
                 </p>
                 <p className="flex">
-                  <ClockIcon className="h-6 w-6 mr-1" />
+                  <ClockIcon className="sm:h-6 sm:w-6 h-5 w-5 mr-1" />
                   {ticket.time}
                 </p>
                 <p className="flex">
-                  <BuildingOfficeIcon className="h-6 w-6 mr-1" />
+                  <BuildingOfficeIcon className="sm:h-6 sm:w-6 h-5 w-5 mr-1" />
                   Phòng {ticket.room}
                 </p>
               </div>
@@ -122,7 +122,7 @@ export const Ticket = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[240px]">
+            <div className="w-[240px] mx-auto">
               <div className="p-5 bg-white rounded my-5 h-[260px]">
                 <QRCode
                   id="qrcode"
@@ -131,7 +131,7 @@ export const Ticket = () => {
                   level={"H"}
                   includeMargin={false}
                 />
-                <p className="text-center font-bold my-2 text-base">
+                <p className="text-center font-bold my-2 sm:text-base text-sm">
                   {ticket.id}
                 </p>
               </div>
