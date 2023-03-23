@@ -6,7 +6,7 @@ import { NewsOffer as NewsOfferInterface } from "../../interface/Interface";
 import { Link, useNavigate } from "react-router-dom";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import { Spin } from "antd";
-import errImage from "../../assets/img/news_img_n1.jpg"
+import errImage from "../../assets/img/news_img_n1.jpg";
 
 export const NewsOffer = () => {
   const navigate = useNavigate();
@@ -43,7 +43,11 @@ export const NewsOffer = () => {
                 <img
                   className="rounded transition ease-in-out delay-150 hover:scale-105 duration-300"
                   src={newsOffer.img}
-                  alt={errImage}
+                  alt={newsOffer.name}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = errImage;
+                  }}
                 />
                 <h1
                   className="sm:h-12 h-10 line-clamp-2 sm:text-sm text-xs text-center font-semibold uppercase cursor-pointer pt-2 hover:text-sky-500"

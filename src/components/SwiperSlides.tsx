@@ -47,7 +47,11 @@ export const SwiperSlides: React.FC<{
                   <img
                     className="sm:h-fit rounded transition ease-in-out delay-150 hover:scale-105 duration-300"
                     src={newsOffer.img}
-                    alt={errImage}
+                    alt={newsOffer.name}
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src = errImage;
+                    }}
                   />
                   <h1
                     className="h-12 line-clamp-2 text-sm text-center font-semibold uppercase cursor-pointer pt-2 hover:text-sky-500"

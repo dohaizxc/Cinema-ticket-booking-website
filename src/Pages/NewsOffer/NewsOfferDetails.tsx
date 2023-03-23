@@ -30,7 +30,11 @@ export const NewsOfferDetails = () => {
               <img
                 className="sm:w-72 w-60 h-fit rounded mx-auto"
                 src={newsOffer.img}
-                alt={errImage}
+                alt={newsOffer.name}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src = errImage;
+                }}
               />
               <div className="sm:w-3/5 sm:mt-0 mt-5 w-full space-y-2 sm:text-base text-xs">
                 <p>
