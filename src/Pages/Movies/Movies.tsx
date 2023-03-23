@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Movie } from "../../interface/Interface";
 import { Tab } from "@headlessui/react";
 import { Spin } from "antd";
+import { Tabs } from "../../components/Tabs";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -63,30 +64,12 @@ export const Movies = () => {
 
   return (
     <Layout>
+      <Tabs
+        setSelectedTab={setSelectedType}
+        tab1="PHIM ĐANG CHIẾU"
+        tab2="PHIM SẮP CHIẾU"
+      ></Tabs>
       <div className="flex flex-col items-center justify-center lg:mx-12 sm:mx-5 mx-0 mb-5">
-        <div className="my-8 lg:w-1/2 sm:w-3/5 w-4/5">
-          <Tab.Group>
-            <Tab.List className="flex space-x-1 rounded-full bg-sky-900/20 p-1">
-              {type.map((type) => (
-                <Tab
-                  key={type.id}
-                  onClick={() => setSelectedType(type.value)}
-                  className={({ selected }) =>
-                    classNames(
-                      "w-full rounded-full py-2.5 sm:text-base text-sm font-semibold leading-5 ",
-                      "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
-                      selected
-                        ? "bg-white shadow text-sky-700"
-                        : "text-gray-100 hover:bg-white/[0.12] hover:text-white"
-                    )
-                  }
-                >
-                  {type.title}
-                </Tab>
-              ))}
-            </Tab.List>
-          </Tab.Group>
-        </div>
         {isLoading ? (
           <div className="flex justify-center min-h-screen">
             <Spin size="large" tip="Loading..." />

@@ -16,29 +16,14 @@ import {
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
 import { FilmFormats } from "../../components/FilmFormats";
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
-const type = [
-  {
-    id: 1,
-    title: "PHIM ĐANG CHIẾU",
-    value: true,
-  },
-  {
-    id: 2,
-    title: "PHIM SẮP CHIẾU",
-    value: false,
-  },
-];
+import { Tabs } from "../../components/Tabs";
+import star from "../../assets/star.gif";
 
 export const Home = () => {
   const navigate = useNavigate();
   const swiperBanner = useRef<SwiperType>();
   const swiperRef = useRef<SwiperType>();
-  const [selectedType, setSelectedType] = useState<boolean>(true);
+  const [selectedTab, setSelectedTab] = useState<boolean>(true);
   const { fetchGet: fetchMovies, result: movieResults } = useGet<Movie[]>();
   const [movies, setMovies] = useState<Movie[]>();
 
@@ -66,9 +51,9 @@ export const Home = () => {
   }, [movieResults]);
 
   useEffect(() => {
-    if (selectedType === true) setMovies(nowShowing);
+    if (selectedTab === true) setMovies(nowShowing);
     else setMovies(comingSoon);
-  }, [selectedType]);
+  }, [selectedTab]);
 
   return (
     <Layout>
@@ -124,31 +109,11 @@ export const Home = () => {
         </Swiper>
       </div>
       <div className="bg-white my-5 rounded lg:mx-12 sm:mx-5 mx-0 drop-shadow-md">
-        <div className="flex items-center justify-center">
-          <div className="my-8 lg:w-1/2 sm:w-3/5 w-4/5">
-            <Tab.Group>
-              <Tab.List className="flex space-x-1 rounded-full bg-sky-900/20 p-1">
-                {type.map((type) => (
-                  <Tab
-                    key={type.id}
-                    onClick={() => setSelectedType(type.value)}
-                    className={({ selected }) =>
-                      classNames(
-                        "w-full rounded-full py-2.5 sm:text-base text-sm font-semibold leading-5 ",
-                        "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
-                        selected
-                          ? "bg-white shadow text-sky-700"
-                          : "text-gray-100 hover:bg-white/[0.12] hover:text-white"
-                      )
-                    }
-                  >
-                    {type.title}
-                  </Tab>
-                ))}
-              </Tab.List>
-            </Tab.Group>
-          </div>
-        </div>
+        <Tabs
+          setSelectedTab={setSelectedTab}
+          tab1="PHIM ĐANG CHIẾU"
+          tab2="PHIM SẮP CHIẾU"
+        ></Tabs>
         {movies && (
           <div className="relative">
             <Swiper
@@ -184,7 +149,7 @@ export const Home = () => {
             >
               {movies?.map((movie: Movie) => (
                 <SwiperSlide key={movie._id} className=" bg-white rounded">
-                  <MovieCard movie={movie} type={selectedType}></MovieCard>
+                  <MovieCard movie={movie} type={selectedTab}></MovieCard>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -217,7 +182,7 @@ export const Home = () => {
       </div>
 
       <div className="grid sm:grid-cols-2 bg-white py-5 sm:px-12 px-5 lg:mx-12 mx-5 my-5 rounded drop-shadow-md">
-        <div>
+        <div className="relative">
           <p className="lg:text-3xl sm:text-xl text-base font-semibold">
             Chương trình khách hàng thân thiết với nhiều ưu đãi độc quyền
           </p>
@@ -243,7 +208,12 @@ export const Home = () => {
             </button>
           </div>
         </div>
-        <div className="bg-[url('https://64.media.tumblr.com/bb52491bb4001d07c4f7542c44649f8a/940908fe8c3a4fcd-3e/s540x810/8439d3125bc1ac5fa63418b8e2a6eb5f3008b185.gif')]"></div>
+        <div className="w-full relative sm:block hidden">
+          <img
+            src={star}
+            className="h-[220px] absolute right-0 top-[-20px]"
+          ></img>
+        </div>
       </div>
 
       <FilmFormats></FilmFormats>
