@@ -74,7 +74,7 @@ export const Movies = () => {
                 )}
 
                 <img
-                  className="sm:w-[192px] sm:h-[276px] w-[170px] h-[240px] mx-auto cursor-pointer transition ease-in-out delay-150 hover:scale-110 duration-300 rounded"
+                  className="sm:w-[192px] sm:h-[276px] w-[170px] h-[240px] mx-auto cursor-pointer transition ease-in-out delay-150 hover:scale-105 duration-300 rounded"
                   src={movie.image}
                   alt={movie.name}
                   onClick={() => {

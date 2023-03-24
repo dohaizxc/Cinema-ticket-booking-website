@@ -19,6 +19,8 @@ import {
 } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 import { openNotification } from "../../components/Notifications";
+import { ClockIcon, CalendarDaysIcon } from "@heroicons/react/24/outline";
+import { PopUpYoutube } from "../../components/PopUpYoutube";
 
 export const MovieDetails = () => {
   const navigate = useNavigate();
@@ -116,63 +118,171 @@ export const MovieDetails = () => {
     }
   };
 
+  const [isShowPopUp, setIsShowPopUp] = useState<boolean>(false);
+
   return (
     <Layout>
-      <div
-        className={`hidden sm:block relative bg-cover ${
-          type ? "min-h-[400px]" : "min-h-screen"
-        }`}
-        style={{
-          backgroundImage: `url(${movie?.image})`,
-        }}
-      >
-        <div className="absolute inset-0 bg-gray-900 opacity-75 backdrop-filter backdrop-blur-sm"></div>
-        <div className="absolute inset-0 flex items-center justify-center text-white lg:px-24 px-10">
-          <img
-            className="lg:w-[220px] lg:h-[320px] sm:w-[200px] sm:h-[300px] w-[150px] h-[215px] rounded"
-            src={movie?.image}
-          ></img>
-          <div className="pl-10">
-            <div className="font-bold text-xl py-2">{movie?.name}</div>
-            <div>
-              <span className="font-medium">Đạo diễn: </span>
-              {movie?.director}
-            </div>
+      {movie && (
+        <div
+          className={`hidden sm:block relative bg-cover ${
+            type ? "min-h-[400px]" : "min-h-screen"
+          }`}
+          style={{
+            backgroundImage: `url(${movie.image})`,
+          }}
+        >
+          <div className="absolute inset-0 bg-gray-900 opacity-75 backdrop-filter backdrop-blur-sm"></div>
+          <div className="absolute inset-0 flex items-center justify-center text-white lg:px-24 px-10">
+            <img
+              className="lg:w-[220px] lg:h-[320px] sm:w-[200px] sm:h-[300px] w-[150px] h-[215px] rounded"
+              src={movie.image}
+            ></img>
+            <div className="pl-10">
+              <div className="flex items-center text-xl font-bold">
+                {movie.rated.substring(0, 1) === "P" ? (
+                  <span className="mt-1 border border-green-500 rounded text-green-500 px-2">
+                    P
+                  </span>
+                ) : (
+                  <span className="mt-1 border border-red-500 rounded text-red-500 px-1">
+                    {movie.rated.substring(0, 3)}
+                  </span>
+                )}
+                <p className="font-bold text-3xl py-2 ml-2"> {movie.name}</p>
+              </div>
 
-            <div>
-              <span className="font-medium">Diễn viên: </span>
-              {movie?.actors}
+              <div className="flex space-x-5 py-2 text-xl font-medium">
+                <p> {movie.genre.join(", ")}</p>
+                <p className="font-thin text-xl mx-5 mb-1">-</p>
+                <div className="flex items-center">
+                  <ClockIcon className="mr-2 h-7 w-7 inline-block" />
+                  <p>{movie.duration} phút</p>
+                </div>
+                <p className="font-thin text-xl mx-5 mb-1">-</p>
+                <div className="flex items-center">
+                  <CalendarDaysIcon className="mr-2 h-7 w-7 inline-block" />
+                  <p>
+                    {new Date(movie.releaseDate).toLocaleDateString("en-UK")}
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <span className="font-medium">Đạo diễn: </span>
+                {movie.director}
+              </div>
+              <div>
+                <span className="font-medium">Diễn viên: </span>
+                {movie.actors}
+              </div>
+              <div>
+                <span className="font-medium"> Ngôn ngữ: </span>
+                {movie.language}
+              </div>
+              <div className="py-4">{movie?.description}</div>
+
+              <div className="flex items-center justify-center">
+                <button
+                  className=" hover:text-sky-500"
+                  onClick={() => setIsShowPopUp(!isShowPopUp)}
+                >
+                  <div className="flex items-center justify-center">
+                    <PlayCircleIcon className="w-10 h-10" />
+                    <p className="font-semibold text-base ml-2">XEM TRAILER</p>
+                  </div>
+                </button>
+                {type && (
+                  <>
+                    <p className="font-thin text-xl mx-5 mb-1">|</p>
+                    <button
+                      className=" hover:text-sky-500"
+                      onClick={() => {
+                        window.scroll({
+                          top: 450,
+                          behavior: "smooth",
+                        });
+                      }}
+                    >
+                      <div className="flex items-center justify-center">
+                        <ArrowDownCircleIcon className="w-10 h-10" />
+                        <p className="font-semibold text-base ml-2">MUA VÉ</p>
+                      </div>
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
-            <div>
-              <span className="font-medium">Thể loại: </span>
-              {movie?.genre.join(", ")}
-            </div>
-            <div>
-              <span className="font-medium"> Thời lượng: </span>
-              {movie?.duration} phút
-            </div>
-            <div>
-              <span className="font-medium">Ngày khởi chiếu: </span>
-              {movie && (
-                <>{new Date(movie.releaseDate).toLocaleDateString("en-UK")}</>
+          </div>
+        </div>
+      )}
+
+      {movie && (
+        <div
+          className={`block sm:hidden relative bg-cover ${
+            type ? "min-h-[600px]" : "min-h-screen"
+          }`}
+          style={{
+            backgroundImage: `url(${movie?.image})`,
+          }}
+        >
+          <div className="absolute inset-0 bg-gray-900 opacity-75 backdrop-filter backdrop-blur-sm"></div>
+          <div className="absolute inset-0 flex flex-col justify-center text-white px-8">
+            <div className="text-base font-bold">
+              {movie.rated.substring(0, 1) === "P" ? (
+                <span className="mt-1 border border-green-500 rounded text-green-500 px-2">
+                  P
+                </span>
+              ) : (
+                <span className="mt-1 border border-red-500 rounded text-red-500 px-1">
+                  {movie.rated.substring(0, 3)}
+                </span>
               )}
+              <span className="text-xl py-2 ml-1"> {movie.name}</span>
+              <div className="flex space-x-5 font-medium my-2">
+                <div className="flex items-center">
+                  <ClockIcon className="mr-2 h-5 w-5 inline-block" />
+                  <p>{movie.duration} phút</p>
+                </div>
+                <p className="font-thin text-xl mx-5 mb-1">-</p>
+                <div className="flex items-center">
+                  <CalendarDaysIcon className="mr-2 h-5 w-5 inline-block" />
+                  <p>
+                    {new Date(movie.releaseDate).toLocaleDateString("en-UK")}
+                  </p>
+                </div>
+              </div>
             </div>
-            <div>
-              <span className="font-medium"> Ngôn ngữ: </span>
-              {movie?.language}
-            </div>
-            <div>
-              <span className="font-medium"> Rated: </span>
-              {movie?.rated}
+            <div className="flex items-center justify-center">
+              <img
+                className="w-[100px] h-[150px] rounded mt-2"
+                src={movie?.image}
+              ></img>
+              <div className="pl-4">
+                <p>
+                  <span className="font-medium">Thể loại: </span>
+                  {movie?.genre.join(", ")}
+                </p>
+                <p>
+                  <span className="font-medium">Đạo diễn: </span>
+                  {movie?.director}
+                </p>
+
+                <p>
+                  <span className="font-medium">Diễn viên: </span>
+                  {movie?.actors}
+                </p>
+                <p>
+                  <span className="font-medium"> Ngôn ngữ: </span>
+                  {movie?.language}
+                </p>
+              </div>
             </div>
             <div className="py-2">{movie?.description}</div>
 
             <div className="flex items-center justify-center">
               <button
                 className=" hover:text-sky-500"
-                onClick={() => {
-                  window.open(movie?.trailer_url, "_blank");
-                }}
+                onClick={() => setIsShowPopUp(!isShowPopUp)}
               >
                 <div className="flex items-center justify-center">
                   <PlayCircleIcon className="w-10 h-10" />
@@ -186,7 +296,7 @@ export const MovieDetails = () => {
                     className=" hover:text-sky-500"
                     onClick={() => {
                       window.scroll({
-                        top: 450,
+                        top: 600,
                         behavior: "smooth",
                       });
                     }}
@@ -202,95 +312,7 @@ export const MovieDetails = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div
-        className={`block sm:hidden relative bg-cover ${
-          type ? "min-h-[550px]" : "min-h-screen"
-        }`}
-        style={{
-          backgroundImage: `url(${movie?.image})`,
-        }}
-      >
-        <div className="absolute inset-0 bg-gray-900 opacity-75 backdrop-filter backdrop-blur-sm"></div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-8">
-          <div className="flex items-center justify-center">
-            <img
-              className="w-[100px] h-[150px] rounded"
-              src={movie?.image}
-            ></img>
-            <div className="pl-4">
-              <div className="font-bold text-base py-2">{movie?.name}</div>
-              <div>
-                <span className="font-medium">Đạo diễn: </span>
-                {movie?.director}
-              </div>
-
-              <div>
-                <span className="font-medium">Diễn viên: </span>
-                {movie?.actors}
-              </div>
-              <div>
-                <span className="font-medium">Thể loại: </span>
-                {movie?.genre.join(", ")}
-              </div>
-              <div>
-                <span className="font-medium"> Thời lượng: </span>
-                {movie?.duration} phút
-              </div>
-              <div>
-                <span className="font-medium">Ngày khởi chiếu: </span>
-                {movie && (
-                  <>{new Date(movie.releaseDate).toLocaleDateString("en-UK")}</>
-                )}
-              </div>
-              <div>
-                <span className="font-medium"> Ngôn ngữ: </span>
-                {movie?.language}
-              </div>
-              <div>
-                <span className="font-medium"> Rated: </span>
-                {movie?.rated}
-              </div>
-            </div>
-          </div>
-          <div className="py-2">{movie?.description}</div>
-
-          <div className="flex items-center justify-center">
-            <button
-              className=" hover:text-sky-500"
-              onClick={() => {
-                window.open(movie?.trailer_url, "_blank");
-              }}
-            >
-              <div className="flex items-center justify-center">
-                <PlayCircleIcon className="w-10 h-10" />
-                <p className="font-semibold text-base ml-2">XEM TRAILER</p>
-              </div>
-            </button>
-            {type && (
-              <>
-                <p className="font-thin text-xl mx-5 mb-1">|</p>
-                <button
-                  className=" hover:text-sky-500"
-                  onClick={() => {
-                    window.scroll({
-                      top: 600,
-                      behavior: "smooth",
-                    });
-                  }}
-                >
-                  <div className="flex items-center justify-center">
-                    <ArrowDownCircleIcon className="w-10 h-10" />
-
-                    <p className="font-semibold text-base ml-2">MUA VÉ</p>
-                  </div>
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      </div>
+      )}
 
       {type && (
         <div className="sm:mx-12 mx-2">
@@ -369,6 +391,13 @@ export const MovieDetails = () => {
             </div>
           )}
         </div>
+      )}
+
+      {movie && isShowPopUp && (
+        <PopUpYoutube
+          link={movie.trailer_url}
+          setIsShowPopUp={setIsShowPopUp}
+        ></PopUpYoutube>
       )}
     </Layout>
   );

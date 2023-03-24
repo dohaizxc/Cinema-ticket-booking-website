@@ -101,7 +101,9 @@ export const Home = () => {
             font-bold lg:text-3xl md:text-2xl text-xs text-white drop-shadow-lg"
             >
               <div className="absolute top-0 sm:h-[400px] h-[300px] bg-gray-800 opacity-50 w-full"></div>
-              <p className="mt-2 z-10">KHÁM PHÁ THẾ GIỚI ĐIỆN ẢNH MA THUẬT</p>
+              <p className="mt-2 z-10">
+                KHÁM PHÁ THẾ GIỚI ĐIỆN ẢNH MA THUẬT
+              </p>
               <p className="mt-2 z-10">CÙNG TRẢI NGHIỆM ĐẶT VÉ DỄ DÀNG</p>
             </div>
           </SwiperSlide>
