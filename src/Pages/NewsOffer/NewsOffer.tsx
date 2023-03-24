@@ -44,7 +44,7 @@ export const NewsOffer = () => {
           <div className="flex flex-wrap justify-center lg:gap-y-10 gap-y-5 lg:gap-x-10 gap-x-5 mb-10">
             {newsOffers?.map((newsOffer: NewsOfferInterface) => {
               return (
-                <div className="md:w-60 sm:w-50 w-40">
+                <div className="md:w-60 sm:w-50 w-40 cursor-pointer">
                   <img
                     className="rounded transition ease-in-out delay-150 hover:scale-105 duration-300"
                     src={newsOffer.img}
@@ -52,6 +52,10 @@ export const NewsOffer = () => {
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null;
                       currentTarget.src = errImage;
+                    }}
+                    onClick={() => {
+                      scroll(0, 0);
+                      navigate(`/newsoffer/detail/${newsOffer.id}`);
                     }}
                   />
                   <h1

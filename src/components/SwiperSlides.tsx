@@ -45,12 +45,16 @@ export const SwiperSlides: React.FC<{
               <SwiperSlide key={newsOffer.id}>
                 <div>
                   <img
-                    className="sm:h-fit rounded transition ease-in-out delay-150 hover:scale-105 duration-300"
+                    className="sm:h-fit cursor-pointer rounded transition ease-in-out delay-150 hover:scale-105 duration-300"
                     src={newsOffer.img}
                     alt={newsOffer.name}
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null;
                       currentTarget.src = errImage;
+                    }}
+                    onClick={() => {
+                      scroll(0, 0);
+                      navigate(`/newsoffer/detail/${newsOffer.id}`);
                     }}
                   />
                   <h1
