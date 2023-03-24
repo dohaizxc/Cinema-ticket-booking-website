@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { Layout } from "../../components/Layout";
 import { useGet } from "../../api/get";
-import { NewsOffer } from "../../interface/Interface";
+import { NewsOffer as NewsOfferInterface } from "../../interface/Interface";
 import { useParams } from "react-router-dom";
 import errImage from "../../assets/img/news_detail_img_d1.jpg";
+import { NewsOffer } from "../../components/NewsOffer";
 
 export const NewsOfferDetails = () => {
-  const { fetchGet, result: newsOffer } = useGet<NewsOffer>();
+  const { fetchGet, result: newsOffer } = useGet<NewsOfferInterface>();
   const param = useParams();
   const id = param.id;
 
@@ -80,6 +81,7 @@ export const NewsOfferDetails = () => {
           </div>
         )}
       </div>
+      <NewsOffer />
     </Layout>
   );
 };

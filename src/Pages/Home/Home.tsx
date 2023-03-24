@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Layout } from "../../components/Layout";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Swiper as SwiperType, Autoplay, Pagination, Navigation } from "swiper";
+import { Swiper as SwiperType, Autoplay, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
 import { useGet } from "../../api/get";
-import { Movie, NewsOffer } from "../../interface/Interface";
+import { Movie } from "../../interface/Interface";
 import { useNavigate } from "react-router-dom";
 import {
   ChevronLeftIcon,
@@ -18,25 +17,7 @@ import { Tabs } from "../../components/Tabs";
 import star from "../../assets/star.gif";
 import { SwiperSlides } from "../../components/SwiperSlides";
 import { Spin } from "antd";
-
-const newofferBreakpoints = {
-  "0": {
-    slidesPerView: 2,
-    spaceBetween: 10,
-  },
-  "768": {
-    slidesPerView: 3,
-    spaceBetween: 10,
-  },
-  "820": {
-    slidesPerView: 4,
-    spaceBetween: 10,
-  },
-  "1280": {
-    slidesPerView: 4,
-    spaceBetween: 20,
-  },
-};
+import { NewsOffer } from "../../components/NewsOffer";
 
 const movieBreakpoints = {
   "0": {
@@ -81,31 +62,6 @@ export const Home = () => {
   useEffect(() => {
     fetchMovies("movie");
   }, []);
-
-  const [selectedTabNews, setSelectedTabNews] = useState<boolean>(true);
-
-  const {
-    fetchGet: fetchNews,
-    result: newsResults,
-    isLoading: isNewsLoading,
-  } = useGet<NewsOffer[]>();
-  const {
-    fetchGet: fetchOffer,
-    result: offerResults,
-    isLoading: isOfferLoading,
-  } = useGet<NewsOffer[]>();
-
-  useEffect(() => {
-    fetchOffer("newsoffer/offer");
-  }, []);
-
-  useEffect(() => {
-    if (selectedTabNews) {
-      fetchOffer("newsoffer/offer");
-    } else {
-      fetchNews("newsoffer/news");
-    }
-  }, [selectedTabNews]);
 
   return (
     <Layout>
@@ -237,58 +193,8 @@ export const Home = () => {
           ></img>
         </div>
       </div>
-
-      <div className="bg-white my-5 rounded lg:mx-12 sm:mx-5 mx-0 drop-shadow-md">
-        <Tabs
-          setSelectedTab={setSelectedTabNews}
-          tab1="ƯU ĐÃI"
-          tab2="TIN TỨC"
-        ></Tabs>
-        {selectedTabNews && (
-          <>
-            {isOfferLoading ? (
-              <div className="flex justify-center h-60">
-                <Spin size="large" tip="Loading..." />
-              </div>
-            ) : (
-              <SwiperSlides
-                newsOffers={offerResults}
-                breakpoints={newofferBreakpoints}
-              ></SwiperSlides>
-            )}
-          </>
-        )}
-
-        {!selectedTabNews && (
-          <>
-            {isNewsLoading ? (
-              <div className="flex justify-center h-60">
-                <Spin size="large" tip="Loading..." />
-              </div>
-            ) : (
-              <SwiperSlides
-                newsOffers={newsResults}
-                breakpoints={newofferBreakpoints}
-              ></SwiperSlides>
-            )}
-          </>
-        )}
-
-        <div className="flex justify-center items-center my-5 hover:text-sky-500">
-          <button
-            className="flex items-center justify-center text-base"
-            onClick={() => {
-              scroll(0, 0);
-              navigate(`/newsoffer`);
-            }}
-          >
-            XEM THÊM
-            <ArrowRightIcon className="inline-block h-5 w-5 ml-2" />
-          </button>
-        </div>
-      </div>
-
-      <FilmFormats></FilmFormats>
+      <NewsOffer />
+      <FilmFormats />
     </Layout>
   );
 };
