@@ -122,7 +122,11 @@ export const MovieDetails = () => {
 
   return (
     <Layout>
-      {movie && (
+      {!movie ? (
+        <div className="flex justify-center min-h-screen my-10">
+          <Spin size="large" tip="Loading..." />
+        </div>
+      ) : (
         <div
           className={`hidden sm:block relative bg-cover ${
             type ? "min-h-[400px]" : "min-h-screen"
@@ -216,7 +220,11 @@ export const MovieDetails = () => {
         </div>
       )}
 
-      {movie && (
+      {!movie ? (
+        <div className="flex justify-center min-h-screen my-10">
+          <Spin size="large" tip="Loading..." />
+        </div>
+      ) : (
         <div
           className={`block sm:hidden relative bg-cover ${
             type ? "min-h-[600px]" : "min-h-screen"
