@@ -206,11 +206,16 @@ export const Cinemas = () => {
                                 navigate(`/movie/${showtime.movie._id}`);
                               }}
                             >
-                              <span className="border border-red-500 rounded text-red-500 px-1 mx-1">
-                                {showtime.movie.rated.substring(0, 1) === "P"
-                                  ? showtime.movie.rated.substring(0, 1)
-                                  : showtime.movie.rated.substring(0, 3)}
-                              </span>
+                              {showtime.movie.rated.substring(0, 1) === "P" ? (
+                                <span className="border border-green-500 rounded text-green-500 px-1 mx-1">
+                                  {showtime.movie.rated.substring(0, 1)}
+                                </span>
+                              ) : (
+                                <span className="border border-red-500 rounded text-red-500 px-1 mx-1">
+                                  {showtime.movie.rated.substring(0, 3)}
+                                </span>
+                              )}
+
                               {showtime.movie.name}
                             </div>
                             <div className="font-medium sm:text-lg">
