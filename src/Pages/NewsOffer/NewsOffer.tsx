@@ -3,7 +3,7 @@ import { Layout } from "../../components/Layout";
 import { Tabs } from "../../components/Tabs";
 import { useGet } from "../../api/get";
 import { NewsOffer as NewsOfferInterface } from "../../interface/Interface";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import { Spin } from "antd";
 import errImage from "../../assets/img/news_img_n1.jpg";
