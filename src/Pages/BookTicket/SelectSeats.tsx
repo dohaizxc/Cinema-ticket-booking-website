@@ -16,8 +16,6 @@ export const SelectSeats: React.FC<{
     else return 0;
   };
 
-  // openNotification("info", "Vui lòng chọn ghế để tiếp tục")
-
   React.useEffect(() => {
     setListSelectedSeats(selectedSeats);
   }, [selectedSeats]);
@@ -41,6 +39,7 @@ export const SelectSeats: React.FC<{
       myRef.current.scrollLeft += 155;
     }
   }, []);
+  
   return (
     <div>
       <div className="overflow-x-scroll lg:overflow-x-hidden" ref={myRef}>

@@ -24,16 +24,16 @@ export const Seat: React.FC<{
   // };
   return (
     <div
-      className={`m-[2px] h-[30px] border border-solid text-center cursor-pointer
+      className={`m-[2px] h-[30px] border border-solid text-center
       ${seat.type === "Couple" ? "w-[92px]" : "w-[37px]"}
       ${
         status === 2
           ? "bg-[#B8C4BF] cursor-not-allowed"
           : status === 1
-          ? "bg-[#fc6060]"
+          ? "bg-[#fc6060] cursor-pointer"
           : seat.type === "Couple"
-          ? "bg-[#f7adf2]"
-          : "bg-[#82bdf5]"
+          ? "bg-[#f7adf2] cursor-pointer"
+          : "bg-[#82bdf5] cursor-pointer"
       }
       `}
       style={{
