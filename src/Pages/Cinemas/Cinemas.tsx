@@ -38,7 +38,7 @@ export const Cinemas = () => {
   );
 
   const [selectedDate, setSelectedDate] = React.useState<dayjs.Dayjs>(
-    dayjs("2022-12-10")
+    dayjs("2022-12-11")
   );
 
   const location = useLocation();

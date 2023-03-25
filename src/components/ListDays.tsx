@@ -18,7 +18,7 @@ export const ListDays: React.FC<{
   const [showPrevButton, setShowPrevButton] = useState(false);
   const [showNextButton, setShowNextButton] = useState(true);
 
-  const startDate = dayjs("2022-12-12");
+  const startDate = dayjs("2022-12-11");
   for (let i = 0; i < 14; i++) {
     listDates.push(startDate.add(i, "day"));
   }

@@ -33,7 +33,7 @@ export const MovieDetails = () => {
     isLoading,
   } = useGet<Showtime[]>();
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs>(
-    dayjs("2022-12-10")
+    dayjs("2022-12-11")
   );
 
   const nowDay = new Date("2022-12-20");
