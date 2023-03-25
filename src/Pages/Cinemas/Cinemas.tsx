@@ -72,6 +72,16 @@ export const Cinemas = () => {
   }, []);
 
   React.useEffect(() => {
+    if (provinceParams && cinemaParams) {
+      fetchShowtimes("showtime/cinema/" + cinemaParams + "/" + "2022-12-11");
+      setHidden(false);
+    }
+    if (provinceParams) {
+      fetchCinemas("province/" + provinceParams);
+    }
+  }, [provinceParams, cinemaParams]);
+
+  React.useEffect(() => {
     let listShowtimes: Showtime[] = [];
     showtimesResult?.map((showtime: Showtime) => {
       if (showtime.showtimes.length > 0) {
@@ -90,15 +100,18 @@ export const Cinemas = () => {
     setSelectedProvince(province);
     setSelectedCinema(undefined);
     fetchCinemas("province/" + province._id);
-    navigate("/cinema?province=" + province.name);
+    navigate("/cinema?province=" + province._id);
   };
 
   const handleCinemaClick = (cinema: Cinema) => {
     setSelectedCinema(cinema);
     setHidden(false);
-    navigate(
-      "/cinema?province=" + selectedProvince?.name + "&cinema=" + cinema.name
-    );
+    if (provinceParams)
+      navigate("/cinema?province=" + provinceParams + "&cinema=" + cinema._id);
+    else
+      navigate(
+        "/cinema?province=" + selectedProvince?._id + "&cinema=" + cinema._id
+      );
   };
 
   const handleLocationClick = (linkUrl: URL) => {
@@ -122,18 +135,20 @@ export const Cinemas = () => {
       <div className="sm:mx-12 mx-2 min-h-screen">
         <LineWithText>DANH SÁCH RẠP</LineWithText>
 
-        <div className="flex flex-wrap sm:gap-x-10 gap-x-5 gap-y-5 justify-center sm:py-5">
-          {provincesResult?.map((province: Province) => (
-            <div
-              key={province._id}
-              onClick={() => handleProvinceClick(province)}
-              className={`text-base lg:text-lg px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
-      ${provinceParams === province.name ? "bg-sky-500" : "bg-white"}`}
-            >
-              <div className="font-bold">{province.name}</div>
-            </div>
-          ))}
-        </div>
+        {provincesResult && (
+          <div className="flex flex-wrap sm:gap-x-10 gap-x-5 gap-y-5 justify-center sm:py-5">
+            {provincesResult.map((province: Province) => (
+              <div
+                key={province._id}
+                onClick={() => handleProvinceClick(province)}
+                className={`text-base lg:text-lg px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
+      ${provinceParams === province._id ? "bg-sky-500" : "bg-white"}`}
+              >
+                <div className="font-bold">{province.name}</div>
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="lg:p-6 pt-5 grid sm:grid-cols-4 grid-cols-2 gap-5 lg:gap-10 px-5 lg:px-24 text-black text-center">
           {cinemasResult &&
@@ -142,7 +157,7 @@ export const Cinemas = () => {
                 <div
                   onClick={() => handleCinemaClick(cinema)}
                   className={`font-bold lg:text-base px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded-t 
-${cinemaParams === cinema.name ? "bg-sky-500" : "bg-white"}`}
+                  ${cinemaParams === cinema._id ? "bg-sky-500" : "bg-white"}`}
                 >
                   {cinema.name}
                 </div>
