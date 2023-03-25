@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { seatMap } from "../../components/seats";
 import { Seat } from "../../components/Seat";
 import { Seat as SeatInterface } from "../../interface/Interface";
+import { openNotification } from "../../components/Notifications";
 export const SelectSeats: React.FC<{
   soldSeats: number[] | undefined;
   setListSelectedSeats: React.Dispatch<React.SetStateAction<SeatInterface[]>>;
@@ -15,15 +16,20 @@ export const SelectSeats: React.FC<{
     else return 0;
   };
 
+  // openNotification("info", "Vui lòng chọn ghế để tiếp tục")
+
   React.useEffect(() => {
     setListSelectedSeats(selectedSeats);
   }, [selectedSeats]);
 
   const pickSeat = (seat: SeatInterface) => {
     if (soldSeats?.includes(seat.id)) return;
+
     const index = selectedSeats.indexOf(seat);
     if (index === -1) {
-      setSelectedSeats([...selectedSeats, seat]);
+      if (selectedSeats.length > 8)
+        openNotification("info", "Bạn có thể chọn tối đa 8 ghế!");
+      else setSelectedSeats([...selectedSeats, seat]);
     } else {
       selectedSeats.splice(index, 1);
       setSelectedSeats([...selectedSeats]);

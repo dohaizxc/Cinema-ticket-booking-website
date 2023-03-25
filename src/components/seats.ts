@@ -11,7 +11,7 @@ for (let i = 1; i < 17; i++) {
     status: 0,
     type: "Single",
     code: "A" + i,
-    price: 50000,
+    price: 80000,
     id: count++,
   };
   seats.push(seat);
@@ -39,7 +39,7 @@ for (let i = 1; i < 9; i++) {
     status: 0,
     type: "Couple",
     code: "S" + i,
-    price: 150000,
+    price: 160000,
     id: count++,
   };
   seats.push(seat);

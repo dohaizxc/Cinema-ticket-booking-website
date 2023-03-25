@@ -292,7 +292,7 @@ export const Booking = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[150px]">
+            <div className="w-[150px] grid md:grid-rows-3 items-start md:pt-2">
               <p>
                 Phòng:{" "}
                 <span className="font-bold">
@@ -300,7 +300,7 @@ export const Booking = () => {
                 </span>
               </p>
 
-              <p>
+              <p className="row-span-2">
                 Ghế:{" "}
                 <span className="font-bold">
                   {listSelectedSeats?.map((seat: Seat) => {
@@ -314,7 +314,7 @@ export const Booking = () => {
                 </span>
               </p>
             </div>
-            <div className="grid grid-cols-2 w-[150px]">
+            <div className="grid grid-cols-2 items-center w-[150px]">
               <div>Vé phim:</div>
               <div className="font-bold">
                 {" "}

@@ -1,12 +1,13 @@
 import React from "react";
 import { Food } from "../interface/Interface";
+import { openNotification } from "./Notifications";
 
 export const Foods: React.FC<{
   food: Food;
   setSelectedFoods: React.Dispatch<React.SetStateAction<Food[]>>;
 }> = ({ food, setSelectedFoods }) => {
   const handleIncreaseQuantity = () => {
-    if (food.quantity < 9) {
+    if (food.quantity < 8) {
       setSelectedFoods((prevSetSelectedFoods: Food[]): Food[] => {
         const newFoods: Food[] = JSON.parse(
           JSON.stringify(prevSetSelectedFoods)
@@ -15,7 +16,7 @@ export const Foods: React.FC<{
         newFoods[index].quantity += 1;
         return newFoods;
       });
-    }
+    } else openNotification("info", "Bạn có thể mua tối đa 8 combo cùng loại!");
   };
 
   const handleDecreaseQuantity = () => {
@@ -54,7 +55,7 @@ export const Foods: React.FC<{
                   className="px-4 bg-sky-300 hover:bg-sky-700 hover:text-white rounded font-semibold py-2"
                   onClick={handleIncreaseQuantity}
                 >
-                  ADD
+                  THÊM
                 </button>
               </div>
             ) : (
