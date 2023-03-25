@@ -12,7 +12,7 @@ export const PopUpYoutube: React.FC<{
     >
       <div className="flex w-4/5 mx-auto items-start lg:mt-5 md:mt-20 mt-40">
         <iframe
-          className="w-full lg:h-[80vh] md:h-[60vh] h-[40vh] mt-10"
+          className="w-full lg:h-[80vh] md:h-[50vh] h-[40vh] mt-10"
           src={link}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
