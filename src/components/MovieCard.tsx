@@ -10,21 +10,25 @@ export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
   const navigate = useNavigate();
   const [movieInfo, setMovieInfo] = useState<boolean>(false);
   return (
-    <div className="min-[400px]:h-[375px] h-[325px] flex flex-col items-center">
+    <div className="min-[400px]:h-[360px] h-[325px] flex flex-col items-center">
       <div className="relative">
         <img
           src={movie.image}
           onMouseEnter={() => setMovieInfo(true)}
           onMouseLeave={() => setMovieInfo(false)}
-          className="min-[400px]:h-[300px] h-[250px] w-full rounded cursor-pointer relative"
+          className="min-[400px]:h-[300px] h-[250px] w-full rounded"
         />
-        {movieInfo && (
+        {true && (
           <div
-            className="absolute bottom-0 w-full"
+            className={`w-full absolute bottom-0 rounded-b bg-gray-800 bg-opacity-80 transition-all duration-250
+          ${movieInfo ? "h-32" : "h-0"}`}
             onMouseEnter={() => setMovieInfo(true)}
             onMouseLeave={() => setMovieInfo(false)}
           >
-            <div className="bg-gray-800 bg-opacity-80 rounded-b-lg px-5 py-2 text-white">
+            <div
+              className={`px-5 py-2 text-white
+                        ${movieInfo ? "h-32" : "h-0"}`}
+            >
               <div className="space-y-1">
                 <div className="flex items-center">
                   <ClockIcon className="mr-2 h-6 w-6 inline-block" />
@@ -36,7 +40,10 @@ export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
                     {new Date(movie.releaseDate).toLocaleDateString("en-UK")}
                   </p>
                 </div>
-                <div className="flex items-center justify-center">
+                <div
+                  className={`flex items-center justify-center
+                            ${movieInfo ? "block" : "hidden"}`}
+                >
                   <button
                     className="px-4 py-2 border border-transparent rounded-md font-semibold text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out mt-2"
                     onClick={() => {
@@ -53,7 +60,7 @@ export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
         )}
       </div>
       <div
-        className="line-clamp-2 cursor-pointer font-bold text-center my-2 hover:text-sky-500"
+        className="h-16 w-full line-clamp-2 cursor-pointer font-bold text-center py-2 hover:text-sky-500 z-10 bg-white"
         onClick={() => {
           scroll(0, 0);
           navigate(`/movie/${movie._id}`);
