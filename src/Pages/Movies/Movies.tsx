@@ -59,13 +59,13 @@ export const Movies = () => {
               <Spin size="large" tip="Loading..." />
             </div>
           ) : (
-            <div className="grid 2xl:grid-cols-6 lg:grid-cols-5 min-[840px]:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-x-5 gap-y-5">
+            <div className="grid 2xl:grid-cols-6 lg:grid-cols-5 min-[840px]:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:gap-x-8 gap-x-6 gap-y-5">
               {movies?.map((movie: Movie) => (
                 <div
                   key={movie._id}
                   className="sm:w-[192px] w-[170px] sm:h-[455px] h-[420px] relative"
                 >
-                  {movie.rated.substring(0, 1) === "P" ? (
+                  {/* {movie.rated.substring(0, 1) === "P" ? (
                     <p className="absolute top-2 left-2 bg-green-500 rounded-full font-semibold text-white py-1 px-[11px] z-10">
                       P
                     </p>
@@ -73,7 +73,40 @@ export const Movies = () => {
                     <p className="absolute top-2 left-2 bg-red-500 rounded-full font-semibold text-white p-1 z-10">
                       {movie.rated.substring(0, 3)}
                     </p>
-                  )}
+                  )} */}
+
+                  <p
+                    className={`absolute top-2 -left-4 w-[56px] h-[30px] text-center font-semibold text-white py-1 z-10
+                    ${
+                      movie.rated.substring(0, 1) === "P"
+                        ? "bg-green-600"
+                        : "bg-[#ed1c24]"
+                    }`}
+                  >
+                    {movie.rated.substring(0, 1) === "P" ? (
+                      <>P</>
+                    ) : (
+                      <>{movie.rated.substring(0, 3)}</>
+                    )}
+                  </p>
+
+                  <div
+                    className={`absolute top-[37px] -left-4 w-0 h-0 border-l-[16px] border-l-transparent border-t-[20px] 
+                    ${
+                      movie.rated.substring(0, 1) === "P"
+                        ? "border-t-green-800"
+                        : "border-t-[#a01419]"
+                    }`}
+                  />
+
+                  <div
+                    className={`absolute top-2 left-10 w-0 h-0 border-t-[30px] border-r-[20px] border-r-transparent z-10
+                  ${
+                    movie.rated.substring(0, 1) === "P"
+                      ? "border-t-green-600"
+                      : "border-t-[#ed1c24]"
+                  }`}
+                  />
 
                   <img
                     className="sm:w-[192px] sm:h-[276px] w-[170px] h-[240px] mx-auto cursor-pointer transition ease-in-out delay-150 hover:scale-105 duration-300 rounded"
