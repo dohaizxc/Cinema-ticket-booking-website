@@ -10,7 +10,7 @@ export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
   const navigate = useNavigate();
   const [movieInfo, setMovieInfo] = useState<boolean>(false);
   return (
-    <div className="min-[400px]:h-[360px] h-[325px] flex flex-col items-center">
+    <div className="min-[400px]:h-[360px] h-[305px] flex flex-col items-center">
       <div className="relative">
         <img
           src={movie.image}
