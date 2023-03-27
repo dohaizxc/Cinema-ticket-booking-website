@@ -293,7 +293,7 @@ export const Booking = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2">
+            <div className="md:flex grid grid-cols-2">
               <div className="w-[150px] grid md:grid-rows-3 items-start md:pt-2">
                 <p>
                   Phòng:{" "}
