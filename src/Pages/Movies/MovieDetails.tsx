@@ -16,12 +16,13 @@ import {
   ArrowDownCircleIcon,
   PlayCircleIcon,
   MapPinIcon,
+  PlusIcon,
+  MinusIcon,
 } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 import { openNotification } from "../../components/Notifications";
 import { ClockIcon, CalendarDaysIcon } from "@heroicons/react/24/outline";
 import { PopUpYoutube } from "../../components/PopUpYoutube";
-
 export const MovieDetails = () => {
   const navigate = useNavigate();
   const { fetchGet: fetchMovieDetails, result: movie } = useGet<Movie>();
@@ -119,6 +120,7 @@ export const MovieDetails = () => {
   };
 
   const [isShowPopUp, setIsShowPopUp] = useState<boolean>(false);
+  const [isMovieDetails, setIsMovieDetails] = useState<boolean>(false);
 
   return (
     <Layout>
@@ -136,56 +138,97 @@ export const MovieDetails = () => {
           }}
         >
           <div className="absolute inset-0 bg-gray-900 opacity-75 backdrop-filter backdrop-blur-sm"></div>
-          <div className="absolute inset-0 flex items-center justify-center text-white lg:px-24 px-10">
+          <div className="absolute inset-0 flex items-center text-white lg:px-20 px-10">
             <img
-              className="lg:w-[220px] lg:h-[320px] sm:w-[200px] sm:h-[300px] w-[150px] h-[215px] rounded"
+              className="w-[220px] h-[320px] rounded"
               src={movie.image}
             ></img>
-            <div className="pl-10">
-              <div className="flex items-center text-xl font-bold">
-                {movie.rated.substring(0, 1) === "P" ? (
-                  <span className="mt-1 border border-green-500 rounded text-green-500 px-2">
-                    P
-                  </span>
-                ) : (
-                  <span className="mt-1 border border-red-500 rounded text-red-500 px-1">
-                    {movie.rated.substring(0, 3)}
-                  </span>
-                )}
-                <p className="font-bold text-3xl py-2 ml-2"> {movie.name}</p>
-              </div>
-
-              <div className="flex space-x-5 py-2 text-xl font-medium">
-                <p> {movie.genre.join(", ")}</p>
-                <p className="font-thin text-xl mx-5 mb-1">-</p>
-                <div className="flex items-center">
-                  <ClockIcon className="mr-2 h-7 w-7 inline-block" />
-                  <p>{movie.duration} phút</p>
+            <div className="pl-10 relative h-[320px] w-full">
+              <div
+                className={`${
+                  isMovieDetails
+                    ? "translate-y-0 text-3xl"
+                    : "translate-y-32 text-4xl"
+                } transform absolute transition-all duration-500`}
+              >
+                <div className="flex items-center font-bold">
+                  {movie.rated.substring(0, 1) === "P" ? (
+                    <span className="text-xl mt-1 border border-green-500 rounded text-green-500 px-2">
+                      P
+                    </span>
+                  ) : (
+                    <span className="text-xl mt-1 border border-red-500 rounded text-red-500 px-1">
+                      {movie.rated.substring(0, 3)}
+                    </span>
+                  )}
+                  <p className="font-bold py-2 ml-2"> {movie.name}</p>
                 </div>
-                <p className="font-thin text-xl mx-5 mb-1">-</p>
-                <div className="flex items-center">
-                  <CalendarDaysIcon className="mr-2 h-7 w-7 inline-block" />
-                  <p>
-                    {new Date(movie.releaseDate).toLocaleDateString("en-UK")}
-                  </p>
+
+                <div className="flex space-x-5 py-2 text-xl font-medium">
+                  <p> {movie.genre.join(", ")}</p>
+                  <p className="font-thin text-xl mx-5 mb-1">-</p>
+                  <div className="flex items-center">
+                    <ClockIcon className="mr-2 h-7 w-7 inline-block" />
+                    <p>{movie.duration} phút</p>
+                  </div>
+                  <p className="font-thin text-xl mx-5 mb-1">-</p>
+                  <div className="flex items-center">
+                    <CalendarDaysIcon className="mr-2 h-7 w-7 inline-block" />
+                    <p>
+                      {new Date(movie.releaseDate).toLocaleDateString("en-UK")}
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <span className="font-medium">Đạo diễn: </span>
-                {movie.director}
+              <div
+                className={`${
+                  isMovieDetails
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-1/4 opacity-0"
+                } transform absolute top-24 w-full transition-all duration-500`}
+              >
+                <div>
+                  <span className="font-medium">Đạo diễn: </span>
+                  {movie.director}
+                </div>
+                <div>
+                  <span className="font-medium">Diễn viên: </span>
+                  {movie.actors}
+                </div>
+                <div>
+                  <span className="font-medium"> Ngôn ngữ: </span>
+                  {movie.language}
+                </div>
+                <div className="py-4">{movie?.description}</div>
               </div>
-              <div>
-                <span className="font-medium">Diễn viên: </span>
-                {movie.actors}
-              </div>
-              <div>
-                <span className="font-medium"> Ngôn ngữ: </span>
-                {movie.language}
-              </div>
-              <div className="py-4">{movie?.description}</div>
 
-              <div className="flex items-center justify-center">
+              <div className="absolute bottom-8 left-4 text-xl text-sky-500 font-semibold z-30">
+                <button
+                  className={`${
+                    isMovieDetails
+                      ? "translate-y-0 opacity-100"
+                      : "-translate-y-1/2 opacity-0"
+                  } flex items-center transform absolute left-5 w-36 transition-all duration-500`}
+                  onClick={() => setIsMovieDetails(!isMovieDetails)}
+                >
+                  Ẩn thông tin
+                  <MinusIcon className="h-5 w-5 ml-1" />
+                </button>
+                <button
+                  className={`${
+                    isMovieDetails
+                      ? "translate-y-1/2 opacity-0"
+                      : "translate-y-0 opacity-100"
+                  } flex items-center transform absolute left-5 w-44 transition-all duration-500`}
+                  onClick={() => setIsMovieDetails(!isMovieDetails)}
+                >
+                  Thêm thông tin
+                  <PlusIcon className="h-5 w-5 ml-1" />
+                </button>
+              </div>
+
+              <div className="absolute bottom-0 w-full flex items-center justify-center">
                 <button
                   className=" hover:text-sky-500"
                   onClick={() => setIsShowPopUp(!isShowPopUp)}
