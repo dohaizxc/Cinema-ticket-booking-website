@@ -147,7 +147,7 @@ export const Home = () => {
           </>
         )}
 
-        <div className="flex justify-center items-center mb-5 hover:text-sky-500 my-1">
+        <div className="flex justify-center items-center mb-5 hover:text-sky-500 mt-3">
           <button
             className="flex items-center justify-center text-base"
             onClick={() => {
