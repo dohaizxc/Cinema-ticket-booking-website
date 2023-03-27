@@ -14,7 +14,7 @@ export const LineWithText = (props: {
   return (
     <div className="flex justify-center items-center h-16">
       <div className="w-1/3 sm:w-1/4 lg:w-1/2 h-1 bg-gray-600"></div>
-      <div className="text-center sm:w-1/3 w-1/2">
+      <div className="text-center sm:w-1/3 w-7/12">
         <span className="font-bold text-lg sm:text-xl lg:text-2xl text-blue-900">
           {props.children}
         </span>

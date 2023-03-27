@@ -32,7 +32,7 @@ export const NewsOfferDetails = () => {
             {newsOffer && (
               <div>
                 <div className="py-6">
-                  <h2 className="lg:text-2xl md:text-xl text-base font-medium">
+                  <h2 className="lg:text-2xl md:text-xl text-base font-bold">
                     {newsOffer.name}
                   </h2>
                 </div>

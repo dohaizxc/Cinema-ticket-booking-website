@@ -44,9 +44,9 @@ export const NewsOffer = () => {
           <div className="flex flex-wrap justify-center lg:gap-y-10 gap-y-5 lg:gap-x-10 gap-x-5 mb-10">
             {newsOffers?.map((newsOffer: NewsOfferInterface) => {
               return (
-                <div className="md:w-60 sm:w-50 w-40 cursor-pointer">
+                <div key={newsOffer.id} className="md:w-60 sm:w-50 w-40">
                   <img
-                    className="rounded transition ease-in-out delay-150 hover:scale-105 duration-300"
+                    className="rounded transition ease-in-out delay-150 hover:scale-105 duration-300 cursor-pointer"
                     src={newsOffer.img}
                     alt={newsOffer.name}
                     onError={({ currentTarget }) => {

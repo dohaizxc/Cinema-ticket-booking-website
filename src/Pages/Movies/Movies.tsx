@@ -128,7 +128,7 @@ export const Movies = () => {
                   >
                     {movie.name}
                   </div>
-                  <div>
+                  <div className="line-clamp-2">
                     <span className="font-medium">Thể loại: </span>
                     {movie.genre.join(", ")}
                   </div>
@@ -142,7 +142,7 @@ export const Movies = () => {
                   </div>
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
                     <button
-                      className="px-4 py-2 border border-transparent rounded-md font-semibold text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out"
+                      className="sm:px-4 px-3 py-2 border border-transparent rounded-md font-semibold text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out"
                       onClick={() => {
                         scroll(0, 0);
                         navigate(`/movie/${movie._id}`);

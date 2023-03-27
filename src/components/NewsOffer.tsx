@@ -91,9 +91,9 @@ export const NewsOffer = () => {
         </>
       )}
 
-      <div className="flex justify-center items-center my-5 hover:text-sky-500">
+      <div className="flex justify-center items-center hover:text-sky-500">
         <button
-          className="flex items-center justify-center text-base"
+          className="flex items-center justify-center text-base my-5"
           onClick={() => {
             scroll(0, 0);
             navigate(`/newsoffer`);

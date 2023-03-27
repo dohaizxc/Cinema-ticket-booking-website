@@ -209,7 +209,7 @@ export const MovieDetails = () => {
                     isMovieDetails
                       ? "translate-y-0 opacity-100"
                       : "-translate-y-1/2 opacity-0"
-                  } flex items-center transform absolute left-5 w-36 transition-all duration-500`}
+                  } flex items-center transform absolute left-5 w-40 transition-all duration-500`}
                   onClick={() => setIsMovieDetails(!isMovieDetails)}
                 >
                   Ẩn thông tin
@@ -220,7 +220,7 @@ export const MovieDetails = () => {
                     isMovieDetails
                       ? "translate-y-1/2 opacity-0"
                       : "translate-y-0 opacity-100"
-                  } flex items-center transform absolute left-5 w-44 transition-all duration-500`}
+                  } flex items-center transform absolute left-5 w-48 transition-all duration-500`}
                   onClick={() => setIsMovieDetails(!isMovieDetails)}
                 >
                   Thêm thông tin

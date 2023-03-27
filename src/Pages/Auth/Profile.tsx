@@ -89,9 +89,9 @@ export const Profile = () => {
           </div>
           <div className="flex flex-col pb-10">
             <button
-              className={`font-medium border-b border-sky-300 text-base p-2 ${
+              className={`font-medium border-b border-sky-300 text-base hover:text-sky-500 p-2 ${
                 tab === "userinfo"
-                  ? "bg-sky-600 text-white rounded"
+                  ? "bg-sky-600 text-white rounded hover:text-white"
                   : "bg-sky-100"
               }`}
               onClick={() => {
@@ -101,9 +101,9 @@ export const Profile = () => {
               Thông tin tài khoản
             </button>
             <button
-              className={`font-medium border-b border-sky-300 text-base p-2 ${
+              className={`font-medium border-b border-sky-300 text-base p-2 hover:text-sky-500 ${
                 tab === "changepassword"
-                  ? "bg-sky-600 text-white rounded"
+                  ? "bg-sky-600 text-white rounded hover:text-white"
                   : "bg-sky-100"
               }`}
               onClick={() => {
@@ -113,9 +113,9 @@ export const Profile = () => {
               Đổi mật khẩu
             </button>
             <button
-              className={`font-medium border-b border-sky-300 text-base p-2 ${
+              className={`font-medium border-b border-sky-300 text-base p-2 hover:text-sky-500 ${
                 tab === "bookinghistory"
-                  ? "bg-sky-600 text-white rounded"
+                  ? "bg-sky-600 text-white rounded hover:text-white"
                   : "bg-sky-100"
               }`}
               onClick={() => {
@@ -125,9 +125,9 @@ export const Profile = () => {
               Lịch sử đặt vé
             </button>
             <button
-              className={`font-medium border-b border-sky-300 text-base p-2 ${
+              className={`font-medium border-b border-sky-300 text-base p-2 hover:text-sky-500 ${
                 tab === "membership"
-                  ? "bg-sky-600 text-white rounded"
+                  ? "bg-sky-600 text-white rounded hover:text-white"
                   : "bg-sky-100"
               }`}
               onClick={() => {
@@ -137,7 +137,7 @@ export const Profile = () => {
               Chính sách thành viên
             </button>
             <button
-              className="font-medium text-base bg-sky-100 p-2"
+              className="font-medium text-base bg-sky-100 p-2 hover:text-sky-500"
               onClick={handleLogout}
             >
               Đăng xuất

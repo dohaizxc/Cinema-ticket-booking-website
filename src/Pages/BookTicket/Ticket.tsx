@@ -28,7 +28,7 @@ export const Ticket = () => {
           <h1 className="font-bold text-lg bg-sky-300 py-2 w-full text-center rounded">
             THÔNG TIN VÉ
           </h1>
-          <div className="flex lg:flex-row flex-col lg:justify-between lg:space-x-16 bg-sky-100 py-5 sm:px-10 px-6 lg:h-[400px] w-full">
+          <div className="flex lg:flex-row flex-col lg:justify-between lg:space-x-16 bg-sky-100 py-5 sm:px-10 px-8 lg:h-[400px] w-full">
             <img
               src={ticket.movieImage}
               className="rounded sm:w-[240px] sm:h-[350px] h-[300px] w-fit mt-2 mx-auto"
@@ -116,7 +116,10 @@ export const Ticket = () => {
                 </div>
 
                 <div className="w-full flex justify-between">
-                  <span className="sm:mr-10">PHƯƠNG THỨC THANH TOÁN:</span>
+                  <span className="sm:mr-10 hidden sm:block">
+                    PHƯƠNG THỨC THANH TOÁN:
+                  </span>
+                  <span className="sm:hidden">THANH TOÁN:</span>
                   <span className="font-normal">{ticket.paymentMethod}</span>
                 </div>
               </div>

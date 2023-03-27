@@ -25,7 +25,7 @@ export const Tabs: React.FC<{
 
   return (
     <div className="flex justify-center items-center">
-      <div className="my-8 lg:w-1/2 sm:w-3/5 w-4/5">
+      <div className="my-8 lg:w-1/2 sm:w-3/5 w-11/12">
         <Tab.Group>
           <Tab.List className="flex space-x-1 rounded-full bg-sky-900/20 p-1">
             {tabs.map((tab) => (
@@ -34,11 +34,11 @@ export const Tabs: React.FC<{
                 onClick={() => setSelectedTab(tab.value)}
                 className={({ selected }) =>
                   classNames(
-                    "w-full rounded-full py-2.5 sm:text-base text-sm font-semibold leading-5 ",
+                    "w-full rounded-full py-2.5 sm:text-base text-sm font-bold leading-5 ",
                     "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
                     selected
                       ? "bg-white shadow text-sky-700"
-                      : "text-gray-100 hover:bg-white/[0.12] hover:text-white"
+                      : "text-gray-500 hover:bg-white/[0.12] hover:text-sky-700"
                   )
                 }
               >

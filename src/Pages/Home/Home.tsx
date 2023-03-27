@@ -98,12 +98,10 @@ export const Home = () => {
           <SwiperSlide>
             <div
               className="flex relative flex-col items-center justify-center sm:h-[400px] h-[300px] bg-[url('https://wallpapercave.com/wp/wp11027148.png')] bg-cover bg-center
-            font-bold lg:text-3xl md:text-2xl text-xs text-white drop-shadow-lg"
+              font-montserrat font-bold lg:text-4xl md:text-2xl text-xs text-white drop-shadow-lg"
             >
               <div className="absolute top-0 sm:h-[400px] h-[300px] bg-gray-800 opacity-50 w-full"></div>
-              <p className="mt-2 z-10">
-                KHÁM PHÁ THẾ GIỚI ĐIỆN ẢNH MA THUẬT
-              </p>
+              <p className="mt-2 z-10">KHÁM PHÁ THẾ GIỚI ĐIỆN ẢNH MA THUẬT</p>
               <p className="mt-2 z-10">CÙNG TRẢI NGHIỆM ĐẶT VÉ DỄ DÀNG</p>
             </div>
           </SwiperSlide>
@@ -147,9 +145,9 @@ export const Home = () => {
           </>
         )}
 
-        <div className="flex justify-center items-center mb-5 hover:text-sky-500 mt-3">
+        <div className="flex justify-center items-center hover:text-sky-500">
           <button
-            className="flex items-center justify-center text-base"
+            className="flex items-center justify-center text-base my-5"
             onClick={() => {
               scroll(0, 0);
               navigate(`/movie`);

@@ -51,7 +51,7 @@ export const Header = () => {
         setConfirm={setConfirm}
         title="Bạn có muốn đăng xuất?"
       ></Modal> */}
-      <nav className="flex w-full items-center justify-between p-3 sm:px-4 lg:px-10">
+      <nav className="flex w-full items-center justify-between p-3 sm:px-4 lg:px-10 font-montserrat">
         <div className="flex sm:flex-1">
           <Link
             to="/"
@@ -70,7 +70,7 @@ export const Header = () => {
             <Bars3Icon className="h-6 w-6" />
           </button>
         </div>
-        <div className="hidden sm:flex sm:gap-x-12 font-montserrat font-bold">
+        <div className="hidden sm:flex sm:gap-x-12  font-semibold text-base">
           <Link
             to="/movie"
             className={`leading-6 ${
@@ -81,7 +81,7 @@ export const Header = () => {
           </Link>
           <Link
             to="/cinema"
-            className={`text-sm font-semibold leading-6 ${
+            className={` leading-6 ${
               keyMenu === "cinema" ? "text-cyan-600" : ""
             } hover:text-cyan-500`}
           >
@@ -89,7 +89,7 @@ export const Header = () => {
           </Link>
           <Link
             to="/newsoffer"
-            className={`text-sm font-semibold leading-6 ${
+            className={` leading-6 ${
               keyMenu === "newsoffer" ? "text-cyan-600" : ""
             } hover:text-cyan-500`}
           >
@@ -98,7 +98,7 @@ export const Header = () => {
           {user && (
             <Link
               to="/profile?tab=userinfo"
-              className={`text-sm font-semibold leading-6 ${
+              className={` leading-6 ${
                 keyMenu === "profile" ? "text-cyan-600" : ""
               } hover:text-cyan-500`}
             >
@@ -106,11 +106,11 @@ export const Header = () => {
             </Link>
           )}
         </div>
-        <div className="hidden sm:flex sm:flex-1 sm:justify-end">
+        <div className="hidden sm:flex sm:flex-1 sm:justify-end  font-semibold text-base">
           {user ? (
             <button
               onClick={handleLogout}
-              className={`text-sm font-semibold leading-6 ${
+              className={`leading-6 ${
                 keyMenu === "login" ? "text-cyan-600" : ""
               } hover:text-cyan-500`}
             >
@@ -119,7 +119,7 @@ export const Header = () => {
           ) : (
             <Link
               to="/login"
-              className={`text-sm font-semibold leading-6 ${
+              className={`leading-6 ${
                 keyMenu === "login" ? "text-cyan-600" : ""
               } hover:text-cyan-500`}
             >
@@ -135,7 +135,7 @@ export const Header = () => {
         onClose={setMobileMenuOpen}
       >
         <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full font-montserrat overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link
               to="/"

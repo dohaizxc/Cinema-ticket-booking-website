@@ -21,7 +21,7 @@ export const Modal: React.FC<{
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-30"
+        className="relative z-30 font-montserrat"
         initialFocus={cancelButtonRef}
         onClose={setOpenModal}
       >

@@ -10,7 +10,7 @@ import {
 export const Footer = () => {
   return (
     <Layout.Footer
-      className="text-base text-center"
+      className="text-base text-center font-montserrat"
       style={{ backgroundColor: "#0c468a", color: "white" }}
     >
       <div className="lg:mx-20 mx-0 flex md:flex-row flex-col justify-between md:space-y-0 space-y-5">
@@ -43,7 +43,10 @@ export const Footer = () => {
 
       <div className="text-center mt-5">
         <h3 className="text-white">CÔNG TY TNHH DOHAIZXC VIETNAM</h3>
-        <p>COPYRIGHT 2023 DOHAIZXC. All RIGHTS RESERVED.</p>
+        <p>
+          COPYRIGHT 2023 DOHAIZXC.{" "}
+          <span className="sm:inline-block block"> All RIGHTS RESERVED.</span>
+        </p>
       </div>
     </Layout.Footer>
   );
