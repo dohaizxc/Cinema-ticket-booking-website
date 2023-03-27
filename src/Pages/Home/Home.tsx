@@ -161,7 +161,7 @@ export const Home = () => {
 
       <div className="grid sm:grid-cols-2 bg-white py-5 sm:px-12 px-5 lg:mx-12 mx-5 my-5 rounded drop-shadow-md">
         <div className="relative">
-          <p className="lg:text-3xl sm:text-xl text-base font-semibold">
+          <p className="lg:text-2xl sm:text-xl text-base font-semibold">
             Chương trình khách hàng thân thiết với nhiều ưu đãi độc quyền
           </p>
           <div className="flex space-x-5 my-4 sm:text-sm text-xs">
