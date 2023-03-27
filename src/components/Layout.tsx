@@ -16,9 +16,9 @@ export const Layout = (props: {
 }) => {
   return (
     <>
-      <AntLayout>
+      <AntLayout className="font-montserrat">
         <Header></Header>
-        <div className="font-montserrat">{props.children}</div>
+        <>{props.children}</>
         <Footer></Footer>
       </AntLayout>
     </>
