@@ -244,14 +244,14 @@ export const Booking = () => {
             </button>
           </div>
 
-          <div className="relative md:h-auto h-[420px] flex md:flex-row md:space-x-5 space-x-0 flex-col md:space-y-0 space-y-5  lg:px-16 px-10 md:mx-20 mx-2 md:py-2 pt-5 bg-gradient-to-r from-sky-300 to-indigo-300 rounded">
+          <div className="relative md:h-auto h-[360px] flex md:flex-row md:space-x-5 space-x-0 flex-col md:space-y-0 space-y-5  lg:px-10 px-10 md:mx-20 mx-2 md:py-2 pt-5 bg-gradient-to-r from-sky-300 to-indigo-300 rounded">
             <div className="flex justify-center items-center space-x-5">
               <img
                 src={showtimeResult?.showtime.movieId.image}
                 className="w-[90px] h-[120px] rounded"
               ></img>
               <div className="flex flex-col justify-between space-y-1 lg:w-[300px] md:w-[200px] ">
-                <p className="font-bold">
+                <p className="font-bold line-clamp-2">
                   {showtimeResult?.showtime.movieId.rated.substring(0, 1) ===
                   "P" ? (
                     <span className="border border-green-600 rounded text-green-600 px-1 mr-1">
@@ -292,51 +292,54 @@ export const Booking = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[150px] grid md:grid-rows-3 items-start md:pt-2">
-              <p>
-                Phòng:{" "}
-                <span className="font-bold">
-                  {showtimeResult?.showtime.roomId.name}
-                </span>
-              </p>
 
-              <p className="row-span-2">
-                Ghế:{" "}
-                <span className="font-bold">
-                  {listSelectedSeats?.map((seat: Seat) => {
-                    if (
-                      listSelectedSeats[listSelectedSeats.length - 1].id ==
-                      seat.id
-                    )
-                      return <span key={seat.code}>{seat.code}</span>;
-                    else return <span key={seat.code}>{seat.code}, </span>;
+            <div className="grid grid-cols-2">
+              <div className="w-[150px] grid md:grid-rows-3 items-start md:pt-2">
+                <p>
+                  Phòng:{" "}
+                  <span className="font-bold">
+                    {showtimeResult?.showtime.roomId.name}
+                  </span>
+                </p>
+
+                <p className="row-span-2">
+                  Ghế:{" "}
+                  <span className="font-bold">
+                    {listSelectedSeats?.map((seat: Seat) => {
+                      if (
+                        listSelectedSeats[listSelectedSeats.length - 1].id ==
+                        seat.id
+                      )
+                        return <span key={seat.code}>{seat.code}</span>;
+                      else return <span key={seat.code}>{seat.code}, </span>;
+                    })}
+                  </span>
+                </p>
+              </div>
+              <div className="grid grid-cols-2 items-center md:w-[200px] w-[160px]">
+                <div>Vé phim:</div>
+                <div className="font-bold">
+                  {" "}
+                  {seatPrice.toLocaleString("vi", {
+                    style: "currency",
+                    currency: "VND",
                   })}
-                </span>
-              </p>
-            </div>
-            <div className="grid grid-cols-2 items-center w-[150px]">
-              <div>Vé phim:</div>
-              <div className="font-bold">
-                {" "}
-                {seatPrice.toLocaleString("vi", {
-                  style: "currency",
-                  currency: "VND",
-                })}
-              </div>
-              <div>Combo:</div>
-              <div className="font-bold">
-                {foodPrice.toLocaleString("vi", {
-                  style: "currency",
-                  currency: "VND",
-                })}
-              </div>
-              <div>Tổng:</div>
-              <div className="font-bold text-xl">
-                {" "}
-                {totalPrice.toLocaleString("vi", {
-                  style: "currency",
-                  currency: "VND",
-                })}
+                </div>
+                <div>Combo:</div>
+                <div className="font-bold">
+                  {foodPrice.toLocaleString("vi", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </div>
+                <div>Tổng:</div>
+                <div className="font-bold text-xl">
+                  {" "}
+                  {totalPrice.toLocaleString("vi", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </div>
               </div>
             </div>
           </div>
