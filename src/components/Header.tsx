@@ -106,7 +106,7 @@ export const Header = () => {
             </Link>
           )}
         </div>
-        <div className="hidden sm:flex sm:flex-1 sm:justify-end  font-semibold text-base">
+        <div className="hidden sm:flex sm:flex-1 sm:justify-end font-medium text-base">
           {user ? (
             <button
               onClick={handleLogout}
