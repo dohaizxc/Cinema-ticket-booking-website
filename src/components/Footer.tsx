@@ -35,15 +35,15 @@ export const Footer = () => {
 
         <div>
           <h3 className="font-medium text-lg mb-2">CHĂM SÓC KHÁCH HÀNG</h3>
-          <p>Hotline: 1900 2022</p>
+          <p>Hotline: 2023 2023</p>
           <p>Giờ làm việc: 8:00 - 22:00</p>
-          <p>Email hỗ trợ: hoidap@uitcinema.vn</p>
+          <p>Email hỗ trợ: dohaizxc@uitcinema.vn</p>
         </div>
       </div>
 
       <div className="text-center mt-5">
-        <h3 className="text-white">CÔNG TY TNHH UIT CINEMA VIETNAM</h3>
-        <p>COPYRIGHT 2022 UIT CINEMA. All RIGHTS RESERVED.</p>
+        <h3 className="text-white">CÔNG TY TNHH DOHAIZXC VIETNAM</h3>
+        <p>COPYRIGHT 2023 DOHAIZXC. All RIGHTS RESERVED.</p>
       </div>
     </Layout.Footer>
   );
