@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         source: ["Source Sans Pro", "sans-serif"],
-        anton: ["Tilt Warp", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
       },
     },
   },
