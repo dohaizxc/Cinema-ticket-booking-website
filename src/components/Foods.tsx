@@ -39,7 +39,7 @@ export const Foods: React.FC<{
         <div className="w-full bg-white rounded-b-lg">
           <div className="font-bold text-center text-lg">{food.title}</div>
           {food.contents.map((content: string) => (
-            <div className="text-center h-10">{content}</div>
+            <div className="text-center h-10 sm:px-2">{content}</div>
           ))}
 
           <div className="flex items-center justify-between mx-5 my-2">
