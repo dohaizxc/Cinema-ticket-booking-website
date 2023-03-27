@@ -70,14 +70,14 @@ export const Header = () => {
             <Bars3Icon className="h-6 w-6" />
           </button>
         </div>
-        <div className="hidden sm:flex sm:gap-x-12">
+        <div className="hidden sm:flex sm:gap-x-12 font-montserrat font-bold">
           <Link
             to="/movie"
-            className={`text-sm font-semibold leading-6 ${
+            className={`leading-6 ${
               keyMenu === "movie" ? "text-cyan-600" : ""
             } hover:text-cyan-500`}
           >
-            PHIM
+            Phim
           </Link>
           <Link
             to="/cinema"
@@ -85,7 +85,7 @@ export const Header = () => {
               keyMenu === "cinema" ? "text-cyan-600" : ""
             } hover:text-cyan-500`}
           >
-            RẠP
+            Rạp
           </Link>
           <Link
             to="/newsoffer"
@@ -93,7 +93,7 @@ export const Header = () => {
               keyMenu === "newsoffer" ? "text-cyan-600" : ""
             } hover:text-cyan-500`}
           >
-            ƯU ĐÃI
+            Ưu đãi
           </Link>
           {user && (
             <Link
@@ -102,7 +102,7 @@ export const Header = () => {
                 keyMenu === "profile" ? "text-cyan-600" : ""
               } hover:text-cyan-500`}
             >
-              TÀI KHOẢN
+              Tài khoản
             </Link>
           )}
         </div>
