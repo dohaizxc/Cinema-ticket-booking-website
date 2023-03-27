@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout } from "../../components/Layout";
 import { UserOutlined } from "@ant-design/icons";
 import { User } from "../../interface/Interface";
@@ -10,6 +10,7 @@ import { BookingHistory } from "./BookingHistory";
 import { Membership } from "./Membership";
 import { useLocation, useNavigate } from "react-router-dom";
 import { openNotification } from "../../components/Notifications";
+import { Modal } from "../../components/Modal/Modal";
 
 export const Profile = () => {
   const navigate = useNavigate();
@@ -27,13 +28,6 @@ export const Profile = () => {
     }
   }, []);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    openNotification("success", "Đăng xuất thành công");
-    scroll(0, 0);
-    navigate("/login");
-  };
-
   React.useEffect(() => {
     const object = localStorage.getItem("user");
     if (!object) {
@@ -42,8 +36,30 @@ export const Profile = () => {
     }
   }, []);
 
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [confirm, setConfirm] = useState<boolean>(false);
+
+  const handleLogout = () => {
+    setOpenModal(true);
+  };
+
+  React.useEffect(() => {
+    if (confirm) {
+      localStorage.clear();
+      openNotification("success", "Đăng xuất thành công");
+      scroll(0, 0);
+      navigate("/login");
+    }
+  }, [confirm]);
+
   return (
     <Layout>
+      <Modal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        setConfirm={setConfirm}
+        title="Bạn có muốn đăng xuất?"
+      ></Modal>
       <div className="flex sm:flex-row flex-col sm:space-x-10 space-x-0 sm:space-y-0 space-y-5 lg:px-20 px-5 my-5">
         <div className="sm:w-1/3 w-full bg-white rounded drop-shadow-md sm:sticky sm:h-screen sm:top-0">
           <div className="rounded bg-gradient-to-r from-sky-300 to-indigo-300 pb-4">
