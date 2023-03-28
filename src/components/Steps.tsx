@@ -20,7 +20,7 @@ export const Steps: React.FC<{ currentStep: number }> = ({ currentStep }) => {
         <div
           key={step.id}
           className={`flex items-center ${
-            currentStep === step.id ? "text-sky-500 font-semibold " : ""
+            currentStep === step.id ? "text-sky-500 font-semibold" : ""
           }`}
         >
           <span className="flex items-center">
@@ -43,7 +43,7 @@ export const Steps: React.FC<{ currentStep: number }> = ({ currentStep }) => {
                 </span>
               </div>
             ) : (
-              <span className="sm:h-8 sm:w-8 h-6 w-6 py-0.5 bg-gray-300 rounded-full sm:mr-2 mr-1">
+              <span className="font-medium sm:h-8 sm:py-1 py-0.5 sm:w-8 h-6 w-6 bg-gray-300 rounded-full sm:mr-2 mr-1">
                 {step.id}
               </span>
             )}
