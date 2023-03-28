@@ -145,19 +145,19 @@ export const MovieDetails = () => {
       ) : (
         <div
           className={`hidden sm:block relative bg-cover ${
-            type ? "min-h-[400px]" : "min-h-screen"
+            type ? "min-h-[420px]" : "min-h-screen"
           }`}
           style={{
             backgroundImage: `url(${movie.image})`,
           }}
         >
           <div className="absolute inset-0 bg-gray-900 opacity-75 backdrop-filter backdrop-blur-sm"></div>
-          <div className="absolute inset-0 flex items-center text-white lg:px-20 px-10">
+          <div className="absolute inset-0 flex items-center text-white lg:px-12 px-10">
             <img
-              className="w-[220px] h-[320px] rounded"
+              className="w-[220px] h-[340px] rounded"
               src={movie.image}
             ></img>
-            <div className="pl-10 relative h-[320px] w-full">
+            <div className="pl-10 relative h-[340px] w-full">
               <div
                 className={`${
                   isMovieDetails
@@ -175,7 +175,7 @@ export const MovieDetails = () => {
                       {movie.rated.substring(0, 3)}
                     </span>
                   )}
-                  <p className="font-bold py-2 ml-2"> {movie.name}</p>
+                  <p className="font-bold py-2 ml-2 -mr-2"> {movie.name}</p>
                 </div>
 
                 <div className="flex space-x-5 py-2 text-xl font-medium">
@@ -200,7 +200,7 @@ export const MovieDetails = () => {
                   isMovieDetails
                     ? "translate-y-0 opacity-100"
                     : "translate-y-1/4 opacity-0"
-                } transform absolute top-24 w-full transition-all duration-500`}
+                } transform absolute top-24 transition-all duration-500`}
               >
                 <div>
                   <span className="font-medium">Đạo diễn: </span>
