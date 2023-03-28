@@ -122,6 +122,20 @@ export const MovieDetails = () => {
   const [isShowPopUp, setIsShowPopUp] = useState<boolean>(false);
   const [isMovieDetails, setIsMovieDetails] = useState<boolean>(false);
 
+  const formattedTime = (time: string): string => {
+    const [hourString, minuteString] = time.split(":");
+    const hour = parseInt(hourString);
+    const minute = parseInt(minuteString);
+    const date = new Date();
+    date.setHours(hour);
+    date.setMinutes(minute);
+    return date.toLocaleTimeString("en-US", {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <Layout>
       {!movie ? (
@@ -397,7 +411,7 @@ export const MovieDetails = () => {
                 <div className="lg:mx-10">
                   {showtimes?.map((showtime: Showtime) => (
                     <div key={showtime.cinema._id}>
-                      <div className="flex sm:flex-row flex-col sm:items-center sm:ml-10 ml-5">
+                      <div className="flex sm:flex-row flex-col sm:items-center sm:pl-10 pl-5">
                         <div className="sm:text-xl text-base font-bold sm:py-4 pb-4 sm:w-2/5 w-full flex items-center">
                           <button
                             onClick={() => {
@@ -412,18 +426,18 @@ export const MovieDetails = () => {
                           {showtime.cinema.name}
                         </div>
 
-                        <div className="font-medium sm:text-lg">
+                        <div className="font-medium sm:text-lg sm:w-3/5 w-full">
                           <div className="flex flex-wrap sm:gap-x-6 gap-x-3 gap-y-4">
                             {showtime.showtimes?.map(
                               (showtimeDetails: ShowtimeDetails) => (
                                 <button
                                   key={showtimeDetails._id}
-                                  className="sm:w-16 w-12 px-1 bg-white border-sky-700 border-2 hover:bg-sky-500 rounded"
+                                  className="lg:w-20 lg:py-[6px] sm:w-16 w-12 px-1 bg-white border-sky-700 border-2 hover:bg-sky-500 rounded"
                                   onClick={() =>
                                     handleShowtimeClick(showtimeDetails._id)
                                   }
                                 >
-                                  {showtimeDetails.time}
+                                  {formattedTime(showtimeDetails.time)}
                                 </button>
                               )
                             )}

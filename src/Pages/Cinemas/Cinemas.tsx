@@ -130,6 +130,20 @@ export const Cinemas = () => {
     }
   };
 
+  const formattedTime = (time: string): string => {
+    const [hourString, minuteString] = time.split(":");
+    const hour = parseInt(hourString);
+    const minute = parseInt(minuteString);
+    const date = new Date();
+    date.setHours(hour);
+    date.setMinutes(minute);
+    return date.toLocaleTimeString("en-US", {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <Layout>
       <div className="sm:mx-12 mx-2 min-h-screen">
@@ -150,18 +164,18 @@ export const Cinemas = () => {
           </div>
         )}
 
-        <div className="lg:p-6 pt-5 grid sm:grid-cols-4 grid-cols-2 gap-5 lg:gap-10 px-5 lg:px-24 text-black text-center">
+        <div className="lg:p-6 pt-5 grid sm:grid-cols-4 grid-cols-2 gap-5 lg:gap-10 px-2 lg:px-12 text-black text-center">
           {cinemasResult &&
             cinemasResult.map((cinema: Cinema) => (
               <div key={cinema._id}>
-                <div
+                <button
                   onClick={() => handleCinemaClick(cinema)}
-                  className={`font-bold lg:text-base px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded-t 
+                  className={`font-bold lg:text-base w-full h-16 border-sky-700 border-[2px] hover:bg-sky-500 rounded-t 
                   ${cinemaParams === cinema._id ? "bg-sky-500" : "bg-white"}`}
                 >
                   {cinema.name}
-                </div>
-                <p className="sm:block hidden bg-white border-sky-700 border-x-[2px] border-b-[2px] p-2">
+                </button>
+                <p className="sm:block hidden xl:h-20 lg:h-24 md:h-auto bg-white border-sky-700 border-x-[2px] border-b-[2px] px-2 py-2">
                   {cinema.address}
                 </p>
                 <button
@@ -190,15 +204,15 @@ export const Cinemas = () => {
                     {showtimes?.map((showtime: Showtime) => (
                       <div
                         key={showtime.movie._id}
-                        className="lg:mx-32 my-5 mx-2"
+                        className="lg:mx-16 my-5 mx-2"
                       >
                         <div className="flex">
                           <img
                             src={showtime.movie.image}
                             alt={showtime.movie.name}
-                            className="rounded lg:h-[300px] lg:w-[200px] h-[150px] w-[100px]"
+                            className="rounded lg:h-[280px] lg:w-[190px] h-[150px] w-[100px]"
                           ></img>
-                          <div className="lg:px-10 pl-5">
+                          <div className="lg:pl-12 pl-6">
                             <div
                               className="font-bold sm:text-xl mb-4 cursor-pointer hover:text-sky-500"
                               onClick={() => {
@@ -219,17 +233,17 @@ export const Cinemas = () => {
                               {showtime.movie.name}
                             </div>
                             <div className="font-medium sm:text-lg">
-                              <div className="flex flex-wrap sm:gap-x-6 gap-x-3 gap-y-3">
+                              <div className="flex flex-wrap sm:gap-x-6 sm:gap-y-5 gap-x-3 gap-y-3">
                                 {showtime.showtimes?.map(
                                   (showtimeDetails: ShowtimeDetails) => (
                                     <button
                                       key={showtimeDetails._id}
-                                      className="sm:w-16 w-12 p-1 bg-white border-sky-700 border-2 hover:bg-sky-500 rounded"
+                                      className="lg:w-20 lg:py-[6px] sm:w-16 w-12 p-1 bg-white border-sky-700 border-2 hover:bg-sky-500 rounded"
                                       onClick={() =>
                                         handleShowtimeClick(showtimeDetails._id)
                                       }
                                     >
-                                      {showtimeDetails.time}
+                                      {formattedTime(showtimeDetails.time)}
                                     </button>
                                   )
                                 )}
