@@ -62,7 +62,7 @@ export const LogIn = () => {
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
-              className="lg:w-2/3 md:w-4/5 w-2/3"
+              className="lg:w-2/3 md:w-4/5 w-3/4"
             >
               <Form.Item
                 name="email"
@@ -93,7 +93,7 @@ export const LogIn = () => {
 
               <Form.Item>
                 <button
-                  className="w-full px-4 py-2 border border-transparent rounded-md font-semibol
+                  className="w-full px-4 py-2 border border-transparent rounded-md font-semibold
                  text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out"
                 >
                   ĐĂNG NHẬP
@@ -101,7 +101,7 @@ export const LogIn = () => {
               </Form.Item>
             </Form>
 
-            <div className="flex justify-between w-2/3 mb-3 mt-[-10px]">
+            <div className="flex justify-between w-3/4 mb-3 mt-[-10px]">
               <div className="flex items-center">
                 <input
                   type="checkbox"

@@ -219,7 +219,7 @@ export const SignUp = () => {
 
               <Form.Item>
                 <button
-                  className="w-full px-4 py-2 border border-transparent rounded-md font-semibol
+                  className="w-full px-4 py-2 border border-transparent rounded-md font-semibold
                  text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out"
                 >
                   ĐĂNG KÝ
