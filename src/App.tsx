@@ -15,6 +15,7 @@ import { Example } from "./Pages/Auth/Example";
 import { NewsOffer } from "./Pages/NewsOffer/NewsOffer";
 import { NewsOfferDetails } from "./Pages/NewsOffer/NewsOfferDetails";
 import { MembershipPage } from "./Pages/NewsOffer/MembershipPage";
+import { DarkMode } from "./components/DarkMode";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/ticket/:id" element={<Ticket />} />
-        <Route path="/test" element={<Example />} />
+        <Route path="/test" element={<DarkMode />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
