@@ -64,7 +64,7 @@ export const Home = () => {
   }, []);
 
   return (
-    <Layout>
+    <>
       <div className="relative">
         <button
           onClick={() => swiperBanner.current?.slidePrev()}
@@ -195,6 +195,6 @@ export const Home = () => {
       </div>
       <NewsOffer />
       <FilmFormats />
-    </Layout>
+    </>
   );
 };

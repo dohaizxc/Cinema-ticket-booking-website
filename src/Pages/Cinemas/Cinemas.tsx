@@ -145,7 +145,7 @@ export const Cinemas = () => {
   };
 
   return (
-    <Layout>
+    <>
       <div className="sm:mx-12 mx-2 min-h-screen">
         <LineWithText>DANH SÁCH RẠP</LineWithText>
 
@@ -267,6 +267,6 @@ export const Cinemas = () => {
       </div>
 
       {/* <div>{showtimes && <pre>{JSON.stringify(showtimes, null, 2)}</pre>}</div> */}
-    </Layout>
+    </>
   );
 };

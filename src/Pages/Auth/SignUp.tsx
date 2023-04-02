@@ -56,7 +56,7 @@ export const SignUp = () => {
   }, []);
 
   return (
-    <Layout>
+    <>
       <div className="flex md:flex-row flex-col lg:space-x-10 md:space-x-5 space-x-0 lg:mx-20 m-5">
         <div className="lg:w-3/5 md:w-1/2 md:block hidden lg:h-[85vh] rounded drop-shadow-md">
           <Banner></Banner>
@@ -247,6 +247,6 @@ export const SignUp = () => {
           <Banner></Banner>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };

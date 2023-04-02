@@ -137,7 +137,7 @@ export const MovieDetails = () => {
   };
 
   return (
-    <Layout>
+    <>
       {!movie ? (
         <div className="flex justify-center min-h-screen my-10">
           <Spin size="large" tip="Loading..." />
@@ -464,6 +464,6 @@ export const MovieDetails = () => {
           setIsShowPopUp={setIsShowPopUp}
         ></PopUpYoutube>
       )}
-    </Layout>
+    </>
   );
 };

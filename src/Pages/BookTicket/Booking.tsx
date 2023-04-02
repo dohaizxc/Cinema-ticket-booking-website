@@ -175,7 +175,7 @@ export const Booking = () => {
   };
 
   return (
-    <Layout>
+    <>
       <Modal
         openModal={openModal}
         setOpenModal={setOpenModal}
@@ -346,6 +346,6 @@ export const Booking = () => {
         </div>
       </div>
       <div className="h-[40px]"></div>
-    </Layout>
+    </>
   );
 };

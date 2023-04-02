@@ -4,8 +4,8 @@ import { Membership } from "../../components/Membership";
 
 export const MembershipPage = () => {
   return (
-    <Layout>
+    <>
       <Membership></Membership>
-    </Layout>
+    </>
   );
 };

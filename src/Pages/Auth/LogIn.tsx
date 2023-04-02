@@ -47,7 +47,7 @@ export const LogIn = () => {
   };
 
   return (
-    <Layout>
+    <>
       <div className="flex md:flex-row flex-col md:space-x-10 space-x-0 lg:mx-20 md:mx-10 m-5">
         <div className="lg:w-3/5 md:w-1/2 md:block hidden lg:h-[85vh] rounded drop-shadow-md">
           <Banner></Banner>
@@ -148,6 +148,6 @@ export const LogIn = () => {
           <Banner></Banner>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };

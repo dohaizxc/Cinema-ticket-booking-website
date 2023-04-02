@@ -22,7 +22,7 @@ export const Ticket = () => {
   }, []);
 
   return (
-    <Layout>
+    <>
       {ticket && (
         <div className="flex flex-col items-center sm:mx-20 mx-5 my-5 space-y-4 min-h-screen">
           <h1 className="font-bold text-lg bg-sky-300 py-2 w-full text-center rounded">
@@ -146,6 +146,6 @@ export const Ticket = () => {
       )}
 
       {/* <div>{ticket && <pre>{JSON.stringify(ticket, null, 2)}</pre>}</div> */}
-    </Layout>
+    </>
   );
 };

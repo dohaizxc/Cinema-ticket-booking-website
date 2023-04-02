@@ -28,7 +28,7 @@ export const NewsOffer = () => {
   }, [selectedTab]);
 
   return (
-    <Layout>
+    <>
       <div className="bg-white">
         <Tabs
           setSelectedTab={setSelectedTab}
@@ -77,6 +77,6 @@ export const NewsOffer = () => {
           </div>
         )}
       </div>
-    </Layout>
+    </>
   );
 };

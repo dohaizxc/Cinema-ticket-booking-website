@@ -53,7 +53,7 @@ export const Profile = () => {
   }, [confirm]);
 
   return (
-    <Layout>
+    <>
       <Modal
         openModal={openModal}
         setOpenModal={setOpenModal}
@@ -173,6 +173,6 @@ export const Profile = () => {
           {tab === "membership" && user && <Membership></Membership>}
         </div>
       </div>
-    </Layout>
+    </>
   );
 };

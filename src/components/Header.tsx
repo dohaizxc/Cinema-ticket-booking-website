@@ -4,6 +4,7 @@ import { User } from "../interface/Interface";
 import { openNotification } from "./Notifications";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { DarkMode } from "./DarkMode";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ export const Header = () => {
           >
             Ưu đãi
           </Link>
-          {user && (
+          {user ? (
             <Link
               to="/profile?tab=userinfo"
               className={` leading-6 ${
@@ -82,10 +83,19 @@ export const Header = () => {
             >
               Tài khoản
             </Link>
+          ) : (
+            <Link
+              to="/login"
+              className={` leading-6 ${
+                keyMenu === "login" ? "text-cyan-600" : ""
+              } hover:text-cyan-500`}
+            >
+              Đăng nhập
+            </Link>
           )}
         </div>
         <div className="hidden sm:flex sm:flex-1 sm:justify-end font-medium text-base">
-          {user ? (
+          {/* {user ? (
             <button
               onClick={handleLogout}
               className={`leading-6 ${
@@ -103,7 +113,10 @@ export const Header = () => {
             >
               Đăng nhập <span>&rarr;</span>
             </Link>
-          )}
+          )} */}
+          <div className="-mt-4">
+            <DarkMode />
+          </div>
         </div>
       </nav>
       <Dialog
