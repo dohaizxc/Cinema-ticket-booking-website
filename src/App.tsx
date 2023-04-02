@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./Pages/Home/Home";
@@ -11,7 +10,6 @@ import { LogIn } from "./Pages/Auth/LogIn";
 import { SignUp } from "./Pages/Auth/SignUp";
 import { Profile } from "./Pages/Auth/Profile";
 import { Ticket } from "./Pages/BookTicket/Ticket";
-import { Example } from "./Pages/Auth/Example";
 import { NewsOffer } from "./Pages/NewsOffer/NewsOffer";
 import { NewsOfferDetails } from "./Pages/NewsOffer/NewsOfferDetails";
 import { MembershipPage } from "./Pages/NewsOffer/MembershipPage";
