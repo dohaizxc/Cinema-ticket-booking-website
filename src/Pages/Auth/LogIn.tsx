@@ -53,7 +53,7 @@ export const LogIn = () => {
           <Banner></Banner>
         </div>
 
-        <div className="lg:w-2/5 md:w-1/2 w-full lg:h-[85vh] bg-white rounded drop-shadow-md">
+        <div className="lg:w-2/5 md:w-1/2 w-full lg:h-[85vh] bg-white dark:bg-slate-800 rounded drop-shadow-md">
           <div className="flex flex-col items-center">
             <h1 className="font-bold text-center text-2xl my-8">ĐĂNG NHẬP</h1>
             <Form

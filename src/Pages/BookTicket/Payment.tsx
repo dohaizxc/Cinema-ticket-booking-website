@@ -53,11 +53,11 @@ export const Payment: React.FC<{
     <div>
       <div className="grid sm:grid-cols-2 sm:mx-20 mx-5 sm:space-x-10 ">
         <div className="space-y-4">
-          <div className="rounded h-auto py-4 px-7 space-y-3 bg-white drop-shadow-md">
+          <div className="rounded h-auto py-4 px-7 space-y-3 bg-white dark:bg-slate-700 drop-shadow-md">
             <TagsOutlined className="text-[24px]" />
             <span className="font-bold text-[16px] mx-2">GIẢM GIÁ</span>
             <button
-              className="block w-full text-left rounded text-[16px] bg-sky-200 p-2"
+              className="block w-full text-left rounded text-[16px] bg-sky-200 dark:bg-sky-800 p-2"
               onClick={() => {
                 typeVoucher === 1 ? setTypeVoucher(0) : setTypeVoucher(1);
               }}
@@ -86,7 +86,7 @@ export const Payment: React.FC<{
             )}
 
             <button
-              className="block w-full text-left rounded [16px] bg-sky-200 p-2"
+              className="block w-full text-left rounded text-[16px] bg-sky-200 dark:bg-sky-800 p-2"
               onClick={() => {
                 typeVoucher === 2 ? setTypeVoucher(0) : setTypeVoucher(2);
               }}
@@ -110,7 +110,7 @@ export const Payment: React.FC<{
             )}
           </div>
 
-          <div className="rounded h-auto p-4 space-y-3 bg-white drop-shadow-md">
+          <div className="rounded h-auto p-4 space-y-3 bg-white dark:bg-slate-700 drop-shadow-md">
             <i className="fa-solid fa-money-check-dollar text-[24px]"></i>
 
             <div className="inline-flex font-bold text-[16px] mx-2">
@@ -134,7 +134,7 @@ export const Payment: React.FC<{
                           ${
                             checked
                               ? "bg-sky-700 bg-opacity-75 text-white"
-                              : "bg-white"
+                              : "bg-white dark:bg-slate-700"
                           }
                           drop-shadow-md border relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
                         }
@@ -147,7 +147,7 @@ export const Payment: React.FC<{
                                   <RadioGroup.Label
                                     as="p"
                                     className={`font-medium flex items-center justify-between ${
-                                      checked ? "text-white" : "text-gray-900"
+                                      checked ? "text-white" : "text-gray-900 dark:text-white"
                                     }`}
                                   >
                                     <FontAwesomeIcon
@@ -176,7 +176,7 @@ export const Payment: React.FC<{
         </div>
 
         <div className="space-y-4 sm:mt-0 mt-4">
-          <div className="bg-white drop-shadow-md rounded h-auto p-4 space-y-3">
+          <div className="bg-white dark:bg-slate-700 drop-shadow-md rounded h-auto p-4 space-y-3">
             <p className="text-center font-bold text-[16px]">
               THÔNG TIN ĐƠN HÀNG
             </p>
@@ -236,7 +236,7 @@ export const Payment: React.FC<{
             </div>
           </div>
 
-          <div className="bg-white drop-shadow-md rounded h-auto p-4 space-y-3">
+          <div className="bg-white dark:bg-slate-700 drop-shadow-md rounded h-auto p-4 space-y-3">
             <div className="flex items-center justify-center">
               <div className="flex flex-col items-center justify-center">
                 <div className="text-xl font-bold">Thời hạn thanh toán</div>

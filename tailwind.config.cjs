@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+// galaxy: `url("./src/assets/background_galaxy.jpg")`,
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
+      backgroundImage: {
+        galaxy: `url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/movie-details-bg.jpg")`,
+      },
       fontFamily: {
         source: ["Source Sans Pro", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],

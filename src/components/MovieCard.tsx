@@ -3,14 +3,12 @@ import { Movie } from "../interface/Interface";
 import { useNavigate } from "react-router-dom";
 import { ClockIcon, CalendarDaysIcon } from "@heroicons/react/24/outline";
 
-export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
-  movie,
-  type,
-}) => {
+export const MovieCard: React.FC<{ movie: Movie }> = ({ movie }) => {
   const navigate = useNavigate();
   const [movieInfo, setMovieInfo] = useState<boolean>(false);
+
   return (
-    <div className="min-[400px]:h-[350px] h-[300px] flex flex-col items-center">
+    <div className="min-[400px]:h-[350px] h-[300px] flex flex-col items-center dark:bg-slate-800 text-black dark:text-white">
       <div className="relative">
         <img
           src={movie.image}
@@ -51,7 +49,11 @@ export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
                       navigate(`/movie/${movie._id}`);
                     }}
                   >
-                    {type ? <>Mua vé</> : <>Chi tiết</>}
+                    {new Date(movie.releaseDate) <= new Date("2022-12-20") ? (
+                      <>Mua vé</>
+                    ) : (
+                      <>Chi tiết</>
+                    )}
                   </button>
                 </div>
               </div>
@@ -60,7 +62,7 @@ export const MovieCard: React.FC<{ movie: Movie; type: boolean }> = ({
         )}
       </div>
       <div
-        className="h-[52px] w-full line-clamp-2 cursor-pointer font-bold text-center py-2 hover:text-sky-500 z-10 bg-white"
+        className="h-[52px] w-full line-clamp-2 cursor-pointer font-bold text-center py-2 hover:text-sky-500 z-10 bg-white dark:bg-slate-800"
         onClick={() => {
           scroll(0, 0);
           navigate(`/movie/${movie._id}`);

@@ -44,7 +44,7 @@ export const SelectSeats: React.FC<{
     <div>
       <div className="overflow-x-scroll lg:overflow-x-hidden" ref={myRef}>
         <div className="w-[1024px] lg:w-full flex justify-center items-center mb-7">
-          <p className="font-semibold text-center text-lg border bg-sky-200 rounded w-3/4">
+          <p className="font-semibold text-center text-lg border bg-sky-200 rounded w-3/4 dark:text-black">
             SCREEN
           </p>
         </div>

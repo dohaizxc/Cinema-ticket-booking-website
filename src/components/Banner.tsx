@@ -37,7 +37,7 @@ export const Banner = () => {
         modules={[Autoplay, Pagination]}
       >
         <SwiperSlide>
-          <div className="flex flex-col items-center justify-center bg-white sm:h-[85vh] h-[50vh] rounded">
+          <div className="flex flex-col items-center justify-center bg-white dark:bg-slate-800  sm:h-[85vh] h-[50vh] min-h-[400px] rounded">
             <img
               src="https://static.vecteezy.com/system/resources/previews/011/835/419/original/crossed-pair-retro-cinema-tickets-png.png"
               className="w-2/3"
@@ -49,7 +49,7 @@ export const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex flex-col items-center justify-center bg-white sm:h-[85vh] h-[50vh] rounded">
+          <div className="flex flex-col items-center justify-center bg-white dark:bg-slate-800 sm:h-[85vh] h-[50vh] min-h-[400px] rounded">
             <img
               src="https://icons.veryicon.com/png/o/miscellaneous/color-work-icon/promotion-2.png"
               className="w-2/5"
@@ -60,7 +60,7 @@ export const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex flex-col items-center justify-center  bg-white sm:h-[85vh] h-[50vh] rounded">
+          <div className="flex flex-col items-center justify-center  bg-white dark:bg-slate-800 sm:h-[85vh] h-[50vh] min-h-[400px] rounded">
             <img
               src="https://cdn3.iconfinder.com/data/icons/cyber-monday-astute-vol-1-1/512/Earn_Reward_Points-512.png"
               className="w-2/5"
@@ -71,7 +71,7 @@ export const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex flex-col items-center justify-center  bg-white sm:h-[85vh] h-[50vh] rounded">
+          <div className="flex flex-col items-center justify-center  bg-white dark:bg-slate-800 sm:h-[85vh] h-[50vh] min-h-[400px] rounded">
             <img
               src="https://static.vecteezy.com/system/resources/previews/011/016/159/original/realistic-3d-gift-box-cutout-free-png.png"
               className="w-2/5"

@@ -84,12 +84,12 @@ export const ListDays: React.FC<{
           {listDates.map((date: dayjs.Dayjs) => (
             <SwiperSlide
               key={date.date()}
-              className=" bg-white rounded relative"
+              className=" bg-white dark:bg-slate-800 rounded relative"
             >
               <div
                 onClick={() => handleDate(date)}
-                className={`grid grid-cols-2 text-[12px] lg:text-[16px] border-sky-700 border-[2px] p-1 lg:p-2 cursor-pointer hover:bg-sky-500 rounded
-        ${selectedDate.date() === date.date() ? "bg-sky-500" : ""}`}
+                className={`grid grid-cols-2 text-[12px] lg:text-[16px] border-sky-700 dark:border-slate-900 border-[2px] p-1 lg:p-2 cursor-pointer hover:bg-sky-500 dark:hover:bg-sky-700 rounded
+        ${selectedDate.date() === date.date() ? "bg-sky-500 dark:bg-sky-700" : ""}`}
               >
                 <div className="self-center">{date.format("MM")}</div>
                 <div className="lg:text-3xl sm:text-xl text-base text-center font-bold row-span-2 self-center">

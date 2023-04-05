@@ -5,8 +5,8 @@ export const ChangePassword = () => {
   const onFinish = (values: any) => {};
   const onFinishFailed = (values: any) => {};
   return (
-    <div className="sm:min-h-screen bg-white rounded drop-shadow-md py-5">
-      <div className="flex items-center justify-center bg-sky-300 rounded h-10 mb-5 lg:mx-20 mx-10">
+    <div className="sm:min-h-screen bg-white dark:bg-slate-800 rounded drop-shadow-md py-5">
+      <div className="flex items-center justify-center bg-sky-300 dark:bg-sky-800 rounded h-10 mb-5 lg:mx-20 mx-10">
         <h1 className="font-semibold sm:text-base">ĐỔI MẬT KHẨU</h1>
       </div>
       <div className="flex justify-center">

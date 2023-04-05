@@ -62,7 +62,7 @@ export const SignUp = () => {
           <Banner></Banner>
         </div>
 
-        <div className="lg:w-2/5 md:w-1/2 w-full lg:h-[85vh] sm:py-0 py-6 bg-white rounded drop-shadow-md">
+        <div className="lg:w-2/5 md:w-1/2 w-full lg:h-[85vh] sm:py-0 py-6 bg-white dark:bg-slate-800 rounded drop-shadow-md">
           <div className="flex flex-col items-center">
             <h1 className="font-bold text-center text-2xl sm:my-2 mb-6">
               ĐĂNG KÝ

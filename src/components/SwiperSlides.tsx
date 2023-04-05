@@ -73,7 +73,7 @@ export const SwiperSlides: React.FC<{
           {movies &&
             movies.map((movie: Movie) => (
               <SwiperSlide key={movie._id} className=" bg-white rounded">
-                <MovieCard movie={movie} type={true}></MovieCard>
+                <MovieCard movie={movie}></MovieCard>
               </SwiperSlide>
             ))}
         </Swiper>

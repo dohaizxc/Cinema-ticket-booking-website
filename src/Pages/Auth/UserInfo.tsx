@@ -44,8 +44,8 @@ export const UserInfo: React.FC<{
   };
 
   return (
-    <div className="sm:min-h-screen bg-white rounded drop-shadow-md py-5">
-      <div className="flex items-center justify-center bg-sky-300 rounded h-10 mb-5 lg:mx-20 mx-10">
+    <div className="sm:min-h-screen bg-white dark:bg-slate-800 rounded drop-shadow-md py-5">
+      <div className="flex items-center justify-center bg-sky-300 dark:bg-sky-800 rounded h-10 mb-5 lg:mx-20 mx-10">
         <h1 className="font-semibold sm:text-base">THÔNG TIN TÀI KHOẢN</h1>
       </div>
       <div className="flex justify-center">
@@ -79,6 +79,7 @@ export const UserInfo: React.FC<{
               disabled={true}
               size="large"
               type="email"
+              className="dark:bg-slate-200"
               prefix={<MailOutlined className="site-form-item-icon" />}
             />
           </Form.Item>

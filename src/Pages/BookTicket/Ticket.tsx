@@ -24,11 +24,11 @@ export const Ticket = () => {
   return (
     <>
       {ticket && (
-        <div className="flex flex-col items-center sm:mx-20 mx-5 my-5 space-y-4 min-h-screen">
-          <h1 className="font-bold text-lg bg-sky-300 py-2 w-full text-center rounded">
+        <div className="flex flex-col items-center sm:mx-20 mx-5 my-5 space-y-4 min-h-[90vh]">
+          <h1 className="font-bold text-lg bg-sky-300 dark:bg-sky-800 py-2 w-full text-center rounded">
             THÔNG TIN VÉ
           </h1>
-          <div className="flex lg:flex-row flex-col lg:justify-between lg:space-x-16 bg-sky-100 py-5 sm:px-10 px-8 lg:h-[400px] w-full">
+          <div className="flex lg:flex-row flex-col lg:justify-between lg:space-x-16 bg-sky-100 dark:bg-slate-800 py-5 sm:px-10 px-8 lg:h-[400px] w-full">
             <img
               src={ticket.movieImage}
               className="rounded sm:w-[240px] sm:h-[350px] h-[300px] w-fit mt-2 mx-auto"

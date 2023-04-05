@@ -45,8 +45,9 @@ export const Movies = () => {
   }, [selectedType]);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-slate-900 text-black dark:text-white">
       <Tabs
+        selectedTab={selectedType}
         setSelectedTab={setSelectedType}
         tab1="PHIM ĐANG CHIẾU"
         tab2="PHIM SẮP CHIẾU"

@@ -34,9 +34,9 @@ export const Foods: React.FC<{
 
   return (
     <div>
-      <div className="flex flex-col items-center border rounded-lg m-3 bg-white drop-shadow-md">
+      <div className="flex flex-col items-center border rounded-lg m-3 bg-white dark:bg-slate-700 drop-shadow-md">
         <img src={food.image} className="h-40 w-40"></img>
-        <div className="w-full bg-white rounded-b-lg">
+        <div className="w-full bg-white dark:bg-slate-700 rounded-b-lg">
           <div className="font-bold text-center text-lg">{food.title}</div>
           {food.contents.map((content: string) => (
             <div className="text-center h-10 sm:px-2">{content}</div>

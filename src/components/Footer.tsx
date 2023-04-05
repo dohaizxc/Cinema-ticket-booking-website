@@ -9,11 +9,8 @@ import {
 
 export const Footer = () => {
   return (
-    <Layout.Footer
-      className="text-base text-center font-montserrat"
-      style={{ backgroundColor: "#0c468a", color: "white" }}
-    >
-      <div className="lg:mx-20 mx-0 flex md:flex-row flex-col justify-between md:space-y-0 space-y-5">
+    <div className="bg-[#0c468a] dark:bg-black text-white py-6 px-12 w-full text-base text-center font-montserrat z-10">
+      <div className="lg:px-20 px-0 flex md:flex-row flex-col justify-between md:space-y-0 space-y-5">
         <div className="flex flex-col">
           <h3 className="font-medium text-lg mb-2">ĐIỀU KHOẢN SỬ DỤNG</h3>
           <button>Điều Khoản Chung</button>
@@ -48,6 +45,6 @@ export const Footer = () => {
           <span className="sm:inline-block block"> All RIGHTS RESERVED.</span>
         </p>
       </div>
-    </Layout.Footer>
+    </div>
   );
 };

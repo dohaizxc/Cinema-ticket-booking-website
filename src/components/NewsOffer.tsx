@@ -55,8 +55,9 @@ export const NewsOffer = () => {
   }, [selectedTabNews]);
 
   return (
-    <div className="bg-white my-5 rounded lg:mx-12 sm:mx-5 mx-0 drop-shadow-md">
+    <div className="bg-white dark:bg-slate-800 dark:text-white my-5 rounded lg:mx-12 sm:mx-5 mx-0 drop-shadow-md">
       <Tabs
+        selectedTab={selectedTabNews}
         setSelectedTab={setSelectedTabNews}
         tab1="ƯU ĐÃI"
         tab2="TIN TỨC"

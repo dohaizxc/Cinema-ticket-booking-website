@@ -155,8 +155,12 @@ export const Cinemas = () => {
               <div
                 key={province._id}
                 onClick={() => handleProvinceClick(province)}
-                className={`text-base lg:text-lg px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
-      ${provinceParams === province._id ? "bg-sky-500" : "bg-white"}`}
+                className={`text-base lg:text-lg px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 dark:hover:bg-sky-700 dark:border-slate-900 rounded
+      ${
+        provinceParams === province._id
+          ? "bg-sky-500 dark:bg-sky-700"
+          : "bg-white dark:bg-slate-800"
+      }`}
               >
                 <div className="font-bold">{province.name}</div>
               </div>
@@ -164,22 +168,26 @@ export const Cinemas = () => {
           </div>
         )}
 
-        <div className="lg:p-6 pt-5 grid sm:grid-cols-4 grid-cols-2 gap-5 lg:gap-10 px-2 lg:px-12 text-black text-center">
+        <div className="lg:p-6 pt-5 grid sm:grid-cols-4 grid-cols-2 gap-5 lg:gap-10 px-2 lg:px-12 text-center">
           {cinemasResult &&
             cinemasResult.map((cinema: Cinema) => (
               <div key={cinema._id}>
                 <button
                   onClick={() => handleCinemaClick(cinema)}
-                  className={`font-bold lg:text-base w-full h-16 border-sky-700 border-[2px] hover:bg-sky-500 rounded-t 
-                  ${cinemaParams === cinema._id ? "bg-sky-500" : "bg-white"}`}
+                  className={`font-bold lg:text-base w-full h-16 border-sky-700 border-[2px] hover:bg-sky-500 dark:hover:bg-sky-700 dark:border-slate-900 rounded-t 
+                  ${
+                    cinemaParams === cinema._id
+                      ? "bg-sky-500 dark:bg-sky-700"
+                      : "bg-white dark:bg-slate-800"
+                  }`}
                 >
                   {cinema.name}
                 </button>
-                <p className="sm:block hidden xl:h-20 lg:h-24 md:h-auto bg-white border-sky-700 border-x-[2px] border-b-[2px] px-2 py-2">
+                <p className="sm:block hidden xl:h-20 lg:h-24 md:h-auto bg-white border-sky-700 dark:bg-slate-800 dark:border-slate-900 border-x-[2px] border-b-[2px] px-2 py-2">
                   {cinema.address}
                 </p>
                 <button
-                  className=" border-sky-700 border-x-[2px] border-b-[2px] bg-white p-2 w-full hover:bg-sky-500 rounded-b flex justify-center"
+                  className=" border-sky-700 border-x-[2px] border-b-[2px] bg-white p-2 w-full hover:bg-sky-500 dark:hover:bg-sky-700 dark:bg-slate-800 dark:border-slate-900 rounded-b flex justify-center"
                   onClick={() => handleLocationClick(cinema.address_url)}
                 >
                   <MapPinIcon className="sm:h-6 sm:w-6 h-4 w-4" />
@@ -238,7 +246,7 @@ export const Cinemas = () => {
                                   (showtimeDetails: ShowtimeDetails) => (
                                     <button
                                       key={showtimeDetails._id}
-                                      className="lg:w-20 lg:py-[6px] sm:w-16 w-12 p-1 bg-white border-sky-700 border-2 hover:bg-sky-500 rounded"
+                                      className="lg:w-20 lg:py-[6px] sm:w-16 w-12 p-1 bg-white border-sky-700 border-2 hover:bg-sky-500 dark:hover:bg-sky-700 dark:bg-slate-800 dark:border-slate-900 rounded"
                                       onClick={() =>
                                         handleShowtimeClick(showtimeDetails._id)
                                       }

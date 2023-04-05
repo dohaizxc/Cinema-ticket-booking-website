@@ -24,7 +24,7 @@ export const Seat: React.FC<{
   // };
   return (
     <div
-      className={`m-[2px] h-[30px] border border-solid text-center
+      className={`m-[2px] h-[30px] border border-solid text-center dark:text-black
       ${seat.type === "Couple" ? "w-[92px]" : "w-[37px]"}
       ${
         status === 2

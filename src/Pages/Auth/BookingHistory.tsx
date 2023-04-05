@@ -38,8 +38,8 @@ export const BookingHistory: React.FC<{ userId: string }> = ({ userId }) => {
   };
 
   return (
-    <div className="sm:min-h-screen bg-white rounded drop-shadow-md py-5">
-      <div className="flex items-center justify-center bg-sky-300 rounded h-10 mb-5 lg:mx-20 mx-10">
+    <div className="sm:min-h-screen bg-white dark:bg-slate-800 rounded drop-shadow-md py-5">
+      <div className="flex items-center justify-center bg-sky-300 dark:bg-sky-800 rounded h-10 mb-5 lg:mx-20 mx-10">
         <h1 className="font-semibold sm:text-base">LỊCH SỬ ĐẶT VÉ</h1>
       </div>
 
@@ -53,7 +53,7 @@ export const BookingHistory: React.FC<{ userId: string }> = ({ userId }) => {
             <>
               <div className="flex flex-col space-y-5">
                 {currentTickets?.map((ticket: Ticket) => (
-                  <div className="flex sm:flex-row flex-col items-center sm:space-x-10 p-5 bg-white border mx-5 rounded drop-shadow-md relative">
+                  <div className="flex sm:flex-row flex-col items-center sm:space-x-10 p-5 bg-white dark:bg-slate-800 border mx-5 rounded drop-shadow-md relative">
                     <img
                       src={ticket.movieImage}
                       className="rounded w-[150px] h-[200px]"

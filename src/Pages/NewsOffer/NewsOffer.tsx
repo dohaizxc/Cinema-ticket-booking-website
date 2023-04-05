@@ -29,8 +29,9 @@ export const NewsOffer = () => {
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-white dark:bg-slate-800 dark:text-white">
         <Tabs
+          selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
           tab1="ƯU ĐÃI"
           tab2="TIN MỚI"

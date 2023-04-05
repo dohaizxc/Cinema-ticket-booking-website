@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Layout } from "../../components/Layout";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType, Autoplay, Pagination } from "swiper";
 import "swiper/css";
@@ -116,8 +115,9 @@ export const Home = () => {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="bg-white my-5 rounded lg:mx-12 sm:mx-5 mx-0 drop-shadow-md">
+      <div className="bg-white dark:bg-slate-800 dark:text-white my-5 rounded lg:mx-12 sm:mx-5 mx-0 drop-shadow-md">
         <Tabs
+          selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
           tab1="PHIM ĐANG CHIẾU"
           tab2="PHIM SẮP CHIẾU"
@@ -159,7 +159,7 @@ export const Home = () => {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 bg-white py-5 sm:px-12 px-5 lg:mx-12 mx-5 my-5 rounded drop-shadow-md">
+      <div className="grid sm:grid-cols-2 bg-white dark:bg-slate-800 dark:text-white py-5 sm:px-12 px-5 lg:mx-12 mx-5 my-5 rounded drop-shadow-md">
         <div className="relative">
           <p className="lg:text-2xl sm:text-xl text-base font-semibold">
             Chương trình khách hàng thân thiết với nhiều ưu đãi độc quyền
@@ -189,7 +189,7 @@ export const Home = () => {
         <div className="w-full relative sm:block hidden">
           <img
             src={star}
-            className="h-[220px] absolute right-0 top-[-20px]"
+            className="h-[220px] absolute right-0 top-[-20px] filter dark:invert"
           ></img>
         </div>
       </div>

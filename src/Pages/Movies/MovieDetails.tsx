@@ -1,4 +1,3 @@
-import { Layout } from "../../components/Layout";
 import React, { useState } from "react";
 import { LineWithText } from "../../components/LineWithText";
 import { useGet } from "../../api/get";
@@ -25,7 +24,11 @@ import { ClockIcon, CalendarDaysIcon } from "@heroicons/react/24/outline";
 import { PopUpYoutube } from "../../components/PopUpYoutube";
 export const MovieDetails = () => {
   const navigate = useNavigate();
-  const { fetchGet: fetchMovieDetails, result: movie } = useGet<Movie>();
+  const {
+    fetchGet: fetchMovieDetails,
+    result: movie,
+    isLoading: isLoadingMovie,
+  } = useGet<Movie>();
   const { fetchGet: fetchProvinces, result: provincesResult } =
     useGet<Province[]>();
   const {
@@ -58,7 +61,7 @@ export const MovieDetails = () => {
 
   React.useEffect(() => {
     fetchMovieDetails("movie/" + id);
-  }, []);
+  }, [id]);
 
   const [type, setType] = useState<boolean>(false);
 
@@ -138,143 +141,153 @@ export const MovieDetails = () => {
 
   return (
     <>
-      {!movie ? (
+      {isLoadingMovie ? (
         <div className="flex justify-center min-h-screen my-10">
           <Spin size="large" tip="Loading..." />
         </div>
       ) : (
-        <div
-          className={`hidden sm:block relative bg-cover ${
-            type ? "min-h-[420px]" : "min-h-screen"
-          }`}
-          style={{
-            backgroundImage: `url(${movie.image})`,
-          }}
-        >
-          <div className="absolute inset-0 bg-gray-900 opacity-75 backdrop-filter backdrop-blur-sm"></div>
-          <div className="absolute inset-0 flex items-center text-white lg:px-12 px-10">
-            <img
-              className="w-[220px] h-[340px] rounded"
-              src={movie.image}
-            ></img>
-            <div className="pl-10 relative h-[340px] w-full">
-              <div
-                className={`${
-                  isMovieDetails
-                    ? "translate-y-0 text-3xl"
-                    : "translate-y-32 text-4xl"
-                } transform absolute transition-all duration-500`}
-              >
-                <div className="flex items-center font-bold">
-                  {movie.rated.substring(0, 1) === "P" ? (
-                    <span className="text-xl mt-1 border border-green-500 rounded text-green-500 px-2">
-                      P
-                    </span>
-                  ) : (
-                    <span className="text-xl mt-1 border border-red-500 rounded text-red-500 px-1">
-                      {movie.rated.substring(0, 3)}
-                    </span>
-                  )}
-                  <p className="font-bold py-2 ml-2 -mr-2"> {movie.name}</p>
-                </div>
+        <>
+          {movie && (
+            <div
+              className={`hidden sm:block relative bg-cover ${
+                type ? "min-h-[420px]" : "min-h-[95vh]"
+              }`}
+              style={{
+                backgroundImage: `url(${movie.image})`,
+              }}
+            >
+              <div className="absolute inset-0 bg-gray-900 opacity-75 backdrop-filter backdrop-blur-sm"></div>
+              <div className="absolute inset-0 flex items-center text-white lg:px-12 px-10">
+                <img
+                  className="w-[220px] h-[340px] rounded"
+                  src={movie.image}
+                ></img>
+                <div className="pl-10 relative h-[340px] w-full">
+                  <div
+                    className={`${
+                      isMovieDetails
+                        ? "translate-y-0 text-3xl"
+                        : "translate-y-32 text-4xl"
+                    } transform absolute transition-all duration-500`}
+                  >
+                    <div className="flex items-center font-bold">
+                      {movie.rated.substring(0, 1) === "P" ? (
+                        <span className="text-xl mt-1 border border-green-500 rounded text-green-500 px-2">
+                          P
+                        </span>
+                      ) : (
+                        <span className="text-xl mt-1 border border-red-500 rounded text-red-500 px-1">
+                          {movie.rated.substring(0, 3)}
+                        </span>
+                      )}
+                      <p className="font-bold py-2 ml-2 -mr-2"> {movie.name}</p>
+                    </div>
 
-                <div className="flex space-x-5 py-2 text-xl font-medium">
-                  <p> {movie.genre.join(", ")}</p>
-                  <p className="font-thin text-xl mx-5 mb-1">-</p>
-                  <div className="flex items-center">
-                    <ClockIcon className="mr-2 h-7 w-7 inline-block" />
-                    <p>{movie.duration} phút</p>
+                    <div className="flex space-x-5 py-2 text-xl font-medium">
+                      <p> {movie.genre.join(", ")}</p>
+                      <p className="font-thin text-xl mx-5 mb-1">-</p>
+                      <div className="flex items-center">
+                        <ClockIcon className="mr-2 h-7 w-7 inline-block" />
+                        <p>{movie.duration} phút</p>
+                      </div>
+                      <p className="font-thin text-xl mx-5 mb-1">-</p>
+                      <div className="flex items-center">
+                        <CalendarDaysIcon className="mr-2 h-7 w-7 inline-block" />
+                        <p>
+                          {new Date(movie.releaseDate).toLocaleDateString(
+                            "en-UK"
+                          )}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="font-thin text-xl mx-5 mb-1">-</p>
-                  <div className="flex items-center">
-                    <CalendarDaysIcon className="mr-2 h-7 w-7 inline-block" />
-                    <p>
-                      {new Date(movie.releaseDate).toLocaleDateString("en-UK")}
-                    </p>
+
+                  <div
+                    className={`${
+                      isMovieDetails
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-1/4 opacity-0"
+                    } transform absolute top-24 transition-all duration-500`}
+                  >
+                    <div>
+                      <span className="font-medium">Đạo diễn: </span>
+                      {movie.director}
+                    </div>
+                    <div>
+                      <span className="font-medium">Diễn viên: </span>
+                      {movie.actors}
+                    </div>
+                    <div>
+                      <span className="font-medium"> Ngôn ngữ: </span>
+                      {movie.language}
+                    </div>
+                    <div className="py-4">{movie?.description}</div>
                   </div>
-                </div>
-              </div>
 
-              <div
-                className={`${
-                  isMovieDetails
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-1/4 opacity-0"
-                } transform absolute top-24 transition-all duration-500`}
-              >
-                <div>
-                  <span className="font-medium">Đạo diễn: </span>
-                  {movie.director}
-                </div>
-                <div>
-                  <span className="font-medium">Diễn viên: </span>
-                  {movie.actors}
-                </div>
-                <div>
-                  <span className="font-medium"> Ngôn ngữ: </span>
-                  {movie.language}
-                </div>
-                <div className="py-4">{movie?.description}</div>
-              </div>
-
-              <div className="absolute bottom-8 left-4 text-xl text-sky-500 font-semibold z-30">
-                <button
-                  className={`${
-                    isMovieDetails
-                      ? "translate-y-0 opacity-100"
-                      : "-translate-y-1/2 opacity-0"
-                  } flex items-center transform absolute left-5 w-40 transition-all duration-500`}
-                  onClick={() => setIsMovieDetails(!isMovieDetails)}
-                >
-                  Ẩn thông tin
-                  <MinusIcon className="h-5 w-5 ml-1" />
-                </button>
-                <button
-                  className={`${
-                    isMovieDetails
-                      ? "translate-y-1/2 opacity-0"
-                      : "translate-y-0 opacity-100"
-                  } flex items-center transform absolute left-5 w-48 transition-all duration-500`}
-                  onClick={() => setIsMovieDetails(!isMovieDetails)}
-                >
-                  Thêm thông tin
-                  <PlusIcon className="h-5 w-5 ml-1" />
-                </button>
-              </div>
-
-              <div className="absolute bottom-0 w-full flex items-center justify-center">
-                <button
-                  className=" hover:text-sky-500"
-                  onClick={() => setIsShowPopUp(!isShowPopUp)}
-                >
-                  <div className="flex items-center justify-center">
-                    <PlayCircleIcon className="w-10 h-10" />
-                    <p className="font-semibold text-base ml-2">XEM TRAILER</p>
+                  <div className="absolute bottom-8 left-4 text-xl text-sky-500 font-semibold z-30">
+                    <button
+                      className={`${
+                        isMovieDetails
+                          ? "translate-y-0 opacity-100"
+                          : "-translate-y-1/2 opacity-0"
+                      } flex items-center transform absolute left-5 w-40 transition-all duration-500`}
+                      onClick={() => setIsMovieDetails(!isMovieDetails)}
+                    >
+                      Ẩn thông tin
+                      <MinusIcon className="h-5 w-5 ml-1" />
+                    </button>
+                    <button
+                      className={`${
+                        isMovieDetails
+                          ? "translate-y-1/2 opacity-0"
+                          : "translate-y-0 opacity-100"
+                      } flex items-center transform absolute left-5 w-48 transition-all duration-500`}
+                      onClick={() => setIsMovieDetails(!isMovieDetails)}
+                    >
+                      Thêm thông tin
+                      <PlusIcon className="h-5 w-5 ml-1" />
+                    </button>
                   </div>
-                </button>
-                {type && (
-                  <>
-                    <p className="font-thin text-xl mx-5 mb-1">|</p>
+
+                  <div className="absolute bottom-0 w-full flex items-center justify-center">
                     <button
                       className=" hover:text-sky-500"
-                      onClick={() => {
-                        window.scroll({
-                          top: 450,
-                          behavior: "smooth",
-                        });
-                      }}
+                      onClick={() => setIsShowPopUp(!isShowPopUp)}
                     >
                       <div className="flex items-center justify-center">
-                        <ArrowDownCircleIcon className="w-10 h-10" />
-                        <p className="font-semibold text-base ml-2">MUA VÉ</p>
+                        <PlayCircleIcon className="w-10 h-10" />
+                        <p className="font-semibold text-base ml-2">
+                          XEM TRAILER
+                        </p>
                       </div>
                     </button>
-                  </>
-                )}
+                    {type && (
+                      <>
+                        <p className="font-thin text-xl mx-5 mb-1">|</p>
+                        <button
+                          className=" hover:text-sky-500"
+                          onClick={() => {
+                            window.scroll({
+                              top: 450,
+                              behavior: "smooth",
+                            });
+                          }}
+                        >
+                          <div className="flex items-center justify-center">
+                            <ArrowDownCircleIcon className="w-10 h-10" />
+                            <p className="font-semibold text-base ml-2">
+                              MUA VÉ
+                            </p>
+                          </div>
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          )}
+        </>
       )}
 
       {!movie ? (
@@ -387,9 +400,11 @@ export const MovieDetails = () => {
               <div
                 key={province._id}
                 onClick={() => handleProvinceClick(province)}
-                className={`text-base lg:text-lg  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 rounded
+                className={`text-base lg:text-lg  px-2 lg:px-5 py-2 border-sky-700 border-[2px] cursor-pointer hover:bg-sky-500 dark:hover:bg-sky-700 dark:border-slate-900 rounded
             ${
-              selectedProvince?._id === province._id ? "bg-sky-500" : "bg-white"
+              selectedProvince?._id === province._id
+                ? "bg-sky-500 dark:bg-sky-700"
+                : "bg-white dark:bg-slate-800"
             }`}
               >
                 <div className="font-bold">{province.name}</div>
@@ -432,7 +447,7 @@ export const MovieDetails = () => {
                               (showtimeDetails: ShowtimeDetails) => (
                                 <button
                                   key={showtimeDetails._id}
-                                  className="lg:w-20 lg:py-[6px] sm:w-16 w-12 px-1 bg-white border-sky-700 border-2 hover:bg-sky-500 rounded"
+                                  className="lg:w-20 lg:py-[6px] sm:w-16 w-12 px-1 bg-white border-sky-700 border-2 hover:bg-sky-500 dark:hover:bg-sky-700 dark:bg-slate-800 dark:border-slate-900 rounded"
                                   onClick={() =>
                                     handleShowtimeClick(showtimeDetails._id)
                                   }
