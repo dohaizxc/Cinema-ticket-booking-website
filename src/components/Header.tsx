@@ -45,6 +45,7 @@ export const Header = () => {
   useEffect(() => {
     setIsSearchOpen(false);
     setSearch("");
+    setMobileMenuOpen(false);
   }, [location]);
 
   const handleLogout = () => {
@@ -246,11 +247,11 @@ export const Header = () => {
         onClose={setMobileMenuOpen}
       >
         <div className="fixed inset-0 z-20" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-30 w-full font-montserrat overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-30 w-full font-montserrat overflow-y-auto bg-white dark:bg-slate-800 dark:text-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link
               to="/"
-              className="flex justify-between font-bold text-lg text-center text-sky-700
+              className="flex justify-between font-bold text-lg text-center text-sky-700 dark:text-cyan-400
             hover:text-cyan-500"
             >
               UIT CINEMA
@@ -268,26 +269,42 @@ export const Header = () => {
               <div className="space-y-2 py-6">
                 <Link
                   to="/movie"
-                  className=" -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50"
+                  className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50 ${
+                    keyMenu === "movie"
+                      ? "text-cyan-600 dark:text-cyan-300"
+                      : ""
+                  }`}
                 >
                   PHIM
                 </Link>
                 <Link
                   to="/cinema"
-                  className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50"
+                  className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50 ${
+                    keyMenu === "cinema"
+                      ? "text-cyan-600 dark:text-cyan-300"
+                      : ""
+                  }`}
                 >
                   RẠP
                 </Link>
                 <Link
                   to="/newsoffer"
-                  className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50"
+                  className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50 ${
+                    keyMenu === "newsoffer"
+                      ? "text-cyan-600 dark:text-cyan-300"
+                      : ""
+                  }`}
                 >
                   ƯU ĐÃI
                 </Link>
                 {object && (
                   <Link
                     to="/profile?tab=userinfo"
-                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50"
+                    className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50 ${
+                      keyMenu === "profile"
+                        ? "text-cyan-600 dark:text-cyan-300"
+                        : ""
+                    }`}
                   >
                     TÀI KHOẢN
                   </Link>
@@ -304,7 +321,11 @@ export const Header = () => {
                 ) : (
                   <Link
                     to="/login"
-                    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7  hover:bg-gray-50"
+                    className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50 ${
+                      keyMenu === "login"
+                        ? "text-cyan-600 dark:text-cyan-300"
+                        : ""
+                    }`}
                   >
                     Đăng nhập
                   </Link>

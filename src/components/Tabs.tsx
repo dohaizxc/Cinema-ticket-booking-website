@@ -40,7 +40,7 @@ export const Tabs: React.FC<{
         <Tab.Group>
           <Tab.List className="flex rounded-full bg-sky-900/20 p-1 relative">
             <div
-              className="absolute w-1/2 h-[44px] flex justify-center items-center rounded-full
+              className="absolute w-1/2 sm:h-[44px] h-[40px] flex justify-center items-center rounded-full
                 transform transition-all duration-400 bg-white dark:bg-sky-800 shadow"
               style={{
                 transform: selectedTab
