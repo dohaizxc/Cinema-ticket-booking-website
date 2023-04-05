@@ -134,7 +134,7 @@ export const Header = () => {
           <div className="absolute top-1/2 transform -translate-y-1/2 right-10 flex space-x-5 z-20">
             <div className="relative text-gray-900">
               <div
-                className={`absolute top-9 left-0 rounded-lg bg-white dark:bg-sky-100 max-h-[400px] scroll lg:w-60 md:w-40 w-20
+                className={`absolute top-9 left-0 rounded-lg bg-white dark:bg-sky-100 max-h-[400px] scroll w-60
                 space-y-2
                 ${isSearchOpen ? "" : "hidden"}
                 ${
