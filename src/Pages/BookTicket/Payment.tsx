@@ -74,7 +74,12 @@ export const Payment: React.FC<{
 
                 <div className="flex justify-between mx-4">
                   <p>Nhập số điểm</p>
-                  <input type="number" min={0} className="p-2 rounded"></input>
+                  <input
+                    type="number"
+                    min={0}
+                    max={999}
+                    className="w-44 p-2 rounded dark:bg-slate-800 border border-white"
+                  />
                 </div>
 
                 <div className="flex justify-end px-4">
@@ -98,7 +103,7 @@ export const Payment: React.FC<{
               <div className="py-2 space-y-3">
                 <div className="flex justify-between mx-4">
                   <p>Nhập mã voucher</p>
-                  <input className="p-2 rounded"></input>
+                  <input className="w-44 p-2 rounded dark:bg-slate-800 border border-white"></input>
                 </div>
 
                 <div className="flex justify-end px-4">
@@ -147,7 +152,9 @@ export const Payment: React.FC<{
                                   <RadioGroup.Label
                                     as="p"
                                     className={`font-medium flex items-center justify-between ${
-                                      checked ? "text-white" : "text-gray-900 dark:text-white"
+                                      checked
+                                        ? "text-white"
+                                        : "text-gray-900 dark:text-white"
                                     }`}
                                   >
                                     <FontAwesomeIcon

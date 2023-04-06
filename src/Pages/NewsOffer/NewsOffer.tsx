@@ -29,7 +29,7 @@ export const NewsOffer = () => {
 
   return (
     <>
-      <div className="bg-white dark:bg-slate-800 dark:text-white">
+      <div className="bg-white dark:bg-transparent dark:text-white">
         <Tabs
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}

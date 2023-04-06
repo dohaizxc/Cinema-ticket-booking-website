@@ -142,7 +142,7 @@ export const MovieDetails = () => {
   return (
     <>
       {isLoadingMovie ? (
-        <div className="flex justify-center min-h-screen my-10">
+        <div className="flex justify-center min-h-screen py-10">
           <Spin size="large" tip="Loading..." />
         </div>
       ) : (

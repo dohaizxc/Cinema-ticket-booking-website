@@ -133,7 +133,7 @@ export const Ticket = () => {
                   level={"H"}
                   includeMargin={false}
                 />
-                <p className="text-center font-bold my-2 sm:text-base text-sm">
+                <p className="text-center font-bold my-2 sm:text-base text-sm dark:text-black">
                   {ticket.id}
                 </p>
               </div>

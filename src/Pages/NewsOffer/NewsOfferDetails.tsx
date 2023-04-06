@@ -24,7 +24,7 @@ export const NewsOfferDetails = () => {
     <>
       <div className="lg:mx-32 md:mx-10 mx-5 lg:mb-10 md:mb-5 mb-2">
         {isLoading ? (
-          <div className="flex justify-center min-h-screen">
+          <div className="flex justify-center min-h-screen py-10">
             <Spin size="large" tip="Loading..." />
           </div>
         ) : (

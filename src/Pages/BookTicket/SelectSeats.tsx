@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { seatMap } from "../../components/seats";
 import { Seat } from "../../components/Seat";
 import { Seat as SeatInterface } from "../../interface/Interface";
@@ -20,26 +20,29 @@ export const SelectSeats: React.FC<{
     setListSelectedSeats(selectedSeats);
   }, [selectedSeats]);
 
-  const pickSeat = (seat: SeatInterface) => {
-    if (soldSeats?.includes(seat.id)) return;
+  const pickSeat = useCallback(
+    (seat: SeatInterface) => {
+      if (soldSeats?.includes(seat.id)) return;
 
-    const index = selectedSeats.indexOf(seat);
-    if (index === -1) {
-      if (selectedSeats.length > 8)
-        openNotification("info", "Bạn có thể chọn tối đa 8 ghế!");
-      else setSelectedSeats([...selectedSeats, seat]);
-    } else {
-      selectedSeats.splice(index, 1);
-      setSelectedSeats([...selectedSeats]);
-    }
-  };
+      const index = selectedSeats.indexOf(seat);
+      if (index === -1) {
+        if (selectedSeats.length > 8)
+          openNotification("info", "Bạn có thể chọn tối đa 8 ghế!");
+        else setSelectedSeats([...selectedSeats, seat]);
+      } else {
+        selectedSeats.splice(index, 1);
+        setSelectedSeats([...selectedSeats]);
+      }
+    },
+    [selectedSeats]
+  );
 
   useEffect(() => {
     if (myRef.current) {
       myRef.current.scrollLeft += 155;
     }
   }, []);
-  
+
   return (
     <div>
       <div className="overflow-x-scroll lg:overflow-x-hidden" ref={myRef}>
@@ -91,7 +94,7 @@ export const SelectSeats: React.FC<{
             <div className="h-8 w-8 bg-[#f7adf2] rounded"></div>
             <p className="pr-5">Sweetbox</p>
 
-            <div className="h-8 w-8 bg-[#fc6060] rounded"></div>
+            <div className="h-8 w-8 bg-[#f57373f5] rounded"></div>
             <p className="pr-5">Selected</p>
 
             <div className="h-8 w-8 bg-[#B8C4BF] rounded"></div>

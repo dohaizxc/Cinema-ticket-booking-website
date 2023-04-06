@@ -15,8 +15,6 @@ export const DarkMode = () => {
     setScreenWidth(window.innerWidth);
   }
 
-  console.log(screenWidth);
-
   // add event listener for resize event
   window.addEventListener("resize", handleResize);
 

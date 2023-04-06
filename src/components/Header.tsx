@@ -10,7 +10,6 @@ import {
 } from "@heroicons/react/24/outline";
 import { DarkMode } from "./DarkMode";
 import { useGet } from "../api/get";
-import "../App.css";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -261,7 +260,7 @@ export const Header = () => {
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <XMarkIcon className="h-6 w-6" />
+              <XMarkIcon className="h-6 w-6 dark:text-white" />
             </button>
           </div>
           <div className="mt-6 flow-root">
@@ -269,7 +268,7 @@ export const Header = () => {
               <div className="space-y-2 py-6">
                 <Link
                   to="/movie"
-                  className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50 ${
+                  className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-100 dark:hover:bg-slate-700  ${
                     keyMenu === "movie"
                       ? "text-cyan-600 dark:text-cyan-300"
                       : ""
@@ -279,7 +278,7 @@ export const Header = () => {
                 </Link>
                 <Link
                   to="/cinema"
-                  className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50 ${
+                  className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-100 dark:hover:bg-slate-700  ${
                     keyMenu === "cinema"
                       ? "text-cyan-600 dark:text-cyan-300"
                       : ""
@@ -289,7 +288,7 @@ export const Header = () => {
                 </Link>
                 <Link
                   to="/newsoffer"
-                  className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50 ${
+                  className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-100 dark:hover:bg-slate-700  ${
                     keyMenu === "newsoffer"
                       ? "text-cyan-600 dark:text-cyan-300"
                       : ""
@@ -300,7 +299,7 @@ export const Header = () => {
                 {object && (
                   <Link
                     to="/profile?tab=userinfo"
-                    className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50 ${
+                    className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-100 dark:hover:bg-slate-700  ${
                       keyMenu === "profile"
                         ? "text-cyan-600 dark:text-cyan-300"
                         : ""
@@ -314,14 +313,14 @@ export const Header = () => {
                 {object ? (
                   <p
                     onClick={handleLogout}
-                    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7  hover:bg-gray-50"
+                    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7  hover:bg-gray-100 dark:hover:bg-slate-700 "
                   >
                     Đăng xuất
                   </p>
                 ) : (
                   <Link
                     to="/login"
-                    className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-50 ${
+                    className={` -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7  hover:bg-gray-100 dark:hover:bg-slate-700  ${
                       keyMenu === "login"
                         ? "text-cyan-600 dark:text-cyan-300"
                         : ""

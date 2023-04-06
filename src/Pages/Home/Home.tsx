@@ -176,7 +176,7 @@ export const Home = () => {
               TÌM HIỂU THÊM
             </button>
             <button
-              className="font-semibold text-gray-400 hover:text-black px-5 py-2 mt-2"
+              className="font-semibold text-gray-400 hover:text-black dark:hover:text-white px-5 py-2 mt-2"
               onClick={() => {
                 scroll(0, 0);
                 navigate(`/newsoffer/membership`);
