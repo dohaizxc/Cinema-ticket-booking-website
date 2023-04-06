@@ -2,20 +2,20 @@ import { useState, ReactNode, useEffect } from "react";
 import { ConfigProvider } from "antd";
 
 export type Token = {
-  colorPrimary: string;
-  colorText: string;
-  colorTextQuaternary: string;
-  colorTextTertiary: string;
-  colorTextDisabled: string;
-  colorTextPlaceholder: string;
-  colorTextHeading: string;
-  colorTextLightSolid: string;
-  colorBgContainer: string;
-  colorBgElevated: string;
-  colorBorderBg: string;
+  colorPrimary?: string;
+  colorText?: string;
+  colorTextQuaternary?: string;
+  colorTextTertiary?: string;
+  colorTextDisabled?: string;
+  colorTextPlaceholder?: string;
+  colorTextHeading?: string;
+  colorTextLightSolid?: string;
+  colorBgContainer?: string;
+  colorBgElevated?: string;
+  colorBorderBg?: string;
 };
 
-export const token: Token = {
+export const tokenDark: Token = {
   colorPrimary: "#1E293B",
   colorText: "white",
   colorTextQuaternary: "white",
@@ -29,12 +29,18 @@ export const token: Token = {
   colorBorderBg: "#f8fafc",
 };
 
+export const tokenLight: Token = {};
+
 type ThemeContextType = {
   token: Token;
 };
 
-export const themeToken: ThemeContextType = {
-  token: token,
+export const darkThemeToken: ThemeContextType = {
+  token: tokenDark,
+};
+
+export const lightThemeToken: ThemeContextType = {
+  token: tokenLight,
 };
 
 const ThemeProvider: React.FC<{
@@ -47,17 +53,17 @@ const ThemeProvider: React.FC<{
 
   const themeCheck = () => {
     if (userTheme === "dark" || (!userTheme && systemTheme)) {
-      setTheme(themeToken);
-    } else setTheme(undefined);
+      setTheme(darkThemeToken);
+    } else setTheme(lightThemeToken);
   };
 
   useEffect(() => {
     themeCheck();
   }, [userTheme]);
 
-  console.log(userTheme);
-
-  return <ConfigProvider theme={theme}>{children}</ConfigProvider>;
+  return (
+    <>{theme && <ConfigProvider theme={theme}>{children}</ConfigProvider>}</>
+  );
 };
 
 export { ThemeProvider };

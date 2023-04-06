@@ -52,8 +52,11 @@ export const BookingHistory: React.FC<{ userId: string }> = ({ userId }) => {
           {tickets && tickets.length > 0 ? (
             <>
               <div className="flex flex-col space-y-5">
-                {currentTickets?.map((ticket: Ticket) => (
-                  <div className="flex sm:flex-row flex-col items-center sm:space-x-10 p-5 bg-white dark:bg-slate-800 border mx-5 rounded drop-shadow-md relative">
+                {currentTickets?.map((ticket: Ticket, index) => (
+                  <div
+                    key={index}
+                    className="flex sm:flex-row flex-col items-center sm:space-x-10 p-5 bg-white dark:bg-slate-800 border mx-5 rounded drop-shadow-md relative"
+                  >
                     <img
                       src={ticket.movieImage}
                       className="rounded w-[150px] h-[200px]"
